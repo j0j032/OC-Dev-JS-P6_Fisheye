@@ -1,4 +1,6 @@
-module.exports = {
+// ____________________________________Code THRA______________________________________________________
+
+/* module.exports = {
   photographersSection: document.querySelector('.photographer-section'),
   modal: document.getElementById('modal'),
   modalTitle: document.getElementById('modal-title'),
@@ -16,4 +18,6 @@ module.exports = {
   arrows: document.querySelectorAll('.arrows'),
   previousImg: document.getElementById('previous-img'),
   nextImg: document.getElementById('next-img')
-}
+} */
+
+// ____________________________________Code j0j0______________________________________________________
