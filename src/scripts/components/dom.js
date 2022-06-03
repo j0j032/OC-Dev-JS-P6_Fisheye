@@ -1,3 +1,4 @@
+// ____________________________________Code THRA______________________________________________________
 /**
  * Create an HTMLElement including possibility to set attributes, add a textNode and also append it to a parent
  *
@@ -7,7 +8,7 @@
  * @param {String} text Add textNode to this new element
  * @returns New HTMLElement created
  */
-const createElement = (tagName, parent, attributes = [], text) => {
+/* const createElement = (tagName, parent, attributes = [], text) => {
   const element = document.createElement(tagName);
 
   // add attributes to element
@@ -25,18 +26,18 @@ const createElement = (tagName, parent, attributes = [], text) => {
   }
 
   return element;
-};
+}; */
 
 /**
  * Remove all first child from an element quoted in parameter
  *
  * @param {HTMLElement} el - target element html with all first child to remove
  */
-const empty = (el) => {
+/* const empty = (el) => {
   while (el.firstChild) {
     el.removeChild(el.firstChild);
   }
-};
+}; */
 
 /**
  * Toggle between 2 classes attached to an element
@@ -45,7 +46,7 @@ const empty = (el) => {
  * @param {String} classToRemove
  * @param {String} classToAdd
  */
-const toggleClass = (el, classToRemove, classToAdd) => {
+/* const toggleClass = (el, classToRemove, classToAdd) => {
   console.log(el);
   if (el.classList.contains(classToRemove)) {
     el.classList.remove(classToRemove);
@@ -53,10 +54,12 @@ const toggleClass = (el, classToRemove, classToAdd) => {
   if (!el.classList.contains(classToAdd)) {
     el.classList.add(classToAdd);
   }
-};
+}; */
 
-module.exports = {
+/* module.exports = {
   createElement,
   empty,
   toggleClass,
-};
+}; */
+
+// ____________________________________Code j0J0______________________________________________________
