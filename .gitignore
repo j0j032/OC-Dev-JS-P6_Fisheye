@@ -1,0 +1,6 @@
+# ignore medias 
+src/assets/medias
+src/assets/photographers
+
+#ignore node modules
+node_modules

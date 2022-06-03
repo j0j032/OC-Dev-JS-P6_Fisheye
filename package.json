@@ -1,0 +1,48 @@
+{
+  "name": "dev-js-p6",
+  "version": "0.1.0",
+  "description": "developer JS Project 6 OpenClassrooms",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "cross-env NODE_ENV='development' webpack-dev-server --progress --color --open --config webpack.config.js --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j0j032/P6-Fisheye"
+  },
+  "keywords": [
+    "DJP6"
+  ],
+  "author": "j0j032",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j0j032/P6-Fisheye/issues"
+  },
+  "homepage": "https://github.com/j0j032/P6-Fisheye#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.12",
+    "babel-eslint": "^10.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.16.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.51.0",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
