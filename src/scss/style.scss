@@ -23,41 +23,35 @@ h1 {
     margin-right: 100px;
 }
 
+a{
+    text-decoration: none;
+}
 
 .logo {
     height: 50px;
     margin-left: 100px;
 }
 
-.photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+.photographer-section {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   gap: 20px;
 }
 
-.photographer_section article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.photographer_section article h2 {
-    color: $orange;
-    font-size: 36px;
-}
-
-.photographer_section article img {
-    height: 200px;
-    width: 200px;
-}
 
 .card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: antiquewhite;
+    width: 300px;
+    &__link{
+        text-align: center;
+        cursor: pointer;
+    }
     &__name{
         color: blue;
-        margin-left: 20px;
     }
     &__location{
         color: blueviolet;
