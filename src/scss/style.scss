@@ -54,6 +54,22 @@ h1 {
     width: 200px;
 }
 
-.card__name{
-    color: blue;
+.card{
+    &__name{
+        color: blue;
+        margin-left: 20px;
+    }
+    &__location{
+        color: blueviolet;
+    }
+    &__tagline{
+        color: cadetblue;
+    }
+    &__price{
+        color: $grey;
+    }
+    &__pic{
+        width: 200px;
+        height: 200px;
+    }
 }
