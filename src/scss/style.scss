@@ -50,13 +50,13 @@ a{
     align-items: center;
     width: 300px;
     margin: 10px;
+    &:hover{
+        transform: translateY(-5px);
+        transition:  300ms ; 
+    }
     &__link{
         text-align: center;
         cursor: pointer;
-        &:hover{
-            transform: translateY(-5px);
-            transition:  300ms ; 
-        }
     }
     &__pic{
         width: 200px;
