@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 const API_URLS = {
-  development: 'http://localhost:3000'
+  development: 'http://localhost:8087'
 }
 
 const API_URL = JSON.stringify(API_URLS[process.env.NODE_ENV]) // must stringify but I'm not sure why!

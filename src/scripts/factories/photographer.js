@@ -1,53 +1,44 @@
-const createImg = (tag, data, attribute, parent) => {
-  const portrait = `/src/assets/photographers/${data.portrait}`;
-  let picture = new Image(100, 100);
-  picture.src = portrait;
-  picture.alt = `Portrait de ${data.name}`;
-  picture.classList.add(attribute);
+const { createCardElements } = require("../components/dom")
+const { photographersSection } = require("../components/domLinker")
 
-  parent.appendChild(picture);
-};
+const getPhotographerCard = (data) => {
+  const {name, city, country, tagline, price, portrait} = data
+  const cardLocation = `${city}, ${country}`
+  const cardPricing = `${price}€/jour`
+  const profilePicture = `/src/assets/photographers/${portrait}`;
 
-const createName = (tag, data, attribute, parent) => {
-  const cardName = document.createElement(tag);
-  cardName.textContent = `${data.name}`;
-  cardName.classList.add(attribute);
+  const createImg = (attribute, parent) => {
+    let profilePic = new Image(100, 100);
+    profilePic.src = profilePicture;
+    profilePic.alt = `Portrait de ${name}`;
+    profilePic.classList.add(attribute);
+  
+    parent.appendChild(profilePic);
+  };
 
-  parent.appendChild(cardName);
-};
+  const createCardLink = (parent) => {
+    const cardLink = document.createElement("a");
+    cardLink.classList.add("card__link");
+    cardLink.href = "photographer.html";
+    parent.appendChild(cardLink);
 
-const createLocation = (tag, data, attribute, parent) => {
-  const cardLocation = document.createElement(tag);
-  cardLocation.textContent = `${data.city}, ${data.country}`;
-  cardLocation.classList.add(attribute);
+    createImg("card__pic", cardLink)
+    createCardElements("h2", name, "card__name", cardLink)
+    }
+  
+  const createCard = () =>{
+    const card = document.createElement("div")
+    card.classList.add("card")
+    photographersSection.appendChild(card)
 
-  parent.appendChild(cardLocation);
-};
-const createTagLine = (tag, data, attribute, parent) => {
-  const cardTagLine = document.createElement(tag);
-  cardTagLine.textContent = `${data.tagline}`;
-  cardTagLine.classList.add(attribute);
-
-  parent.appendChild(cardTagLine);
-};
-
-const createPrice = (tag, data, attribute, parent) => {
-  const cardPrice = document.createElement(tag);
-  cardPrice.textContent = `${data.price}€/jour`;
-  cardPrice.classList.add(attribute);
-
-  parent.appendChild(cardPrice);
-};
-
-const createCardLink = (parent, data) => {
-  const cardLink = document.createElement("a");
-  cardLink.classList.add("card__link");
-  cardLink.href = "photographer.html";
-  parent.appendChild(cardLink);
-  createImg(null, data, "card__pic", cardLink);
-  createName("h2", data, "card__name", cardLink);
-};
+    createCardLink(card)
+    createCardElements("p", cardLocation, "card__location", card)
+    createCardElements("p", tagline, "card__tagline", card)
+    createCardElements("p", cardPricing, "card__price", card)
+  }
+  createCard()
+}
 
 module.exports ={
-    createImg, createName, createLocation, createTagLine, createPrice, createCardLink 
+   getPhotographerCard
 }

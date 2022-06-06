@@ -1,18 +1,13 @@
-const factory= require("../factories/photographer");
-const { photographersSection } = require("./domLinker");
+const createCardElements = (tag, text, attribute, parent) => {
+  const element = document.createElement(tag);
+  element.classList.add(attribute);
+  element.textContent = text;
 
-const createCard = (data) => {
-  const card = document.createElement("div");
-  card.classList.add("card");
-  photographersSection.appendChild(card);
-  factory.createCardLink(card, data);
-  factory.createLocation("p", data, "card__location", card);
-  factory.createTagLine("p", data, "card__tagline", card);
-  factory.createPrice("p", data, "card__price", card);
-};
+  parent.appendChild(element);
+}
 
 module.exports = {
-  createCard,
+  createCardElements,
 };
 
  
