@@ -1,65 +1,66 @@
-// ____________________________________Code THRA______________________________________________________
-/**
- * Create an HTMLElement including possibility to set attributes, add a textNode and also append it to a parent
- *
- * @param {HTMLElement} tagName Tag to create
- * @param {HTMLElement} parent Append the new element to this parent
- * @param {Array} attributes Set attribute in function of an array of object, ex: [{'class': 'nameOfClass'}]
- * @param {String} text Add textNode to this new element
- * @returns New HTMLElement created
- */
-/* const createElement = (tagName, parent, attributes = [], text) => {
-  const element = document.createElement(tagName);
+const { photographersSection } = require("./domLinker");
 
-  // add attributes to element
-  for (const attribute of attributes) {
-    const key = Object.keys(attribute);
-    element.setAttribute(key, attribute[key]);
-  }
+const createImg = (tag, data, attribute, parent) => {
+  const portrait = `/src/assets/photographers/${data.portrait}`;
+  let picture = new Image(100, 100);
+  picture.src = portrait;
+  picture.alt = `Portrait de ${data.name}`;
+  picture.classList.add(attribute);
 
-  if (text) {
-    element.textContent = text;
-  }
+  parent.appendChild(picture);
+};
 
-  if (parent) {
-    parent.appendChild(element);
-  }
+const createName = (tag, data, attribute, parent) => {
+  const cardName = document.createElement(tag);
+  cardName.textContent = `${data.name}`;
+  cardName.classList.add(attribute);
 
-  return element;
-}; */
+  parent.appendChild(cardName);
+};
 
-/**
- * Remove all first child from an element quoted in parameter
- *
- * @param {HTMLElement} el - target element html with all first child to remove
- */
-/* const empty = (el) => {
-  while (el.firstChild) {
-    el.removeChild(el.firstChild);
-  }
-}; */
+const createLocation = (tag, data, attribute, parent) => {
+  const cardLocation = document.createElement(tag);
+  cardLocation.textContent = `${data.city}, ${data.country}`;
+  cardLocation.classList.add(attribute);
 
-/**
- * Toggle between 2 classes attached to an element
- *
- * @param {HTMLElement} el
- * @param {String} classToRemove
- * @param {String} classToAdd
- */
-/* const toggleClass = (el, classToRemove, classToAdd) => {
-  console.log(el);
-  if (el.classList.contains(classToRemove)) {
-    el.classList.remove(classToRemove);
-  }
-  if (!el.classList.contains(classToAdd)) {
-    el.classList.add(classToAdd);
-  }
-}; */
+  parent.appendChild(cardLocation);
+};
+const createTagLine = (tag, data, attribute, parent) => {
+  const cardTagLine = document.createElement(tag);
+  cardTagLine.textContent = `${data.tagline}`;
+  cardTagLine.classList.add(attribute);
 
-/* module.exports = {
-  createElement,
-  empty,
-  toggleClass,
-}; */
+  parent.appendChild(cardTagLine);
+};
 
-// ____________________________________Code j0J0______________________________________________________
+const createPrice = (tag, data, attribute, parent) => {
+  const cardPrice = document.createElement(tag);
+  cardPrice.textContent = `${data.price}€/jour`;
+  cardPrice.classList.add(attribute);
+
+  parent.appendChild(cardPrice);
+};
+
+const createCardLink = (parent, data) => {
+  const cardLink = document.createElement("a");
+  cardLink.classList.add("card__link");
+  cardLink.href = "photographer.html";
+  parent.appendChild(cardLink);
+  createImg(null, data, "card__pic", cardLink);
+  createName("h2", data, "card__name", cardLink);
+};
+
+const createCard = (data) => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  photographersSection.appendChild(card);
+  createCardLink(card, data);
+  createLocation("p", data, "card__location", card);
+  createTagLine("p", data, "card__tagline", card);
+  createPrice("p", data, "card__price", card);
+};
+
+module.exports = {
+  createCard,
+};
+ 
