@@ -1,9 +1,9 @@
 const api = require("../components/api");
-const factory = require("../components/dom");
+const factory = require("../factories/photographer");
 
 const displayCards = (data) => {
   data.forEach((photographer) => {
-    factory.createCard(photographer);
+    factory.getPhotographerCard(photographer);
   });
 };
 
@@ -14,3 +14,5 @@ const init = async () => {
 };
 
 init();
+
+
