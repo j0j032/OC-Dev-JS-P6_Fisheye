@@ -1,27 +1,44 @@
-/* @import './variables.scss';
+@import './variables.scss';
 
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
-    background-color: $white;
+    background-color: $greyLight;
     height: 300px;
-    margin: 0 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__description{
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: aqua;
+    }
+    &__btn{
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        padding: 11px;
+        width: 170px;
+        height: 70px;
+        border: none;
+        background-color:$red;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    &__profilePic-Container{
+        width: 200px;
+        height: 200px;
+        background-color: bisque;
+    }
 }
 
-.contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color:$red;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 .modal {
     border-radius: 5px;
@@ -75,4 +92,4 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
-} */
+}
