@@ -1,42 +1,65 @@
-const { createCardElements } = require("../components/dom")
-const { photographersSection } = require("../components/domLinker")
+// pattern to create an element in dom.js
+// Link to DOM elements in domLinker.js
+const { createElements } = require("../components/dom")
+const { setParent} = require("../components/dom")
+const domLink = require("../components/domLinker")
 
+/**
+ * Factory to fill a photographer profile informations if display on hompage, display as a 'card' else if on photographer profile page display as a 'header'
+ * @param {object} data 
+ */
 const getPhotographerCard = (data) => {
-  const {name, city, country, tagline, price, portrait} = data
-  const cardLocation = `${city}, ${country}`
-  const cardPricing = `${price}€/jour`
+  // turn data into var easy reusable
+  const {name, id, city, country, tagline, price, portrait} = data
+  const photographerLocation = `${city}, ${country}`
+  const photographerPricing = `${price}€/jour`
   const profilePicture = `/src/assets/photographers/${portrait}`;
+  const profilePictureAlt = `Portrait de ${name}`;
+  const profileLink = `photographer.html?id=${id}`;
+  const profileLinkAlabel = `lien vers la page de ${name}`;
 
-  const createImg = (attribute, parent) => {
-    let profilePic = new Image(100, 100);
-    profilePic.src = profilePicture;
-    profilePic.alt = `Portrait de ${name}`;
-    profilePic.classList.add(attribute);
-  
-    parent.appendChild(profilePic);
-  };
+  // Logic for home page and create a 'card'
+  if (location.href === 'http://localhost:8087/')
+  {
+      /**
+       * to set up a link to the photographer page (img and name)
+       * @param {HTMLElement} parent to insert at the right place
+       */
+      const createCardLink = (parent) => {
+        const cardLink = document.createElement("a");
+        setParent(cardLink, "card__link", profileLinkAlabel,profileLink )
+        parent.appendChild(cardLink);
+        
+        createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, cardLink )
+        createElements("h2", name, "card__name",name, null,null, cardLink)
+      }
+      /**
+       * To create a card and get all the elements together 
+       */
+        const createCard = () =>{
+        const card = document.createElement("div")
+        setParent(card, "card", null,null )
+        domLink.photographersSection.appendChild(card)
 
-  const createCardLink = (parent) => {
-    const cardLink = document.createElement("a");
-    cardLink.classList.add("card__link");
-    cardLink.href = "photographer.html";
-    parent.appendChild(cardLink);
-
-    createImg("card__pic", cardLink)
-    createCardElements("h2", name, "card__name", cardLink)
+        createCardLink(card)
+        createElements("p", photographerLocation, "card__location",photographerLocation , null,null, card)
+        createElements("p", tagline, "card__tagline",tagline, null,null, card)
+        createElements("p", photographerPricing, "card__price",price,null,null, card)
+      }
+    createCard()
+    } 
+    // Logic for photographer profile page and create a 'header'
+    else if (location.href.includes('http://localhost:8087/photographer.html') )
+    
+    {
+      const createProfileHeader = () => {
+        createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, domLink.photogHeadPic)
+        createElements("h1", name, "card__name",name, null,null, domLink.photogHeadDescription)
+        createElements("p", photographerLocation, "card__location",photographerLocation , null,null, domLink.photogHeadDescription)
+        createElements("p", tagline, "card__tagline",tagline, null,null, domLink.photogHeadDescription)
+      }
+      createProfileHeader()
     }
-  
-  const createCard = () =>{
-    const card = document.createElement("div")
-    card.classList.add("card")
-    photographersSection.appendChild(card)
-
-    createCardLink(card)
-    createCardElements("p", cardLocation, "card__location", card)
-    createCardElements("p", tagline, "card__tagline", card)
-    createCardElements("p", cardPricing, "card__price", card)
-  }
-  createCard()
 }
 
 module.exports ={

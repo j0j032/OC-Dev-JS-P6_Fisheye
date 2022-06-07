@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -8,12 +8,16 @@
 </head>
 
 <body>
-  <header>
-    <img src="src/assets/images/logo.png" class="logo" />
+  <header class="header">
+    <a href="http://localhost:8087/" alt="fisheye Home page" aria-label="lien vers la page d'acceuil">
+      <img src="src/assets/images/logo.png" class="header__logo" aria-label="logo du site fisheye" />
+    </a>
   </header>
   <main id="main">
     <div class="photograph-header">
-      <button class="contact-button">Contactez-moi</button>
+      <div class="photograph-header__description"></div>
+      <button class="photograph-header__btn">Contactez-moi</button>
+      <div class="photograph-header__profilePic-Container"></div>
     </div>
   </main>
   <div id="contact_modal">
