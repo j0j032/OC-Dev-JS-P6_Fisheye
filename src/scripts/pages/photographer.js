@@ -9,7 +9,7 @@ const factory = require("../factories/photographer");
 const displayHeaderElements = (data) => {
 data.forEach((photographer) => {
   if(location.href.includes(photographer.id)){
-    factory.getPhotographerCard(photographer)
+    factory.getPhotographerProfileDetails(photographer)
   }
 });
 }
