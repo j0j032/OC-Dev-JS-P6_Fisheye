@@ -16,10 +16,7 @@ const getPhotographerCard = (data) => {
   const profilePictureAlt = `Portrait de ${name}`;
   const profileLink = `photographer.html?id=${id}`;
   const profileLinkAlabel = `lien vers la page de ${name}`;
-
-  // Logic for home page and create a 'card'
-  if (location.href === 'http://localhost:8087/')
-  {
+  
       /**
        * to set up a link to the photographer page (img and name)
        * @param {HTMLElement} parent to insert at the right place
@@ -47,10 +44,15 @@ const getPhotographerCard = (data) => {
       }
     createCard()
     } 
-    // Logic for photographer profile page and create a 'header'
-    else if (location.href.includes('http://localhost:8087/photographer.html') )
     
-    {
+    
+    const getPhotographerProfileDetails = (data) => {
+      // turn data into var easy reusable
+  const {name, id, city, country, tagline, price, portrait} = data
+  const photographerLocation = `${city}, ${country}`
+  const profilePicture = `/src/assets/photographers/${portrait}`;
+  const profilePictureAlt = `Portrait de ${name}`;
+
       const createProfileHeader = () => {
         createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, domLink.photogHeadPic)
         createElements("h1", name, "card__name",name, null,null, domLink.photogHeadDescription)
@@ -59,8 +61,10 @@ const getPhotographerCard = (data) => {
       }
       createProfileHeader()
     }
-}
+    
+    
 
 module.exports ={
-   getPhotographerCard
+   getPhotographerCard,getPhotographerProfileDetails
+  
 }
