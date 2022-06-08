@@ -1,9 +1,11 @@
-const { modal } = require('../components/domLinker')
+// ____________________________________Code OC______________________________________________________
 
-const displayModal = () => modal.style.display = 'block'
-const closeModal = () => modal.style.display = 'none'
+function displayModal() {
+  const modal = document.getElementById("contact_modal");
+  modal.style.display = "block";
+}
 
-module.exports = {
-  displayModal,
-  closeModal
+function closeModal() {
+  const modal = document.getElementById("contact_modal");
+  modal.style.display = "none";
 }

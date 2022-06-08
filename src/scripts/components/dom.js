@@ -1,62 +1,46 @@
 /**
- * Create an HTMLElement including possibility to set attributes, add a textNode and also append it to a parent
- *
- * @param {HTMLElement} tagName Tag to create
- * @param {HTMLElement} parent Append the new element to this parent
- * @param {Array} attributes Set attribute in function of an array of object, ex: [{'class': 'nameOfClass'}]
- * @param {String} text Add textNode to this new element
- * @returns New HTMLElement created
+ * Method to insert a 'generic' Element
+ * @param {HTMLElement} tag to create html tag
+ * @param {string} text to fill text area
+ * @param {string} style for css class
+ * @param {string} ariaLabel to set aria-label
+ * @param {link} src to set the source of img (if img)
+ * @param {string} alt to set the alt of img(if img)
+ * @param {HTMLElement} parent to insert at the right place
  */
-const createElement = (tagName, parent, attributes = [], text) => {
-  const element = document.createElement(tagName);
+const createElements = (tag, text, style, ariaLabel, src, alt, parent) => {
+  const element = document.createElement(tag);
+  element.classList.add(style);
+  element.textContent = text;
+  element.setAttribute('aria-label', ariaLabel)
 
-  // add attributes to element
-  for (const attribute of attributes) {
-    const key = Object.keys(attribute);
-    element.setAttribute(key, attribute[key]);
-  }
+  if (tag === 'img'){
+    element.setAttribute('src', src)
+    element.setAttribute('alt', alt)
+  } 
 
-  if (text) {
-    element.textContent = text;
-  }
+  parent.appendChild(element);
 
-  if (parent) {
-    parent.appendChild(element);
-  }
-
-  return element;
-};
-
+}
 /**
- * Remove all first child from an element quoted in parameter
- *
- * @param {HTMLElement} el - target element html with all first child to remove
+ * To add attributes to a 'parent' element
+ * @param {const} parentId to identify a new parent element
+ * @param {string} style for css class
+ * @param {string} ariaLabel to set aria-label (if necessary)
+ * @param {link} link to set link (if the parent is a link)
  */
-const empty = (el) => {
-  while (el.firstChild) {
-    el.removeChild(el.firstChild);
-  }
-};
-
-/**
- * Toggle between 2 classes attached to an element
- *
- * @param {HTMLElement} el
- * @param {String} classToRemove
- * @param {String} classToAdd
- */
-const toggleClass = (el, classToRemove, classToAdd) => {
-  console.log(el);
-  if (el.classList.contains(classToRemove)) {
-    el.classList.remove(classToRemove);
-  }
-  if (!el.classList.contains(classToAdd)) {
-    el.classList.add(classToAdd);
-  }
-};
+const setParent = (parentId, style, alabel,link) => {
+  // before set create element with parent id
+    parentId.classList.add(style);
+    parentId.ariaLabel = alabel
+    if(link){
+      parentId.href = link;
+    }
+  // after set where parent goes with appendChild
+}
 
 module.exports = {
-  createElement,
-  empty,
-  toggleClass,
+  createElements,
+  setParent,
 };
+

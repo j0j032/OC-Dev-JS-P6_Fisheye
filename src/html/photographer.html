@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="src/assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact-button">Contactez-moi</button>
-      </div>
-    </main>
-    <div id="modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img id="close-modal" src="src/assets/icons/close.svg"/>
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact-button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-  </body>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header class="header">
+    <a href="http://localhost:8087/" alt="fisheye Home page" aria-label="lien vers la page d'acceuil">
+      <img src="src/assets/images/logo.png" class="header__logo" aria-label="logo du site fisheye" />
+    </a>
+  </header>
+  <main id="main">
+    <div class="photograph-header">
+      <div class="photograph-header__description"></div>
+      <button class="photograph-header__btn">Contactez-moi</button>
+      <div class="photograph-header__profilePic-Container"></div>
+    </div>
+  </main>
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img id="close-modal" src="src/assets/icons/close.svg" />
+      </header>
+      <form>
+        <div>
+          <label>Prénom</label>
+          <input />
+        </div>
+        <button class="contact-button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
