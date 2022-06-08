@@ -1,7 +1,6 @@
 // pattern to create an element in dom.js
 // Link to DOM elements in domLinker.js
-const { createElements } = require("../components/dom")
-const { setParent} = require("../components/dom")
+const { createElements, setParent } = require("../components/dom")
 const domLink = require("../components/domLinker")
 
 /**
