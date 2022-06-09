@@ -20,7 +20,7 @@ const getPhotographers = () => axios.get(url).then((response) => response.data.p
  * Get all medias
  * @returns Array of media object
  */
-const getMedias = () => axios.get(url).then(response => response.data.media)
+const getMedias = () => axios.get(url).then((response) => response.data.media)
 
 /**
  * Get medias in function of photographerId in param

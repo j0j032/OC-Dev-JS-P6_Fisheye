@@ -99,10 +99,23 @@
 
     background-color: #312E2E;
     width: 87%;
-    height: 500px;
+    height: fit-content;
     padding: 3%;
     
     position: relative;
+}
+
+.Picture{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.video{
+    width: 100px;
+    width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 .likesAndPriceContainer{

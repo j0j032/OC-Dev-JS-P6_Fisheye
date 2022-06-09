@@ -1,8 +1,8 @@
 // Mettre le code JavaScript lié à la page photographer.html
 const api = require("../components/api");
-const { imgContainer } = require("../components/domLinker");
 const factory = require("../factories/photographer");
 
+module.exports = id => {
 /**
  * to display each photographer info on his profile
  * @param {object} data from data.json
@@ -15,20 +15,20 @@ data.forEach((photographer) => {
 });
 }
 
-const displayMedias = (mediaData, artistData) => {
-const urlId = location.href.split("http://localhost:8087/photographer.html?id=")
-console.log(urlId[1]);
-  mediaData.forEach((media)=>{
-    if(parseInt(urlId[1]) === media.photographerId){
-      console.log(`${media.title} match url`);
-     /*  const element = document.createElement("h2")
-      element.textContent = `titre: ${media.title}`
 
-      imgContainer.appendChild(element) */
-      factory.getPhotographersMedias(media, artistData)
-    }
-  })
-}
+
+const displayMedias = (data) => {
+
+  console.log("le photographe "+id);
+    data.forEach((media)=>{
+      if(parseInt(id) === media.photographerId){
+
+        factory.getPhotographersMedias(media)
+
+
+      }
+    })
+  }
 
 /**
  * To get data photographers info in data.json, put it in an array and play the code.
@@ -37,14 +37,15 @@ console.log(urlId[1]);
 const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMedias();
+    const mediaByPhId = await api.getMediasByPhotographerId()
 
     console.log(photographers);
     console.log(medias);
+    console.log(mediaByPhId);
 
     displayHeaderElements(photographers)
-    displayMedias(medias, photographers)
+    displayMedias(medias)
   };
   
   init();
-
-  
+}

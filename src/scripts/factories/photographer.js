@@ -64,14 +64,23 @@ const getPhotographerCard = (data) => {
       createProfileHeader()
     }
     
-    const getPhotographersMedias = (mediaData , artistData) => {
-      const {date, id, image, likes, photographerId, price, title} = mediaData
-      const {name, artistId} = artistData
-      const media = `/src/assets/medias/${name}/${image}`
-      const mediaAlt = `${title} : photo de ${name}`
+    const getPhotographersMedias = (data) => {
+      const {date, id, image,video, likes, photographerId, price, title} = data
+      const mediaI = `../src/assets/medias/${image}`;
+      const mediaV = `../src/assets/medias/${video}`;
+      const mediaAlt = `${title}`;
+      console.log(mediaI);
+      console.log(mediaV);
       
       const createPictureCard = () => {
-        createElements('img', null, "Picture", mediaAlt, media, mediaAlt, domLink.imgContainer )
+        if(image){createElements('img', null, "Picture", mediaAlt, mediaI, mediaAlt, domLink.imgContainer )}else if(video){
+         console.log("c'est une video");
+          const newVideo = document.createElement("video")
+          setParent(newVideo, "video", mediaAlt, null)
+          domLink.imgContainer.appendChild(newVideo)
+          createElements('source', null, null, mediaAlt, mediaV, mediaAlt, newVideo, "video/mp4")
+        }
+
       }
       createPictureCard()
     }
