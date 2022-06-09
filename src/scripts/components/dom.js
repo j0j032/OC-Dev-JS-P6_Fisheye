@@ -8,7 +8,7 @@
  * @param {string} alt to set the alt of img(if img)
  * @param {HTMLElement} parent to insert at the right place
  */
-const createElements = (tag, text, style, ariaLabel, src, alt, parent , type) => {
+const createElements = (tag, text, style, ariaLabel, src, alt, parent , type, style2) => {
   const element = document.createElement(tag);
   element.classList.add(style);
   element.textContent = text;
@@ -20,6 +20,9 @@ const createElements = (tag, text, style, ariaLabel, src, alt, parent , type) =>
   } 
   if(tag === 'source'){
     element.setAttribute('type', type)
+  }
+  if(tag === 'i'){
+    element.classList.add(style2)
   }
 
   parent.appendChild(element);

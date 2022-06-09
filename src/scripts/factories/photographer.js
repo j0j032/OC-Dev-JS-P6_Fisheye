@@ -69,17 +69,35 @@ const getPhotographerCard = (data) => {
       const mediaI = `../src/assets/medias/${image}`;
       const mediaV = `../src/assets/medias/${video}`;
       const mediaAlt = `${title}`;
-      console.log(mediaI);
-      console.log(mediaV);
-      
+      const mediaLikes = `${likes}`
+      const heartIcon = "fa-solid fa-heart"
+
       const createPictureCard = () => {
-        if(image){createElements('img', null, "Picture", mediaAlt, mediaI, mediaAlt, domLink.imgContainer )}else if(video){
-         console.log("c'est une video");
+        const mediaContainer = document.createElement("div")
+        setParent(mediaContainer, "media-container", null, null)
+        domLink.imgContainer.appendChild(mediaContainer)
+        if(image){createElements('img', null, "Picture", mediaAlt, mediaI, mediaAlt, mediaContainer )}
+        else if(video){
           const newVideo = document.createElement("video")
           setParent(newVideo, "video", mediaAlt, null)
-          domLink.imgContainer.appendChild(newVideo)
+          mediaContainer.appendChild(newVideo)
           createElements('source', null, null, mediaAlt, mediaV, mediaAlt, newVideo, "video/mp4")
         }
+
+        const mediaTitleContainer = document.createElement("div")
+        setParent(mediaTitleContainer, "media-container__Title", null,null)
+        mediaContainer.appendChild(mediaTitleContainer)
+
+        createElements('p', mediaAlt, "media-title", mediaAlt, null, mediaAlt, mediaTitleContainer, null)
+
+        const mediaLikesContainer = document.createElement("div")
+        setParent(mediaLikesContainer, "media-container__likes", null, null)
+        mediaTitleContainer.appendChild(mediaLikesContainer)
+        createElements('p', mediaLikes, "media-likes", mediaLikes, null, mediaLikes, mediaLikesContainer, null)
+        createElements('i',null, "fa-heart","icon coeur", null, "icon coeur", mediaLikesContainer, null, "fa-solid")
+        
+
+
 
       }
       createPictureCard()
