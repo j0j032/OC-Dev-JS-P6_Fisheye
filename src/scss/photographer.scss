@@ -4,6 +4,7 @@
     display: none;
 }
 
+
 .photograph-header {
     background-color: $greyLight;
     height: 300px;
@@ -11,33 +12,115 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: -30px;
 
     &__description{
-        width: 200px;
-        height: 200px;
+        width: fit-content;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        background-color: aqua;
+
+        > h1 {
+            font-size: 3.3em;
+            font-weight: 500;
+        }
+        > .card__location{
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        > .card__tagline{
+            font-size: 1rem;
+        }
     }
     &__btn{
-        font-size: 20px;
+        font-size: 1rem;
         font-weight: bold;
         color: white;
         padding: 11px;
-        width: 170px;
-        height: 70px;
+        width: fit-content;
+        height: 60px;
         border: none;
         background-color:$red;
         border-radius: 5px;
         cursor: pointer;
     }
     &__profilePic-Container{
-        width: 200px;
-        height: 200px;
-        background-color: bisque;
+        width: fit-content;
+        height: fit-content;
     }
 }
+.sort {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 0;
+
+    > label{
+        font-size: 1.1rem;
+        font-weight: 900;
+        margin-right: 20px;
+        margin-left: 40px;
+    }
+    > select{
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: white;
+        padding: 10px;
+        width: 100px;
+        height: 40px;
+        border: none;
+        background-color:$red;
+        border-radius: 5px;
+        cursor: pointer;
+        appearance: none;
+        border: none;
+    }
+}
+
+.artist-work-container{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    
+}
+
+.img-container{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 20px 20px; 
+    grid-template-areas: 
+      ". . ."
+      ". . ."
+      ". . ."; 
+
+    background-color: #312E2E;
+    width: 87%;
+    height: 500px;
+    padding: 3%;
+    
+    position: relative;
+}
+
+.likesAndPriceContainer{
+    position: absolute;
+    z-index: 2;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    height: fit-content;
+    background-color: $orangeBis;
+    border-radius: 5px 5px 0 0;
+    font-weight: 900;
+}
+
 
 
 .modal {

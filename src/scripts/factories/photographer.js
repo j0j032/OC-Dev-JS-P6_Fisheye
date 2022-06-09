@@ -52,19 +52,31 @@ const getPhotographerCard = (data) => {
   const photographerLocation = `${city}, ${country}`
   const profilePicture = `/src/assets/photographers/${portrait}`;
   const profilePictureAlt = `Portrait de ${name}`;
+  const photographerPricing = `${price}€/jour`
 
       const createProfileHeader = () => {
         createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, domLink.photogHeadPic)
         createElements("h1", name, "card__name",name, null,null, domLink.photogHeadDescription)
         createElements("p", photographerLocation, "card__location",photographerLocation , null,null, domLink.photogHeadDescription)
         createElements("p", tagline, "card__tagline",tagline, null,null, domLink.photogHeadDescription)
+        createElements("p", photographerPricing,null, price, null, null, domLink.priceContainer  )
       }
       createProfileHeader()
     }
     
-    
+    const getPhotographersMedias = (mediaData , artistData) => {
+      const {date, id, image, likes, photographerId, price, title} = mediaData
+      const {name, artistId} = artistData
+      const media = `/src/assets/medias/${name}/${image}`
+      const mediaAlt = `${title} : photo de ${name}`
+      
+      const createPictureCard = () => {
+        createElements('img', null, "Picture", mediaAlt, media, mediaAlt, domLink.imgContainer )
+      }
+      createPictureCard()
+    }
 
 module.exports ={
-   getPhotographerCard,getPhotographerProfileDetails
+   getPhotographerCard,getPhotographerProfileDetails,getPhotographersMedias
   
 }
