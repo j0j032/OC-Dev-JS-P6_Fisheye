@@ -1,59 +1,73 @@
 @import './variables.scss';
 
 #contact_modal {
-    display: none;
+  display: none;
+  width: 60%;
+  height: max-content;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+body {
+  position: relative;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: $orangeBis;
-    width: 50%;
+  border-radius: 5px;
+  background-color: $orangeBis;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
+  &__heading {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
+    justify-content: start;
+    &-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &-police {
+      font-size: 2.2rem;
+    }
+  }
+  &__closeBtn {
     cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+/* form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
-}
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+} */

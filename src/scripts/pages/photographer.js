@@ -5,6 +5,7 @@
 
 const api = require('../components/api');
 const factory = require('../factories/photographer');
+const { openModal, closeModal } = require('../utils/modal');
 
 module.exports = (id) => {
   /**
@@ -44,4 +45,6 @@ module.exports = (id) => {
   };
 
   init();
+  openModal();
+  closeModal();
 };

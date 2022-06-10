@@ -65,6 +65,9 @@ const getPhotographerCard = (data) => {
         createElements("p", photographerLocation, "card__location",photographerLocation , null,null, domLink.photogHeadDescription)
         createElements("p", tagline, "card__tagline",tagline, null,null, domLink.photogHeadDescription)
         createElements("p", photographerPricing,null, price, null, null, domLink.priceContainer  )
+
+        // to display name in modal
+        createElements("h1", name, "modal__heading-police",name, null,null, domLink.modalHeader)
       }
       createProfileHeader()
     }
