@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Method to insert a 'generic' Element
  * @param {HTMLElement} tag to create html tag
@@ -37,10 +38,11 @@ const createElements = (tag, text, style, ariaLabel, src, alt, parent , type, st
  */
 const setParent = (parentId, style, alabel,link) => {
   // before set create element with parent id
-    parentId.classList.add(style);
-    parentId.ariaLabel = alabel
+  const theParent = parentId
+    theParent.classList.add(style);
+    theParent.ariaLabel = alabel
     if(link){
-      parentId.href = link;
+      theParent.href = link;
     }
   // after set where parent goes with appendChild
 }

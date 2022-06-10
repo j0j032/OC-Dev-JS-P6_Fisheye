@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
   photographersSection: document.querySelector(".photographer-section"),
   photographHeader: document.querySelector(".photograph-header"),

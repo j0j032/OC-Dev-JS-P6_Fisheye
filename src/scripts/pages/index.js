@@ -1,5 +1,8 @@
-const api = require("../components/api");
-const factory = require("../factories/photographer");
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
+
+const api = require('../components/api');
+const factory = require('../factories/photographer');
 
 /**
  * to display every photographer cards
@@ -21,5 +24,3 @@ const init = async () => {
 };
 
 init();
-
-
