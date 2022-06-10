@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/0eb7ff3966.js" crossorigin="anonymous"></script>
   <title>Fisheye - photographe </title>
 </head>
 
@@ -19,6 +20,24 @@
       <button class="photograph-header__btn">Contactez-moi</button>
       <div class="photograph-header__profilePic-Container"></div>
     </div>
+    <form class="sort">
+      <label for="sortBy">Trier par</label>
+      <select name="sortBy " id="sortBy">
+        <option value="Popularité">Popularité</option>
+        <option value="Date">Date</option>
+        <option value="Titre">Titre</option>
+      </select>
+    </form>
+    <section class="medias__section">
+      <div class="medias__container">
+      </div>
+      <div class="totalLikes-container">
+        <div>
+          2000
+          <i class="fa-solid fa-heart"></i>
+        </div>
+      </div>
+    </section>
   </main>
   <div id="contact_modal">
     <div class="modal">
