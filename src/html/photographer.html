@@ -17,7 +17,7 @@
   <main id="main">
     <div class="photograph-header">
       <div class="photograph-header__description"></div>
-      <button class="photograph-header__btn">Contactez-moi</button>
+      <button class="photograph-header__btn btn">Contactez-moi</button>
       <div class="photograph-header__profilePic-Container"></div>
     </div>
     <form class="sort">
@@ -47,12 +47,24 @@
           <img id="close-modal" class="modal__closeBtn" src="src/assets/icons/close.svg" />
         </div>
       </header>
-      <form>
+      <form class="contact__form">
         <div>
-          <label>Prénom</label>
-          <input />
+          <label class="contact__label" for="first">Prénom</label><br>
+          <input id="first" name="first" class="contact__input" type="text" />
         </div>
-        <button class="contact-button">Envoyer</button>
+        <div>
+          <label class="contact__label" for="last">Nom</label><br>
+          <input id="last" name="last" class="contact__input" type="text" />
+        </div>
+        <div>
+          <label class="contact__label" for="email">Email</label><br>
+          <input id="email" name="email" class="contact__input" type="email" required />
+        </div>
+        <div>
+          <label class="contact__label" for="message">Votre message</label><br>
+          <textarea id="message" name="message" maxlength="500" class="contact__input--message" type="text"></textarea>
+        </div> <br>
+        <button class="btn contact__btn">Envoyer</button>
       </form>
     </div>
   </div>
