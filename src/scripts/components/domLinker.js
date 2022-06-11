@@ -9,5 +9,7 @@ module.exports = {
   contactBtn: document.querySelector('.photograph-header__btn'),
   contactModal: document.getElementById('contact_modal'),
   closeModalBtn:document.getElementById('close-modal'),
-  modalHeader: document.querySelector('.modal__heading')
+  modalHeader: document.querySelector('.modal__heading'),
+  modalInputs:document.querySelectorAll("input[class='contact__input']"),
+  contactMessage: document.getElementById('message')
 };
