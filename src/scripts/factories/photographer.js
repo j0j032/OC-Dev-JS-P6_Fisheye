@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 // pattern to create an element in dom.js
 // Link to DOM elements in domLinker.js
 const { createElements, setParent } = require("../components/dom")
@@ -30,7 +32,7 @@ const getPhotographerCard = (data) => {
         createElements("h2", name, "card__name",name, null,null, cardLink)
       }
 
-       //To create a card and get all the elements together 
+       // To create a card and get all the elements together 
         const createCard = () =>{
         const card = document.createElement("div")
         setParent(card, "card", null,null )
@@ -50,7 +52,7 @@ const getPhotographerCard = (data) => {
      */
     const getPhotographerProfileDetails = (data) => {
       // turn data into var easy reusable
-      const {name, id, city, country, tagline, price, portrait} = data
+      const {name, /* id, */ city, country, tagline, price, portrait} = data
       const photographerLocation = `${city}, ${country}`
       const profilePicture = `/src/assets/photographers/${portrait}`;
       const profilePictureAlt = `Portrait de ${name}`;
@@ -63,6 +65,9 @@ const getPhotographerCard = (data) => {
         createElements("p", photographerLocation, "card__location",photographerLocation , null,null, domLink.photogHeadDescription)
         createElements("p", tagline, "card__tagline",tagline, null,null, domLink.photogHeadDescription)
         createElements("p", photographerPricing,null, price, null, null, domLink.priceContainer  )
+
+        // to display name in modal
+        createElements("h1", name, "modal__heading-police",name, null,null, domLink.modalHeader)
       }
       createProfileHeader()
     }
@@ -73,18 +78,18 @@ const getPhotographerCard = (data) => {
      */
     const getPhotographersMedias = (data) => {
       // turn data into var easy reusable
-      const {date, id, image,video, likes, photographerId, price, title} = data
+      const {/* date, id, */ image,video, likes, /* photographerId, price, */ title} = data
       const mediaI = `../src/assets/medias/${image}`;
       const mediaV = `../src/assets/medias/${video}`;
       const mediaAlt = `${title}`;
       const mediaLikes = `${likes}`
 
-      //to display one media 'Card' (media+infos)
+      // to display one media 'Card' (media+infos)
       const createMediaCard = () => {
         const mediaContainer = document.createElement("div")
         setParent(mediaContainer, "media__container", null, null)
         domLink.mediasContainer.appendChild(mediaContainer)
-        //Logic to inject by media type
+        // Logic to inject by media type
         if(image){
           createElements('img', null, "media__img", mediaAlt, mediaI, mediaAlt, mediaContainer )
         }
@@ -113,7 +118,4 @@ const getPhotographerCard = (data) => {
       createMediaCard()
     }
 
-module.exports ={
-   getPhotographerCard,getPhotographerProfileDetails,getPhotographersMedias
-  
-}
+module.exports = {getPhotographerCard,getPhotographerProfileDetails,getPhotographersMedias}

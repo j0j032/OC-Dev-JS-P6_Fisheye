@@ -1,51 +1,50 @@
-// Mettre le code JavaScript lié à la page photographer.html
-const api = require("../components/api");
-const factory = require("../factories/photographer");
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable radix */
+/* eslint-disable no-console */
 
-module.exports = id => {
-/**
- * to display each photographer info on his profile
- * @param {object} data from data.json
- */
-const displayHeaderElements = (data) => {
-data.forEach((photographer) => {
-  if(location.href.includes(photographer.id)){
-    factory.getPhotographerProfileDetails(photographer)
-  }
-});
-}
+const api = require('../components/api');
+const factory = require('../factories/photographer');
+const { openModal, closeModal } = require('../utils/modal');
 
-
-
-const displayMedias = (data) => {
-
-  console.log("le photographe "+id);
-    data.forEach((media)=>{
-      if(parseInt(id) === media.photographerId){
-
-        factory.getPhotographersMedias(media)
-
-
+module.exports = (id) => {
+  /**
+   * to display each photographer info on his profile
+   * @param {object} data from data.json
+   */
+  const displayHeaderElements = (data) => {
+    data.forEach((photographer) => {
+      if (location.href.includes(photographer.id)) {
+        factory.getPhotographerProfileDetails(photographer);
       }
-    })
-  }
+    });
+  };
 
-/**
- * To get data photographers info in data.json, put it in an array and play the code.
- * To get each photographer's media from data.json
- */
-const init = async () => {
+  const displayMedias = (data) => {
+    console.log(`le photographe ${id}`);
+    data.forEach((media) => {
+      if (parseInt(id) === media.photographerId) {
+        factory.getPhotographersMedias(media);
+      }
+    });
+  };
+
+  /**
+   * To get data photographers info in data.json, put it in an array and play the code.
+   * To get each photographer's media from data.json
+   */
+  const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMedias();
-    const mediaByPhId = await api.getMediasByPhotographerId()
 
     console.log(photographers);
     console.log(medias);
-    console.log(mediaByPhId);
 
-    displayHeaderElements(photographers)
-    displayMedias(medias)
+    displayHeaderElements(photographers);
+    displayMedias(medias);
   };
-  
+
   init();
-}
+  openModal();
+  closeModal();
+};

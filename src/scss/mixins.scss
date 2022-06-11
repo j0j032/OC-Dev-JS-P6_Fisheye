@@ -1,0 +1,5 @@
+@import './variables.scss';
+
+@mixin shadow {
+  box-shadow: -2px -1px 25px -4px rgba(105, 103, 103, 0.75);
+}

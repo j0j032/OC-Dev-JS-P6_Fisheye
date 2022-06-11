@@ -1,0 +1,11 @@
+{
+    "editor.tabSize":2,
+    "editor.formatOnSave": true,
+    "[javascript]":{
+        "editor.maxTokenizationLineLength": 2500,
+        "editor.formatOnSave": false,
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
+}
