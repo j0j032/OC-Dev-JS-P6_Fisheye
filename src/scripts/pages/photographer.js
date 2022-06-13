@@ -23,7 +23,7 @@ module.exports = (id) => {
   };
 
   const displayMedias = (data) => {
-    console.log(`le photographe ${id}`);
+    console.log(`id du photographe: ${id}`);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
         getPhotographersMedias(media);
@@ -37,10 +37,12 @@ module.exports = (id) => {
    */
   const init = async () => {
     const photographers = await api.getPhotographers();
-    const medias = await api.getMedias();
-
-    console.log(photographers);
-    console.log(medias);
+    const medias = await api.getMediasByPhotographerId(parseInt(id));
+    console.log("medias du photographe:", medias)
+    console.log("Photographes:" , photographers);
+    // Marche aussi avec mais récupère tous les médias
+    /* const medias = await api.getMedias(); */
+    /* console.log(medias); */
 
     displayHeaderElements(photographers);
     displayMedias(medias);
