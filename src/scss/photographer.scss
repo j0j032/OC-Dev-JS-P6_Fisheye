@@ -95,10 +95,7 @@
       cursor: pointer;
     }
   }
-  &__img {
-    @include mediaGallery;
-  }
-  &__video {
+  &__itself {
     @include mediaGallery;
   }
   &__title {

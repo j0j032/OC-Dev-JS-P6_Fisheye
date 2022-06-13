@@ -21,11 +21,11 @@ const getPhotographersMedias = (data) => {
     domLink.mediasContainer.appendChild(mediaContainer)
     // Logic to inject by media type
     if(image){
-      createElements('img', null, "media__img", mediaAlt, mediaI, mediaAlt, mediaContainer )
+      createElements('img', null, "media__itself", mediaAlt, mediaI, mediaAlt, mediaContainer )
     }
     else if(video){
       const newVideo = document.createElement("video")
-      setParent(newVideo, "media__video", mediaAlt, null)
+      setParent(newVideo, "media__itself", mediaAlt, null)
       mediaContainer.appendChild(newVideo)
       createElements('source', null, null, mediaAlt, mediaV, mediaAlt, newVideo, "video/mp4")
     }

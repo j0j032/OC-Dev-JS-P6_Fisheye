@@ -1,9 +1,5 @@
-const {
-  closeLightBoxBtn,
-  lightBox,
-  allMedias,
-  /* clicclic, */
-} = require('../components/domLinker');
+/* eslint-disable no-console */
+const { closeLightBoxBtn, lightBox } = require('../components/domLinker');
 
 const closeLightBox = () => {
   closeLightBoxBtn.addEventListener('click', () => {
@@ -12,14 +8,13 @@ const closeLightBox = () => {
 };
 
 const openLightBox = () => {
+  const allMedias = document.querySelectorAll('.media__itself');
+  console.log(allMedias);
   allMedias.forEach((media) => {
     media.addEventListener('click', () => {
       lightBox.style.display = 'flex';
     });
   });
-  /*  clicclic.addEventListener('click',()=>{
-    lightBox.style.display = ('flex')
-  }) */
 };
 
 module.exports = {

@@ -48,10 +48,12 @@ module.exports = (id) => {
     displayMedias(medias);
   };
 
-
-  init();
-  openModal();
-  closeModal();
+ const runPage = async () => {
+  await init();
   openLightBox();
   closeLightBox()
+  openModal();
+  closeModal();
+ }
+ runPage()
 };
