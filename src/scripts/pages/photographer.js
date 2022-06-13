@@ -35,7 +35,7 @@ module.exports = (id) => {
    * To get data photographers info in data.json, put it in an array and play the code.
    * To get each photographer's media from data.json
    */
-  const init = async () => {
+   const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMediasByPhotographerId(parseInt(id));
     console.log("medias du photographe:", medias)
