@@ -10,11 +10,9 @@
   margin-top: -30px;
 
   &__description {
+    @include flex-column;
     width: fit-content;
     height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
 
     > h1 {
       font-size: 3.3em;
@@ -34,16 +32,14 @@
   }
 }
 .sort {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
+  width: 20%;
+  @include flex-spacer;
   padding: 20px 0;
 
   > label {
+    width: 50%;
     font-size: 1.1rem;
     font-weight: 900;
-    margin-right: 20px;
     margin-left: 40px;
   }
   > select {
@@ -64,10 +60,8 @@
 
 .medias {
   &__section {
+    @include flex-centered;
     position: relative;
-    display: flex;
-    align-content: center;
-    justify-content: center;
   }
   &__container {
     display: grid;
@@ -94,26 +88,18 @@
     width: 100%;
     height: 200px;
     &--infos {
-      display: flex;
-      justify-content: space-between;
+      @include flex-spacer;
     }
     &--likes {
-      display: flex;
-      align-items: center;
+      @include flex-spacer;
       cursor: pointer;
     }
   }
   &__img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 5px;
+    @include mediaGallery;
   }
   &__video {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 5px;
+    @include mediaGallery;
   }
   &__title {
     color: $red;
@@ -127,12 +113,10 @@
 }
 
 .totalLikes-container {
+  @include flex-spacer;
   position: absolute;
   z-index: 2;
   padding: 20px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   bottom: 200px;
   right: 6.5%;
   width: 250px;

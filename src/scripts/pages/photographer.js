@@ -4,7 +4,9 @@
 /* eslint-disable no-console */
 
 const api = require('../components/api');
-const factory = require('../factories/photographer');
+const {getPhotographerProfileDetails} = require('../factories/photographer');
+const {getPhotographersMedias} = require('../factories/medias');
+const { openLightBox, closeLightBox } = require('../utils/lightBox');
 const { openModal, closeModal } = require('../utils/modal');
 
 module.exports = (id) => {
@@ -15,7 +17,7 @@ module.exports = (id) => {
   const displayHeaderElements = (data) => {
     data.forEach((photographer) => {
       if (location.href.includes(photographer.id)) {
-        factory.getPhotographerProfileDetails(photographer);
+        getPhotographerProfileDetails(photographer);
       }
     });
   };
@@ -24,7 +26,7 @@ module.exports = (id) => {
     console.log(`le photographe ${id}`);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
-        factory.getPhotographersMedias(media);
+        getPhotographersMedias(media);
       }
     });
   };
@@ -44,7 +46,10 @@ module.exports = (id) => {
     displayMedias(medias);
   };
 
+
   init();
   openModal();
   closeModal();
+  openLightBox();
+  closeLightBox()
 };
