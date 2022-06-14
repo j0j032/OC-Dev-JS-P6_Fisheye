@@ -1,23 +1,17 @@
-/* eslint-disable no-console */
-const { closeLightBoxBtn, lightBox } = require('../components/domLinker');
+const displayLightBox = (data) => {
+  console.log('lightbox', data);
 
-const closeLightBox = () => {
-  closeLightBoxBtn.addEventListener('click', () => {
-    lightBox.style.display = 'none';
-  });
-};
-
-const openLightBox = () => {
-  const allMedias = document.querySelectorAll('.media__itself');
-  console.log(allMedias);
-  allMedias.forEach((media) => {
-    media.addEventListener('click', () => {
-      lightBox.style.display = 'flex';
-    });
-  });
+  /* for (let i = 0; i < data.length; i++) {
+    const PhotographerMedia = {
+      order: i,
+      title: data[i].title,
+      nbrLikes: data[i].likes,
+      media: `../src/assets/medias/${data[i].image || data[i].video}`,
+    };
+    console.log(PhotographerMedia);
+  } */
 };
 
 module.exports = {
-  closeLightBox,
-  openLightBox,
+  displayLightBox,
 };

@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable radix */
 /* eslint-disable no-console */
@@ -6,8 +8,8 @@
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
 const {getPhotographersMedias} = require('../factories/medias');
-const { openLightBox, closeLightBox } = require('../utils/lightBox');
 const { openModal, closeModal } = require('../utils/modal');
+const { displayLightBox } = require('../utils/lightBox');
 
 module.exports = (id) => {
   /**
@@ -21,6 +23,7 @@ module.exports = (id) => {
       }
     });
   };
+
 
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
@@ -37,23 +40,22 @@ module.exports = (id) => {
    */
    const init = async () => {
     const photographers = await api.getPhotographers();
+    console.log("Photographes:" , photographers);
     const medias = await api.getMediasByPhotographerId(parseInt(id));
     console.log("medias du photographe:", medias)
-    console.log("Photographes:" , photographers);
-    // Marche aussi avec mais récupère tous les médias
-    /* const medias = await api.getMedias(); */
-    /* console.log(medias); */
 
     displayHeaderElements(photographers);
     displayMedias(medias);
+    displayLightBox(medias);
   };
 
  const runPage = async () => {
   await init();
-  openLightBox();
-  closeLightBox()
+
   openModal();
   closeModal();
  }
  runPage()
+ 
+ 
 };
