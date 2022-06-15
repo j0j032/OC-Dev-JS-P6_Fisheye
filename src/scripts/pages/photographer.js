@@ -7,7 +7,7 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getPhotographersMedias} = require('../factories/medias');
+const {getPhotographersMedias, totalOfLikes} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
 
 
@@ -24,7 +24,6 @@ module.exports = (id) => {
     });
   };
 
-
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
     data.forEach((media) => {
@@ -32,6 +31,18 @@ module.exports = (id) => {
         getPhotographersMedias(media);
       }
     });
+  };
+  const displaytotalOfLikes = (data,) => {
+    console.log(`id du photographe: ${id}`);
+    const arrayOfLikes = []
+    data.forEach((media) => {
+        totalOfLikes(media, arrayOfLikes);
+    });
+    const likesReduce = arrayOfLikes.reduce((acc,likes)=> acc + likes)
+    console.log(likesReduce);
+    const totalLikesDom = document.getElementById('totalLikes')
+    totalLikesDom.textContent = likesReduce
+    
   };
 
   const displayLightBox = (data) => {
@@ -57,6 +68,7 @@ module.exports = (id) => {
     displayHeaderElements(photographers);
     displayMedias(medias);
     displayLightBox(medias);
+    displaytotalOfLikes(medias);
   };
 
  const runPage = async () => {

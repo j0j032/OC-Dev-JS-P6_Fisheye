@@ -53,6 +53,8 @@ const getPhotographersMedias = (data) => {
   }
   createMediaCard()
 
+// lightBox Logic
+
   const displayMediaInLightBox = () => {
     
     
@@ -74,8 +76,6 @@ const getPhotographersMedias = (data) => {
     openLightBox()
 
     
-
-
     const closeLightBox = () => {
       closeLightBoxBtn.addEventListener('click', () => {
         lightBox.classList.remove('show');
@@ -84,7 +84,18 @@ const getPhotographersMedias = (data) => {
     closeLightBox()  
   }
   displayMediaInLightBox()
+
   
 }
 
-module.exports = {getPhotographersMedias}
+// Likes logic
+
+const totalOfLikes = (data, unArray) => {
+  const {likes, title }=data
+  
+  unArray.push(likes)
+  console.log(`${title} = ${likes} likes`); 
+ }
+
+
+module.exports = {getPhotographersMedias, totalOfLikes}

@@ -110,6 +110,11 @@
 }
 
 .totalLikes-container {
+  display: flex;
+  align-content: center;
+}
+
+.likesAndPrice-container {
   @include flex-spacer;
   position: absolute;
   z-index: 2;

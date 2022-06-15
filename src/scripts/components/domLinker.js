@@ -4,7 +4,7 @@ module.exports = {
   photographHeader: document.querySelector(".photograph-header"),
   photogHeadDescription :document.querySelector('.photograph-header__description'),
   photogHeadPic :document.querySelector('.photograph-header__profilePic-Container'),
-  priceContainer :document.querySelector('.totalLikes-container'),
+  priceContainer :document.querySelector('.likesAndPrice-container'),
   mediasContainer : document.querySelector('.medias__container'),
   // modal
   contactBtn: document.querySelector('.photograph-header__btn'),
