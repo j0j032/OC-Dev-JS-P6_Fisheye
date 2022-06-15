@@ -9,7 +9,7 @@ const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
 const {getPhotographersMedias} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
-const { displayLightBox } = require('../utils/lightBox');
+const { openLightBox, closeLightBox } = require('../utils/lightBox');
 
 module.exports = (id) => {
   /**
@@ -34,6 +34,12 @@ module.exports = (id) => {
     });
   };
 
+  const displayLightBox = (data) => {
+
+    console.log('lightbox', data);
+    
+  };
+
   /**
    * To get data photographers info in data.json, put it in an array and play the code.
    * To get each photographer's media from data.json
@@ -51,7 +57,8 @@ module.exports = (id) => {
 
  const runPage = async () => {
   await init();
-
+  openLightBox();
+  closeLightBox();
   openModal();
   closeModal();
  }

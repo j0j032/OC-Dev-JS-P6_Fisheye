@@ -14,7 +14,7 @@ module.exports = {
   modalInputs:document.querySelectorAll("input[class='contact__input']"),
   contactMessage: document.getElementById('message'),
   // lightBox
-  allMedias : document.querySelectorAll('.media__itself'),
+
   closeLightBoxBtn : document.querySelector(".lightBox__close"),
   nextLightBoxBtn : document.querySelector(".lightBox__next"),
   prevLightBoxBtn : document.querySelector(".lightBox__prev"),

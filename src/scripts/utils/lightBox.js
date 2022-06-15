@@ -1,17 +1,29 @@
-const displayLightBox = (data) => {
-  console.log('lightbox', data);
+const { lightBox, closeLightBoxBtn } = require('../components/domLinker');
 
-  /* for (let i = 0; i < data.length; i++) {
-    const PhotographerMedia = {
-      order: i,
-      title: data[i].title,
-      nbrLikes: data[i].likes,
-      media: `../src/assets/medias/${data[i].image || data[i].video}`,
-    };
-    console.log(PhotographerMedia);
-  } */
+const openLightBox = () => {
+  const allMedias = document.querySelectorAll('.media__itself');
+  allMedias.forEach((media) => {
+    media.addEventListener('click', (e) => {
+      const clickedId = ` id de la photo clicked = ${e.target.id}`;
+      console.log(clickedId);
+      lightBox.classList.add('show');
+      return clickedId;
+    });
+  });
 };
 
+const closeLightBox = () => {
+  closeLightBoxBtn.addEventListener('click', () => {
+    lightBox.classList.remove('show');
+  });
+};
+
+/* const addMediatoLightBox = (data) => {
+if
+
+} */
+
 module.exports = {
-  displayLightBox,
+  openLightBox,
+  closeLightBox,
 };

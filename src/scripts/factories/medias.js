@@ -11,10 +11,11 @@ const domLink = require("../components/domLinker")
 
 const getPhotographersMedias = (data) => {
   // turn data into var easy reusable
-  const {/* date, id, */ image,video, likes, /* photographerId, price, */ title} = data
+  const {/* date, */ id,  image,video, likes, /* photographerId, price, */ title} = data
   const media = `../src/assets/medias/${image||video}`;
   const mediaAlt = `${title}`;
   const mediaLikes = `${likes}`
+  const mediaId = `${id}`
 
   // to display one media 'Card' (media+infos)
   const createMediaCard = () => {
@@ -23,13 +24,13 @@ const getPhotographersMedias = (data) => {
     domLink.mediasContainer.appendChild(mediaContainer)
     // Logic to inject by media type
     if(image){
-      createElements('img', null, "media__itself", mediaAlt, media, mediaAlt, mediaContainer )
+      createElements('img', null, "media__itself", mediaAlt, media, mediaAlt, mediaContainer, null,null, mediaId )
     }
     else if(video){
       const newVideo = document.createElement("video")
       setParent(newVideo, "media__itself", mediaAlt, null)
       mediaContainer.appendChild(newVideo)
-      createElements('source', null, null, mediaAlt, media, mediaAlt, newVideo, "video/mp4")
+      createElements('source', null, null, mediaAlt, media, mediaAlt, newVideo, "video/mp4",null, mediaId)
     }
 
     // informations container (total of likes and photographer pricing)

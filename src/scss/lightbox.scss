@@ -1,9 +1,10 @@
 @import './variables.scss';
 
-#lightBox {
-  display: none;
+.lightBox.show {
+  display: block;
 }
 .lightBox {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,6 +12,7 @@
   height: 100%;
   background-color: $white;
   z-index: 3;
+
   &__next {
     @include lightBoxNav;
     right: 20px;

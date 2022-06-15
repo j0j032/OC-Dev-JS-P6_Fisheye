@@ -72,10 +72,6 @@ const getPhotographerCard = (data) => {
       createProfileHeader()
     }
     
-    /**
-     * Factory to fill medias for each photographer on photographer page
-     * @param {object} data 
-     */
    
 
 
