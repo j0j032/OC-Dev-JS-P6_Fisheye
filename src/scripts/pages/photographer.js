@@ -9,7 +9,7 @@ const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
 const {getPhotographersMedias} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
-const { openLightBox, closeLightBox } = require('../utils/lightBox');
+
 
 module.exports = (id) => {
   /**
@@ -35,8 +35,12 @@ module.exports = (id) => {
   };
 
   const displayLightBox = (data) => {
-
     console.log('lightbox', data);
+    /* data.forEach((object) => {
+      if(object.id == clickedId){
+        console.log('match');
+      };
+    }) */
     
   };
 
@@ -57,8 +61,7 @@ module.exports = (id) => {
 
  const runPage = async () => {
   await init();
-  openLightBox();
-  closeLightBox();
+  
   openModal();
   closeModal();
  }

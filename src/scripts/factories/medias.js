@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 /* eslint-disable no-constant-condition */
@@ -6,7 +7,9 @@
 // pattern to create an element in dom.js
 // Link to DOM elements in domLinker.js
 const { createElements, setParent } = require("../components/dom");
-const domLink = require("../components/domLinker")
+const { lightBox, closeLightBoxBtn} = require('../components/domLinker');
+const domLink = require("../components/domLinker");
+
 
 
 const getPhotographersMedias = (data) => {
@@ -50,6 +53,38 @@ const getPhotographersMedias = (data) => {
   }
   createMediaCard()
 
+  const displayMediaInLightBox = () => {
+    
+    
+    const openLightBox = () => {
+
+      const allMedias = document.querySelectorAll('.media__itself');
+
+      allMedias.forEach((media) => {
+
+        media.addEventListener('click', (e) => {
+         const clickedId = e.target.id;
+          console.log(clickedId);
+          lightBox.classList.add('show');
+
+        
+        });
+      });
+    };
+    openLightBox()
+
+    
+
+
+    const closeLightBox = () => {
+      closeLightBoxBtn.addEventListener('click', () => {
+        lightBox.classList.remove('show');
+      });
+    }
+    closeLightBox()  
+  }
+  displayMediaInLightBox()
+  
 }
 
 module.exports = {getPhotographersMedias}
