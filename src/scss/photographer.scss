@@ -1,95 +1,129 @@
 @import './variables.scss';
 
-#contact_modal {
-    display: none;
-}
-
 .photograph-header {
-    background-color: $greyLight;
-    height: 300px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  background-color: $greyLight;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: -30px;
 
-    &__description{
-        width: 200px;
-        height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        background-color: aqua;
+  &__description {
+    @include flex-column;
+    width: fit-content;
+    height: fit-content;
+
+    > h1 {
+      font-size: 3.3em;
+      font-weight: 500;
     }
-    &__btn{
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-        padding: 11px;
-        width: 170px;
-        height: 70px;
-        border: none;
-        background-color:$red;
-        border-radius: 5px;
-        cursor: pointer;
+    > .card__location {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
     }
-    &__profilePic-Container{
-        width: 200px;
-        height: 200px;
-        background-color: bisque;
+    > .card__tagline {
+      font-size: 1rem;
     }
+  }
+  &__profilePic-Container {
+    width: fit-content;
+    height: fit-content;
+  }
 }
+.sort {
+  width: 20%;
+  @include flex-spacer;
+  padding: 20px 0;
 
-
-.modal {
-    border-radius: 5px;
-    background-color: $orangeBis;
+  > label {
     width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
-form input {
-    width: 100%;
-    height: 68px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-left: 40px;
+  }
+  > select {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    height: 40px;
     border: none;
+    background-color: $red;
     border-radius: 5px;
+    cursor: pointer;
+    appearance: none;
+    border: none;
+  }
+}
+
+.medias {
+  &__section {
+    @include flex-centered;
+    position: relative;
+  }
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 350px 350px 350px;
+    gap: 40px 40px;
+    grid-template-areas:
+      '. . .'
+      '. . .'
+      '. . .';
+
+    width: 87%;
+    height: 550px;
+    padding: 3%;
+    margin-bottom: 200px;
+    aspect-ratio: 1/1;
+
+    overflow: scroll;
+  }
+}
+
+.media {
+  &__container {
+    width: 100%;
+    height: 200px;
+    &--infos {
+      @include flex-spacer;
+    }
+    &--likes {
+      @include flex-spacer;
+      cursor: pointer;
+    }
+  }
+  &__itself {
+    @include mediaGallery;
+  }
+  &__title {
+    color: $red;
+    font-size: 1.2rem;
+  }
+}
+
+.fa-heart {
+  color: $red;
+  margin-left: 5px;
+}
+
+.totalLikes-container {
+  display: flex;
+  align-content: center;
+}
+
+.likesAndPrice-container {
+  @include flex-spacer;
+  position: absolute;
+  z-index: 2;
+  padding: 20px 30px;
+  bottom: 200px;
+  right: 6.5%;
+  width: 250px;
+  height: fit-content;
+  background-color: $orangeBis;
+  border-radius: 5px 5px 0 0;
+  font-weight: 900;
 }

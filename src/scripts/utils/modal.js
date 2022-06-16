@@ -1,11 +1,36 @@
-// ____________________________________Code OC______________________________________________________
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 
-function displayModal() {
-  const modal = document.getElementById("contact_modal");
-  modal.style.display = "block";
+const domLinker = require('../components/domLinker');
+
+const openModal = () =>{
+  domLinker.contactBtn.addEventListener('click', () => {
+    domLinker.contactModal.style.display = ('block');
+  });
+}
+const closeModal = () => {
+  domLinker.closeModalBtn.addEventListener('click', ()=>{
+    domLinker.contactModal.style.display = ('none');
+  })
+}
+module.exports = {
+  openModal, closeModal
 }
 
-function closeModal() {
-  const modal = document.getElementById("contact_modal");
-  modal.style.display = "none";
-}
+const logInputsValue = () => {
+  domLinker.modalInputs.forEach(input => {
+    input.addEventListener('input',(e)=>{
+      console.log(`${e.target.id} = ${e.target.value}`);
+    })
+  });
+  domLinker.contactMessage.addEventListener('input',(e)=>{
+    console.log(`${e.target.id} = ${e.target.value}`);
+  })
+  
+};
+logInputsValue()
+
+domLinker.contactModal.addEventListener('submit',(e)=>{
+  e.preventDefault()
+  logInputsValue()
+})
