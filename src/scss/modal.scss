@@ -3,25 +3,19 @@
 #contact_modal {
   display: none;
   width: 60%;
-  height: max-content;
+  max-height: 80vh;
   position: fixed;
-  top: 30px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-body {
-  position: relative;
-}
-
 .modal {
+  @include flex-spacer;
+  flex-direction: column;
   border-radius: 5px;
   background-color: $orangeBis;
   width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 35px;
   margin: auto;
   @include shadow;
@@ -31,10 +25,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: start;
+
     &-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex-spacer;
     }
     &-police {
       font-size: 2.2rem;
@@ -49,28 +42,29 @@ body {
 
 .contact {
   &__form {
-    display: flex;
+    @include flex-column;
     width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
     margin-top: 20px;
   }
   &__label {
     color: #312e2e;
     font-size: 1rem;
-    margin-bottom: -10px;
+    font-weight: bold;
   }
   &__input {
     width: 100%;
     height: 40px;
     border: none;
     border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
     &--message {
       width: 100%;
       border: none;
       border-radius: 5px;
       height: 140px;
       resize: none;
+      margin-top: 5px;
     }
   }
   &__btn.btn {
@@ -80,12 +74,4 @@ body {
       border: solid 1px $black;
     }
   }
-}
-
-form div {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
 }
