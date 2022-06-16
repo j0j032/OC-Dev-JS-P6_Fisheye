@@ -76,12 +76,13 @@ const totalOfLikes = (data, array) => {
   * to add a like when user click on media like container
   * @param {object} data to get media informations
   */
- const addLike = (data) => {
-  const {likes}=data
+ const addLike = (data, array) => {
+  const {likes}= data
    const likeClick = document.querySelectorAll('.media__container--likes');
     likeClick.forEach((like)=>{
       like.addEventListener('click', ()=>{
-        console.log(likes);
+        array.push(likes)
+        console.log(array);
       })
     })
  }

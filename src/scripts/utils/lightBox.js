@@ -1,13 +1,17 @@
 /* eslint-disable no-console */
 const { lightBox, closeLightBoxBtn } = require('../components/domLinker');
 
-// lightBox Logic
 /**
- * To open and close lightBox
+ * LightBox logic
+ * @param {object} data to get to get media informations
  */
 const getLightbox = (data) => {
-  // eslint-disable-next-line no-unused-vars
   const { id } = data;
+
+  const displayLBoxMedia = () => {
+    console.log(id);
+  };
+
   // open
   const openLightBox = () => {
     const allMedias = document.querySelectorAll('.media__itself');
@@ -16,6 +20,7 @@ const getLightbox = (data) => {
       media.addEventListener('click', (e) => {
         const clickedId = e.target.id;
         console.log(clickedId);
+        displayLBoxMedia();
         lightBox.classList.add('show');
       });
     });

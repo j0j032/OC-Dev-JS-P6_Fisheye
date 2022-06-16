@@ -58,8 +58,20 @@ module.exports = (id) => {
    * @param {object} data 
    */
   const displayUserLike = (data) => {
-  addLike(data)
+    const arrayOfLikes = []
+    data.forEach((like)=>{
+      addLike(like, arrayOfLikes)
+    })
+  }
 
+  /** DOESN'T WORK AT THE MOMENT (bad Logic)
+   * 
+   * @param {object} data 
+   */
+  const displayLightBox = (data) =>{
+    data.forEach((mediaId)=>{
+      getLightbox(mediaId);
+    })
   }
 
   /**
@@ -77,7 +89,7 @@ module.exports = (id) => {
     displayMedias(medias);
     displaytotalOfLikes(medias);
     displayUserLike(medias);
-    getLightbox(medias);
+    displayLightBox(medias);
     openModal();
     closeModal();
   };
