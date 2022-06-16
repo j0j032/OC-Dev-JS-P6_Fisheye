@@ -7,7 +7,7 @@ const domLink = require("../components/domLinker")
 
 /**
  * Factory to fill a photographer 'Profile card' informations on homepage
- * @param {object} data 
+ * @param {object} data to get photographers data
  */
 const getPhotographerCard = (data) => {
   // turn data into var easy reusable
@@ -48,7 +48,7 @@ const getPhotographerCard = (data) => {
     
     /**
      * To fill profile header on photographer page
-     * @param {object} data 
+     * @param {object} data to get photographers data
      */
     const getPhotographerProfileDetails = (data) => {
       // turn data into var easy reusable
@@ -72,7 +72,4 @@ const getPhotographerCard = (data) => {
       createProfileHeader()
     }
     
-   
-
-
 module.exports = {getPhotographerCard,getPhotographerProfileDetails}

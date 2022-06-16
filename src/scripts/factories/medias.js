@@ -7,11 +7,13 @@
 // pattern to create an element in dom.js
 // Link to DOM elements in domLinker.js
 const { createElements, setParent } = require("../components/dom");
-const { lightBox, closeLightBoxBtn} = require('../components/domLinker');
 const domLink = require("../components/domLinker");
 
 
-
+/**
+ * create and display medias
+ * @param {object} data 
+ */
 const getPhotographersMedias = (data) => {
   // turn data into var easy reusable
   const {/* date, */ id,  image,video, likes, /* photographerId, price, */ title} = data
@@ -53,38 +55,37 @@ const getPhotographersMedias = (data) => {
   }
   createMediaCard()
 
-  const displayMediaInLightBox = () => {
-    
-    
-    const openLightBox = () => {
-
-      const allMedias = document.querySelectorAll('.media__itself');
-
-      allMedias.forEach((media) => {
-
-        media.addEventListener('click', (e) => {
-         const clickedId = e.target.id;
-          console.log(clickedId);
-          lightBox.classList.add('show');
-
-        
-        });
-      });
-    };
-    openLightBox()
-
-    
-
-
-    const closeLightBox = () => {
-      closeLightBoxBtn.addEventListener('click', () => {
-        lightBox.classList.remove('show');
-      });
-    }
-    closeLightBox()  
-  }
-  displayMediaInLightBox()
-  
 }
 
-module.exports = {getPhotographersMedias}
+// Likes logic
+
+/**
+ * to get total of likes per photographer
+ * @param {object} data to get media informations
+ * @param {array} total to stock and additionning all likes 
+ */
+const totalOfLikes = (data, array) => {
+  const {likes, title }= data
+  array.push(likes)
+  console.log(`${title} = ${likes} likes`); 
+  
+ }
+
+ /** DOESN'T WORK AT THE MOMENT (bad Logic)
+  * 
+  * to add a like when user click on media like container
+  * @param {object} data to get media informations
+  */
+ const addLike = (data, array) => {
+  const {likes}= data
+   const likeClick = document.querySelectorAll('.media__container--likes');
+    likeClick.forEach((like)=>{
+      like.addEventListener('click', ()=>{
+        array.push(likes)
+        console.log(array);
+      })
+    })
+ }
+
+
+module.exports = {getPhotographersMedias, totalOfLikes, addLike}
