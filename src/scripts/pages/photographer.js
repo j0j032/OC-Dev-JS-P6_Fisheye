@@ -7,14 +7,15 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getPhotographersMedias, totalOfLikes} = require('../factories/medias');
+const {getPhotographersMedias, totalOfLikes, addLike} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
+const { getLightbox } = require('../utils/lightBox');
 
 
 module.exports = (id) => {
   /**
    * to display each photographer info on his profile
-   * @param {object} data from data.json
+   * @param {object} data to get photographers informations
    */
   const displayHeaderElements = (data) => {
     data.forEach((photographer) => {
@@ -24,6 +25,10 @@ module.exports = (id) => {
     });
   };
 
+  /**
+   * to display each photographer medias (by id) on his profile
+   * @param {object} data to get medias informations
+   */
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
     data.forEach((media) => {
@@ -32,32 +37,35 @@ module.exports = (id) => {
       }
     });
   };
-  const displaytotalOfLikes = (data,) => {
-    console.log(`id du photographe: ${id}`);
+
+  /**
+   * To display the total of all media likes
+   * @param {object} data to get medias informations
+   */
+  const displaytotalOfLikes = (data) => {
     const arrayOfLikes = []
     data.forEach((media) => {
         totalOfLikes(media, arrayOfLikes);
     });
     const likesReduce = arrayOfLikes.reduce((acc,likes)=> acc + likes)
-    console.log(likesReduce);
+    console.log(`total of likes = ${likesReduce}`);
     const totalLikesDom = document.getElementById('totalLikes')
     totalLikesDom.textContent = likesReduce
-    
   };
 
-  const displayLightBox = (data) => {
-    console.log('lightbox', data);
-    /* data.forEach((object) => {
-      if(object.id == clickedId){
-        console.log('match');
-      };
-    }) */
-    
-  };
+  /**  DOESN'T WORK AT THE MOMENT (bad Logic)
+   * 
+   * @param {object} data 
+   */
+  const displayUserLike = (data) => {
+  addLike(data)
+
+  }
 
   /**
-   * To get data photographers info in data.json, put it in an array and play the code.
+   * To get data photographers info in data.json
    * To get each photographer's media from data.json
+   * To play the logics filled with datas
    */
    const init = async () => {
     const photographers = await api.getPhotographers();
@@ -67,17 +75,13 @@ module.exports = (id) => {
 
     displayHeaderElements(photographers);
     displayMedias(medias);
-    displayLightBox(medias);
     displaytotalOfLikes(medias);
+    displayUserLike(medias);
+    getLightbox(medias);
+    openModal();
+    closeModal();
   };
 
- const runPage = async () => {
-  await init();
-  
-  openModal();
-  closeModal();
- }
- runPage()
- 
+ init()
  
 };
