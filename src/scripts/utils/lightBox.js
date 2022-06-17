@@ -6,25 +6,22 @@ const { lightBox, closeLightBoxBtn } = require('../components/domLinker');
  * @param {object} data to get to get media informations
  */
 const getLightbox = (data) => {
-  const { id } = data;
-
-  const displayLBoxMedia = () => {
-    console.log(id);
-  };
+  const { id, image, video } = data;
 
   // open
   const openLightBox = () => {
-    const allMedias = document.querySelectorAll('.media__itself');
+    const allMedias = document.querySelectorAll('.medias__container a');
+    for (const link of allMedias) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const image = lightBox.querySelector('.lightBox__container img');
+        image.src = this.href;
 
-    allMedias.forEach((media) => {
-      media.addEventListener('click', (e) => {
-        const clickedId = e.target.id;
-        console.log(clickedId);
-        displayLBoxMedia();
         lightBox.classList.add('show');
       });
-    });
+    }
   };
+
   openLightBox();
 
   // close

@@ -40,9 +40,9 @@ module.exports = (id) => {
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
         getMediaCard(media);
-        console.log(media.id);
       }
     });
+    return articles
   };
 
   /**

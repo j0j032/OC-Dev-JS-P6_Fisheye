@@ -24,8 +24,8 @@ const getMediaCard = (data) => {
 
   // to display one media 'Card' (media+infos)
 
-    const mediaContainer = document.createElement("div")
-    setParent(mediaContainer, "media__container", null, null)
+    const mediaContainer = document.createElement("a")
+    setParent(mediaContainer, "media__container", null, media)
     domLink.mediasContainer.appendChild(mediaContainer)
     // Logic to inject by media type
     if(image){
