@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable prefer-const */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-globals */
@@ -7,7 +8,7 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getPhotographersMedias, totalOfLikes, addLike} = require('../factories/medias');
+const {getMediaCard, totalOfLikes, addLike} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
 const { getLightbox } = require('../utils/lightBox');
 
@@ -31,9 +32,15 @@ module.exports = (id) => {
    */
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
+    let articles = []
+    for (let i = 0; i< data.length; i++){
+      articles.push(`../src/assets/medias/${data[i].image||data[i].video}`)
+    }
+    console.log(articles);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
-        getPhotographersMedias(media);
+        getMediaCard(media);
+        console.log(media.id);
       }
     });
   };

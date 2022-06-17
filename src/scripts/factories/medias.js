@@ -14,7 +14,7 @@ const domLink = require("../components/domLinker");
  * create and display medias
  * @param {object} data 
  */
-const getPhotographersMedias = (data) => {
+const getMediaCard = (data) => {
   // turn data into var easy reusable
   const {/* date, */ id,  image,video, likes, /* photographerId, price, */ title} = data
   const media = `../src/assets/medias/${image||video}`;
@@ -23,7 +23,7 @@ const getPhotographersMedias = (data) => {
   const mediaId = `${id}`
 
   // to display one media 'Card' (media+infos)
-  const createMediaCard = () => {
+
     const mediaContainer = document.createElement("div")
     setParent(mediaContainer, "media__container", null, null)
     domLink.mediasContainer.appendChild(mediaContainer)
@@ -53,9 +53,9 @@ const getPhotographersMedias = (data) => {
     createElements('i',null, "fa-heart","icon coeur", null, "icon coeur", mediaLikesContainer, null, "fa-solid")
     
   }
-  createMediaCard()
 
-}
+
+
 
 // Likes logic
 
@@ -88,4 +88,4 @@ const totalOfLikes = (data, array) => {
  }
 
 
-module.exports = {getPhotographersMedias, totalOfLikes, addLike}
+module.exports = {getMediaCard, totalOfLikes, addLike}
