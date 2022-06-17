@@ -42,7 +42,7 @@ module.exports = (id) => {
         getMediaCard(media);
       }
     });
-    return articles
+    getLightbox(articles);
   };
 
   /**
@@ -71,16 +71,6 @@ module.exports = (id) => {
     })
   }
 
-  /** DOESN'T WORK AT THE MOMENT (bad Logic)
-   * 
-   * @param {object} data 
-   */
-  const displayLightBox = (data) =>{
-    data.forEach((mediaId)=>{
-      getLightbox(mediaId);
-    })
-  }
-
   /**
    * To get data photographers info in data.json
    * To get each photographer's media from data.json
@@ -96,7 +86,6 @@ module.exports = (id) => {
     displayMedias(medias);
     displaytotalOfLikes(medias);
     displayUserLike(medias);
-    displayLightBox(medias);
     openModal();
     closeModal();
   };
