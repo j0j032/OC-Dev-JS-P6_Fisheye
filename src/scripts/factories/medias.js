@@ -7,14 +7,13 @@
 // pattern to create an element in dom.js
 // Link to DOM elements in domLinker.js
 const { createElements, setParent } = require("../components/dom");
-const domLink = require("../components/domLinker");
 
 
 /**
  * create and display medias
  * @param {object} data 
  */
-const getMediaCard = (data) => {
+const getMediaCard = (data,parent) => {
   // turn data into var easy reusable
   const {/* date, */ id,  image,video, likes, /* photographerId, price, */ title} = data
   const media = `../src/assets/medias/${image||video}`;
@@ -25,8 +24,8 @@ const getMediaCard = (data) => {
   // to display one media 'Card' (media+infos)
 
     const mediaContainer = document.createElement("a")
-    setParent(mediaContainer, "media__container", null, media)
-    domLink.mediasContainer.appendChild(mediaContainer)
+    setParent(mediaContainer, "media__container", null, media, mediaId)
+    parent.appendChild(mediaContainer)
     // Logic to inject by media type
     if(image){
       createElements('img', null, "media__itself", mediaAlt, media, mediaAlt, mediaContainer, null,null, mediaId )

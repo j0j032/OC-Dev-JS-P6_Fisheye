@@ -11,6 +11,7 @@ const {getPhotographerProfileDetails} = require('../factories/photographer');
 const {getMediaCard, totalOfLikes, addLike} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
 const { getLightbox } = require('../utils/lightBox');
+const { mediasContainer } = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -32,17 +33,20 @@ module.exports = (id) => {
    */
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
-    let articles = []
+    let ids = []
+    let sources = []
     for (let i = 0; i< data.length; i++){
-      articles.push(`../src/assets/medias/${data[i].image||data[i].video}`)
+      ids.push(data[i].id)
+      sources.push(`../src/assets/medias/${data[i].image}`)
     }
-    console.log(articles);
+    console.log(ids);
+    console.log(sources);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
-        getMediaCard(media);
+        getMediaCard(media, mediasContainer);
       }
     });
-    getLightbox(articles);
+    getLightbox(ids,sources);
   };
 
   /**

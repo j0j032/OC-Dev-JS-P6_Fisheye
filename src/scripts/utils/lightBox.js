@@ -1,29 +1,28 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-console */
 const {
   lightBox,
   closeLightBoxBtn,
   nextLightBoxBtn,
+  prevLightBoxBtn,
 } = require('../components/domLinker');
 
-const getLightbox = (arrayOfSrc) => {
+const getLightbox = (arrayOfId, arrayOfSrc) => {
   const image = lightBox.querySelector('.lightBox__container img');
+  let counter = 0;
   // open
-
   const openLightBox = () => {
     const allMedias = document.querySelectorAll('.medias__container a');
     for (const link of allMedias) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
         image.src = this.href;
-
         image.id = this.id;
-        console.log(image.id);
 
         lightBox.classList.add('show');
       });
     }
   };
-
   openLightBox();
 
   // close
@@ -35,28 +34,30 @@ const getLightbox = (arrayOfSrc) => {
   closeLightBox();
 
   const nextMedia = () => {
-    /* nextLightBoxBtn.addEventListener('click', (e) => {
-      const source = image.src.split('http://localhost:8087');
-      if (arrayOfSrc.indexOf(`..${source[1]}`) === -1) {
-        console.log('pas trouvé');
-        console.log(`..${source[1]}`);
-      } else {
-        console.log('trouvé');
-        image.src = arrayOfSrc[2];
-      }
-    }); */
-    nextLightBoxBtn.addEventListener('click', (e) => {
-      const source = image.src.slice(image.src);
-      if (arrayOfSrc.indexOf(source) === -1) {
-        console.log('pas trouvé');
-        console.log(source);
-      } else {
-        console.log('trouvé');
-        image.src = arrayOfSrc[2];
+    nextLightBoxBtn.addEventListener('click', () => {
+      if (arrayOfId.indexOf(parseInt(image.id)) !== -1) {
+        counter++;
+        if (counter === arrayOfSrc.length) {
+          counter = 0;
+        }
+        image.src = arrayOfSrc[counter];
       }
     });
   };
   nextMedia();
+
+  const prevMedia = () => {
+    prevLightBoxBtn.addEventListener('click', () => {
+      if (arrayOfId.indexOf(parseInt(image.id)) !== -1) {
+        counter--;
+        if (counter < 0) {
+          counter = arrayOfSrc.length - 1;
+        }
+        image.src = arrayOfSrc[counter];
+      }
+    });
+  };
+  prevMedia();
 };
 
 module.exports = {
