@@ -37,13 +37,14 @@ const createElements = (tag, text, style, ariaLabel, src, alt, parent , type, st
  * @param {string} ariaLabel to set aria-label (if necessary)
  * @param {link} link to set link (if the parent is a link)
  */
-const setParent = (parentId, style, alabel,link) => {
+const setParent = (parentId, style, alabel,link, mediaId) => {
   // before set create element with parent id
   const theParent = parentId
     theParent.classList.add(style);
     theParent.ariaLabel = alabel
     if(link){
       theParent.href = link;
+      theParent.id = mediaId;
     }
   // after set where parent goes with appendChild
 }
@@ -52,4 +53,3 @@ module.exports = {
   createElements,
   setParent,
 };
-

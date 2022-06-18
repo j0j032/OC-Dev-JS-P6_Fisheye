@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable prefer-const */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-globals */
@@ -7,9 +8,10 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getPhotographersMedias, totalOfLikes, addLike} = require('../factories/medias');
+const {getMediaCard, totalOfLikes, addLike} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
 const { getLightbox } = require('../utils/lightBox');
+const { mediasContainer } = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -31,12 +33,23 @@ module.exports = (id) => {
    */
   const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
+    let ids = []
+    let sources = []
+    for (let i = 0; i< data.length; i++){
+      ids.push(data[i].id)
+      sources.push(`../src/assets/medias/${data[i].image}`)
+    }
+    console.log(ids);
+    console.log(sources);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
-        getPhotographersMedias(media);
+        getMediaCard(media, mediasContainer);
       }
     });
+    getLightbox(ids,sources);
   };
+
+
 
   /**
    * To display the total of all media likes
@@ -64,16 +77,6 @@ module.exports = (id) => {
     })
   }
 
-  /** DOESN'T WORK AT THE MOMENT (bad Logic)
-   * 
-   * @param {object} data 
-   */
-  const displayLightBox = (data) =>{
-    data.forEach((mediaId)=>{
-      getLightbox(mediaId);
-    })
-  }
-
   /**
    * To get data photographers info in data.json
    * To get each photographer's media from data.json
@@ -89,7 +92,6 @@ module.exports = (id) => {
     displayMedias(medias);
     displaytotalOfLikes(medias);
     displayUserLike(medias);
-    displayLightBox(medias);
     openModal();
     closeModal();
   };

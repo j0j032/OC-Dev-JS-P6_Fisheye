@@ -18,6 +18,7 @@ const getPhotographerCard = (data) => {
   const profilePictureAlt = `Portrait de ${name}`;
   const profileLink = `photographer.html?id=${id}`;
   const profileLinkAlabel = `lien vers la page de ${name}`;
+  const mediaId = id
   
       /**
        * to set up a link to the photographer page (img and name)
@@ -25,7 +26,7 @@ const getPhotographerCard = (data) => {
        */
       const createCardLink = (parent) => {
         const cardLink = document.createElement("a");
-        setParent(cardLink, "card__link", profileLinkAlabel,profileLink )
+        setParent(cardLink, "card__link", profileLinkAlabel,profileLink,mediaId )
         parent.appendChild(cardLink);
         
         createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, cardLink )
