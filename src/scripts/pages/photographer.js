@@ -8,10 +8,11 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getMediaCard, totalOfLikes, addLike} = require('../factories/medias');
+const {/* getMediaCard, */ totalOfLikes} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
-const { getLightbox } = require('../utils/lightBox');
-const { mediasContainer } = require('../components/domLinker');
+const { createMediaCard } = require('../factories/medias2');
+// const { getLightbox } = require('../utils/lightBox');
+// const { mediasContainer } = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -27,11 +28,8 @@ module.exports = (id) => {
     });
   };
 
-  /**
-   * to display each photographer medias (by id) on his profile
-   * @param {object} data to get medias informations
-   */
-  const displayMedias = (data) => {
+  
+  /* const displayMedias = (data) => {
     console.log(`id du photographe: ${id}`);
     let ids = []
     let sources = []
@@ -39,17 +37,22 @@ module.exports = (id) => {
       ids.push(data[i].id)
       sources.push(`../src/assets/medias/${data[i].image}`)
     }
-    console.log(ids);
-    console.log(sources);
     data.forEach((media) => {
       if (parseInt(id) === media.photographerId) {
         getMediaCard(media, mediasContainer);
       }
     });
     getLightbox(ids,sources);
-  };
+  }; */
 
+  const displayMedias = (data) =>{
+    console.log(`id du photographe: ${id}`);
 
+    data.forEach((media)=>{
+      createMediaCard(media)
+    })
+
+  }
 
   /**
    * To display the total of all media likes
@@ -61,21 +64,10 @@ module.exports = (id) => {
         totalOfLikes(media, arrayOfLikes);
     });
     const likesReduce = arrayOfLikes.reduce((acc,likes)=> acc + likes)
-    console.log(`total of likes = ${likesReduce}`);
     const totalLikesDom = document.getElementById('totalLikes')
     totalLikesDom.textContent = likesReduce
   };
 
-  /**  DOESN'T WORK AT THE MOMENT (bad Logic)
-   * 
-   * @param {object} data 
-   */
-  const displayUserLike = (data) => {
-    const arrayOfLikes = []
-    data.forEach((like)=>{
-      addLike(like, arrayOfLikes)
-    })
-  }
 
   /**
    * To get data photographers info in data.json
@@ -91,7 +83,6 @@ module.exports = (id) => {
     displayHeaderElements(photographers);
     displayMedias(medias);
     displaytotalOfLikes(medias);
-    displayUserLike(medias);
     openModal();
     closeModal();
   };
