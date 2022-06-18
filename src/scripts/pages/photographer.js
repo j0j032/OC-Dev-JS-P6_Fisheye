@@ -49,6 +49,8 @@ module.exports = (id) => {
     getLightbox(ids,sources);
   };
 
+
+
   /**
    * To display the total of all media likes
    * @param {object} data to get medias informations
