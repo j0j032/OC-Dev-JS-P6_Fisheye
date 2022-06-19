@@ -6,6 +6,7 @@ module.exports = {
   photogHeadPic :document.querySelector('.photograph-header__profilePic-Container'),
   priceContainer :document.querySelector('.likesAndPrice-container'),
   mediasContainer : document.querySelector('.medias__container'),  
+  likesBtn : document.querySelectorAll('.media__container--likes'),
 
   // modal
   contactBtn: document.querySelector('.photograph-header__btn'),

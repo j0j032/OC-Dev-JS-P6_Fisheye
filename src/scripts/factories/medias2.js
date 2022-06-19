@@ -1,5 +1,4 @@
 const { createElement } = require('../components/dom2');
-const { mediasContainer } = require('../components/domLinker');
 
 module.exports = {
   /**
@@ -44,8 +43,8 @@ module.exports = {
       { 'aria-label': `icone clickable pour aimer limage : ${title}` },
     ];
 
-    const infoDivAttributes = [{ class: 'class=media__container--infos' }];
-    const likesDivAttributes = [{ class: 'class=media__container--likes' }];
+    const infoDivAttributes = [{ class: 'media__container--infos' }];
+    const likesDivAttributes = [{ class: 'media__container--likes' }];
 
     // article = container with id of media that contain media and title
     const getArticleDOM = () => {
@@ -69,9 +68,18 @@ module.exports = {
       createElement('p', likesAttributes, likesDiv, likes);
       createElement('i', heartIconAttributes, likesDiv);
       link.appendChild(article);
-      mediasContainer.appendChild(link);
       return link;
     };
     return { title, mediaLink, getArticleDOM, getMediaCardDOM };
+  },
+
+  /**
+   * to get total of likes per photographer
+   * @param {object} data to get media informations
+   * @param {array} total to stock and additionning all likes
+   */
+  totalOfLikes(data, array) {
+    const { likes } = data;
+    array.push(likes);
   },
 };

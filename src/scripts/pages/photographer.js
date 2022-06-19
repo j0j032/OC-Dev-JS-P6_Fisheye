@@ -8,11 +8,10 @@
 
 const api = require('../components/api');
 const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {/* getMediaCard, */ totalOfLikes} = require('../factories/medias');
 const { openModal, closeModal } = require('../utils/modal');
-const { createMediaCard } = require('../factories/medias2');
+const factoryMedia = require('../factories/medias2')
 // const { getLightbox } = require('../utils/lightBox');
-// const { mediasContainer } = require('../components/domLinker');
+const { mediasContainer } = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -28,30 +27,14 @@ module.exports = (id) => {
     });
   };
 
-  
-  /* const displayMedias = (data) => {
-    console.log(`id du photographe: ${id}`);
-    let ids = []
-    let sources = []
-    for (let i = 0; i< data.length; i++){
-      ids.push(data[i].id)
-      sources.push(`../src/assets/medias/${data[i].image}`)
-    }
-    data.forEach((media) => {
-      if (parseInt(id) === media.photographerId) {
-        getMediaCard(media, mediasContainer);
-      }
-    });
-    getLightbox(ids,sources);
-  }; */
-
   const displayMedias = (data) =>{
-    console.log(`id du photographe: ${id}`);
+    
 
     data.forEach((media)=>{
-      createMediaCard(media)
+      const mediaModel = factoryMedia.createMediaCard(media)
+      const mediaCardDOM = mediaModel.getMediaCardDOM()
+      mediasContainer.appendChild(mediaCardDOM);
     })
-
   }
 
   /**
@@ -61,7 +44,7 @@ module.exports = (id) => {
   const displaytotalOfLikes = (data) => {
     const arrayOfLikes = []
     data.forEach((media) => {
-        totalOfLikes(media, arrayOfLikes);
+        factoryMedia.totalOfLikes(media, arrayOfLikes);
     });
     const likesReduce = arrayOfLikes.reduce((acc,likes)=> acc + likes)
     const totalLikesDom = document.getElementById('totalLikes')
@@ -76,8 +59,9 @@ module.exports = (id) => {
    */
    const init = async () => {
     const photographers = await api.getPhotographers();
-    console.log("Photographes:" , photographers);
     const medias = await api.getMediasByPhotographerId(parseInt(id));
+    console.log(`id du photographe: ${id}`);
+    console.log("Photographes:" , photographers);
     console.log("medias du photographe:", medias)
 
     displayHeaderElements(photographers);

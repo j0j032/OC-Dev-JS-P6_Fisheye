@@ -63,12 +63,12 @@ const getMediaCard = (data,parent) => {
  * @param {object} data to get media informations
  * @param {array} total to stock and additionning all likes 
  */
-const totalOfLikes = (data, array) => {
+/* const totalOfLikes = (data, array) => {
   const {likes}= data
   array.push(likes)
- }
+ } */
 
 
 
 
-module.exports = {getMediaCard, totalOfLikes}
+module.exports = {getMediaCard, /* totalOfLikes */}
