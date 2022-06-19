@@ -1,15 +1,13 @@
 /* eslint-disable prettier/prettier */
 module.exports = {
   photographersSection: document.querySelector(".photographer-section"),
-  photographHeader: document.querySelector(".photograph-header"),
+  photographHeader: document.querySelector(".photographer"),
   photogHeadDescription :document.querySelector('.photograph-header__description'),
   photogHeadPic :document.querySelector('.photograph-header__profilePic-Container'),
   priceContainer :document.querySelector('.likesAndPrice-container'),
   mediasContainer : document.querySelector('.medias__container'),  
-  likesBtn : document.querySelectorAll('.media__container--likes'),
 
   // modal
-  contactBtn: document.querySelector('.photograph-header__btn'),
   contactModal: document.getElementById('contact_modal'),
   closeModalBtn:document.getElementById('close-modal'),
   modalHeader: document.querySelector('.modal__heading'),

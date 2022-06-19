@@ -1,20 +1,27 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 
+
 const domLinker = require('../components/domLinker');
 
-const openModal = () =>{
-  domLinker.contactBtn.addEventListener('click', () => {
-    domLinker.contactModal.style.display = ('block');
-  });
+const displayModal = () => {
+
+  const openModal = () =>{
+    const contactBtn = document.querySelector('.photograph-header__btn');
+    contactBtn.addEventListener('click', () => {
+      domLinker.contactModal.style.display = ('block');
+    });
+  }
+  const closeModal = () => {
+    domLinker.closeModalBtn.addEventListener('click', ()=>{
+      domLinker.contactModal.style.display = ('none');
+    })
+  }
+  return {openModal, closeModal}
 }
-const closeModal = () => {
-  domLinker.closeModalBtn.addEventListener('click', ()=>{
-    domLinker.contactModal.style.display = ('none');
-  })
-}
+
 module.exports = {
-  openModal, closeModal
+  displayModal
 }
 
 const logInputsValue = () => {

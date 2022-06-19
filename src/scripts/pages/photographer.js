@@ -7,11 +7,11 @@
 /* eslint-disable no-console */
 
 const api = require('../components/api');
-const {getPhotographerProfileDetails} = require('../factories/photographer');
-const { openModal, closeModal } = require('../utils/modal');
-const factoryMedia = require('../factories/medias2')
+const factoryPhotographer = require('../factories/photographer');
+const { displayModal } = require('../utils/modal');
+const factoryMedia = require('../factories/medias');
 // const { getLightbox } = require('../utils/lightBox');
-const { mediasContainer } = require('../components/domLinker');
+const { mediasContainer, photographHeader} = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -22,19 +22,36 @@ module.exports = (id) => {
   const displayHeaderElements = (data) => {
     data.forEach((photographer) => {
       if (location.href.includes(photographer.id)) {
-        getPhotographerProfileDetails(photographer);
+       const headerModel = factoryPhotographer.createProfileCard(photographer);
+       const headerDOM = headerModel.getProfileHeaderDOM()
+       photographHeader.appendChild(headerDOM)
       }
+      displayModal().openModal()
+      displayModal().closeModal()
     });
   };
 
   const displayMedias = (data) =>{
-    
+    let articles = []
 
     data.forEach((media)=>{
       const mediaModel = factoryMedia.createMediaCard(media)
       const mediaCardDOM = mediaModel.getMediaCardDOM()
       mediasContainer.appendChild(mediaCardDOM);
+      articles.push(mediaModel.getArticleDOM().article)
     })
+    const likeBtn =document.querySelectorAll('.media__container--likes')
+    
+    function addLike(){
+      likeBtn.forEach((btn)=>{
+        btn .addEventListener('click' , (e) => {
+          console.log(e.target);
+        })
+      })
+    }
+  addLike()
+    console.log(articles);
+    console.log(likeBtn);
   }
 
   /**
@@ -67,8 +84,6 @@ module.exports = (id) => {
     displayHeaderElements(photographers);
     displayMedias(medias);
     displaytotalOfLikes(medias);
-    openModal();
-    closeModal();
   };
 
  init()
