@@ -63,6 +63,7 @@ module.exports = {
       createElement('img', cardImgAttributes, headerImgContainer);
       return photographHeader;
     };
-    return { name, profilePicture, price, getProfileCardDOM, getProfileHeaderDOM };
+
+    return { name, profilePicture, photographerPrice, getProfileCardDOM, getProfileHeaderDOM};
   },
 };

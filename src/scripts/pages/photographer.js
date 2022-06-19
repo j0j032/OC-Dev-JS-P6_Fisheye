@@ -11,7 +11,7 @@ const factoryPhotographer = require('../factories/photographer');
 const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 // const { getLightbox } = require('../utils/lightBox');
-const { mediasContainer, photographHeader} = require('../components/domLinker');
+const { mediasContainer, photographHeader, modalHeading, priceContainer} = require('../components/domLinker');
 
 
 module.exports = (id) => {
@@ -22,13 +22,20 @@ module.exports = (id) => {
   const displayHeaderElements = (data) => {
     data.forEach((photographer) => {
       if (location.href.includes(photographer.id)) {
-       const headerModel = factoryPhotographer.createProfileCard(photographer);
-       const headerDOM = headerModel.getProfileHeaderDOM()
-       photographHeader.appendChild(headerDOM)
+        // header
+        const photographerModel = factoryPhotographer.createProfileCard(photographer);
+        const headerDOM = photographerModel.getProfileHeaderDOM()
+        photographHeader.appendChild(headerDOM)
+        // modal
+        const modalTextHeading = `Contactez-moi ${photographerModel.name}`
+        modalHeading.textContent = modalTextHeading
+        // like & Price container
+        const pricing = photographerModel.photographerPrice
+        priceContainer.textContent = pricing
       }
+    });
       displayModal().openModal()
       displayModal().closeModal()
-    });
   };
 
   const displayMedias = (data) =>{
