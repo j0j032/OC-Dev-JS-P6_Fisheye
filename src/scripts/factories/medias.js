@@ -8,16 +8,16 @@ module.exports = {
 
   createMediaCard(data) {
     const { id, image, video, likes, title } = data;
-    const mediaLink = `../src/assets/medias/${image || video}`;
+    const mediaSrc = `../src/assets/medias/${image || video}`;
 
     const linkAttributes = [
-      { href: mediaLink },
+      { href: `#lightBox?id=${id}` },
       { 'aria-label': `ouvre en grand l'image ${title}` },
     ];
 
     const mediaAttributes = [
       // img by default
-      { src: mediaLink },
+      { src: mediaSrc },
       { class: 'media__itself' },
       { alt: `titre du media : ${title}` },
       { 'aria-label': `ouvre en grand le media : ${title}` },
@@ -70,7 +70,7 @@ module.exports = {
       link.appendChild(article);
       return link;
     };
-    return { title, mediaLink, getArticleDOM, getMediaCardDOM };
+    return { title, mediaSrc, getArticleDOM, getMediaCardDOM };
   },
 
   /**

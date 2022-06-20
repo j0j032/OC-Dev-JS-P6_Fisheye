@@ -11,7 +11,9 @@ const factoryPhotographer = require('../factories/photographer');
 const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 // const { getLightbox } = require('../utils/lightBox');
-const { mediasContainer, photographHeader, modalHeading, priceContainer} = require('../components/domLinker');
+const domLinker  = require('../components/domLinker');
+const lightbox  = require('../utils/lightBox');
+let articles = []
 
 
 module.exports = (id) => {
@@ -25,13 +27,13 @@ module.exports = (id) => {
         // header
         const photographerModel = factoryPhotographer.createProfileCard(photographer);
         const headerDOM = photographerModel.getProfileHeaderDOM()
-        photographHeader.appendChild(headerDOM)
-        // modal
+        domLinker.photographHeader.appendChild(headerDOM)
+        // contact modal
         const modalTextHeading = `Contactez-moi ${photographerModel.name}`
-        modalHeading.textContent = modalTextHeading
+        domLinker.modalHeading.textContent = modalTextHeading
         // like & Price container
         const pricing = photographerModel.photographerPrice
-        priceContainer.textContent = pricing
+        domLinker.priceContainer.textContent = pricing
       }
     });
       displayModal().openModal()
@@ -39,14 +41,27 @@ module.exports = (id) => {
   };
 
   const displayMedias = (data) =>{
-    let articles = []
 
     data.forEach((media)=>{
       const mediaModel = factoryMedia.createMediaCard(media)
       const mediaCardDOM = mediaModel.getMediaCardDOM()
-      mediasContainer.appendChild(mediaCardDOM);
-      articles.push(mediaModel.getArticleDOM().article)
+      domLinker.mediasContainer.appendChild(mediaCardDOM);
+
+      // lightbox
+      const getLightboxContent = (media) => {
+        articles.push(mediaModel.getArticleDOM().article)
+        mediaCardDOM.addEventListener('click', () =>{ 
+          lightbox.openLightBox();
+          lightbox.displayLightBoxContent(media)
+        })
+      }
+      getLightboxContent(mediaModel)
+      lightbox.closeLightBox()
     })
+    domLinker.nextLightBoxBtn.addEventListener('click', () => lightbox.nextMedia(articles) )
+    domLinker.prevLightBoxBtn.addEventListener('click', () => lightbox.prevMedia(articles) )
+
+
     const likeBtn =document.querySelectorAll('.media__container--likes')
     
     function addLike(){
@@ -57,7 +72,6 @@ module.exports = (id) => {
       })
     }
   addLike()
-    console.log(articles);
     console.log(likeBtn);
   }
 
