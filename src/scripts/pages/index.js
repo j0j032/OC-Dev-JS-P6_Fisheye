@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 
 const api = require('../components/api');
+const { photographersSection } = require('../components/domLinker');
 const factory = require('../factories/photographer');
 
 /**
@@ -10,7 +11,9 @@ const factory = require('../factories/photographer');
  */
 const displayCards = (data) => {
   data.forEach((photographer) => {
-    factory.getPhotographerCard(photographer);
+    const photographerModel = factory.createProfileCard(photographer);
+    const photographerCardDOM = photographerModel.getProfileCardDOM()
+    photographersSection.appendChild(photographerCardDOM)
   });
 };
 

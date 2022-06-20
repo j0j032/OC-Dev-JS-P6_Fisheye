@@ -1,90 +1,85 @@
-/* eslint-disable no-shadow */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-console */
-/* eslint-disable no-constant-condition */
-/* eslint-disable no-cond-assign */
+const { createElement } = require('../components/dom');
 
-// pattern to create an element in dom.js
-// Link to DOM elements in domLinker.js
-const { createElements, setParent } = require("../components/dom");
+module.exports = {
+  /**
+   * create and display medias
+   * @param {object} data
+   */
 
+  createMediaCard(data) {
+    const { id, image, video, likes, title } = data;
+    const mediaSrc = `../src/assets/medias/${image || video}`;
 
-/**
- * create and display medias
- * @param {object} data 
- */
-const getMediaCard = (data,parent) => {
-  // turn data into var easy reusable
-  const {/* date, */ id,  image,video, likes, /* photographerId, price, */ title} = data
-  const media = `../src/assets/medias/${image||video}`;
-  const mediaAlt = `${title}`;
-  const mediaLikes = `${likes}`
-  const mediaId = `${id}`
+    const linkAttributes = [
+      { href: `#lightBox?id=${id}` },
+      { 'aria-label': `ouvre en grand l'image ${title}` },
+    ];
 
-  // to display one media 'Card' (media+infos)
+    const mediaAttributes = [
+      // img by default
+      { src: mediaSrc },
+      { class: 'media__itself' },
+      { alt: `titre du media : ${title}` },
+      { 'aria-label': `ouvre en grand le media : ${title}` },
+    ];
 
-    const mediaContainer = document.createElement("a")
-    setParent(mediaContainer, "media__container", null, media, mediaId)
-    parent.appendChild(mediaContainer)
-    // Logic to inject by media type
-    if(image){
-      createElements('img', null, "media__itself", mediaAlt, media, mediaAlt, mediaContainer, null,null, mediaId )
-    }
-    else if(video){
-      const newVideo = document.createElement("video")
-      setParent(newVideo, "media__itself", mediaAlt, null)
-      mediaContainer.appendChild(newVideo)
-      createElements('source', null, null, mediaAlt, media, mediaAlt, newVideo, "video/mp4",null, mediaId)
-    }
+    const videoAttributes = [
+      { class: 'media__itself--video' },
+      { type: 'video/mp4' },
+    ];
 
-    // informations container (total of likes and photographer pricing)
-    const mediaInfosContainer = document.createElement("div")
-    setParent(mediaInfosContainer, "media__container--infos", null,null)
-    mediaContainer.appendChild(mediaInfosContainer)
+    const titleAttributes = [
+      { class: 'media__title' },
+      { 'aria-label': `Titre du média : ${title}` },
+    ];
 
-    createElements('p', mediaAlt, "media__title", mediaAlt, null, mediaAlt, mediaInfosContainer, null)
+    const likesAttributes = [
+      { class: 'media__likes' },
+      { 'aria-label': `Nombres de like du média : ${title} = ${likes}` },
+    ];
 
-    const mediaLikesContainer = document.createElement("div")
-    setParent(mediaLikesContainer, "media__container--likes", null, null)
-    mediaInfosContainer.appendChild(mediaLikesContainer)
+    const heartIconAttributes = [
+      { class: 'fa-solid fa-heart' },
+      { 'aria-label': `icone clickable pour aimer limage : ${title}` },
+    ];
 
-    createElements('p', mediaLikes, "media__likes", mediaLikes, null, mediaLikes, mediaLikesContainer, null)
-    createElements('i',null, "fa-heart","icon coeur", null, "icon coeur", mediaLikesContainer, null, "fa-solid")
-    
-  }
+    const infoDivAttributes = [{ class: 'media__container--infos' }];
+    const likesDivAttributes = [{ class: 'media__container--likes' }];
 
+    // article = container with id of media that contain media and title
+    const getArticleDOM = () => {
+      const article = createElement('article', [{ id }], null);
+      image
+        ? createElement('img', mediaAttributes, article)
+        : createElement(
+            'video',
+            [...videoAttributes, ...mediaAttributes],
+            article
+          );
+      const infoDiv = createElement('div', infoDivAttributes, article);
+      createElement('p', titleAttributes, infoDiv, title);
+      return { article, infoDiv };
+    };
 
+    const getMediaCardDOM = () => {
+      const link = createElement('a', linkAttributes, null);
+      const { article, infoDiv } = getArticleDOM();
+      const likesDiv = createElement('div', likesDivAttributes, infoDiv);
+      createElement('p', likesAttributes, likesDiv, likes);
+      createElement('i', heartIconAttributes, likesDiv);
+      link.appendChild(article);
+      return link;
+    };
+    return { title, mediaSrc, getArticleDOM, getMediaCardDOM };
+  },
 
-
-// Likes logic
-
-/**
- * to get total of likes per photographer
- * @param {object} data to get media informations
- * @param {array} total to stock and additionning all likes 
- */
-const totalOfLikes = (data, array) => {
-  const {likes, title }= data
-  array.push(likes)
-  console.log(`${title} = ${likes} likes`); 
-  
- }
-
- /** DOESN'T WORK AT THE MOMENT (bad Logic)
-  * 
-  * to add a like when user click on media like container
-  * @param {object} data to get media informations
-  */
- const addLike = (data, array) => {
-  const {likes}= data
-   const likeClick = document.querySelectorAll('.media__container--likes');
-    likeClick.forEach((like)=>{
-      like.addEventListener('click', ()=>{
-        array.push(likes)
-        console.log(array);
-      })
-    })
- }
-
-
-module.exports = {getMediaCard, totalOfLikes, addLike}
+  /**
+   * to get total of likes per photographer
+   * @param {object} data to get media informations
+   * @param {array} total to stock and additionning all likes
+   */
+  totalOfLikes(data, array) {
+    const { likes } = data;
+    array.push(likes);
+  },
+};

@@ -7,11 +7,12 @@
 /* eslint-disable no-console */
 
 const api = require('../components/api');
-const {getPhotographerProfileDetails} = require('../factories/photographer');
-const {getMediaCard, totalOfLikes, addLike} = require('../factories/medias');
-const { openModal, closeModal } = require('../utils/modal');
-const { getLightbox } = require('../utils/lightBox');
-const { mediasContainer } = require('../components/domLinker');
+const factoryPhotographer = require('../factories/photographer');
+const { displayModal } = require('../utils/modal');
+const factoryMedia = require('../factories/medias');
+const domLinker  = require('../components/domLinker');
+const lightbox  = require('../utils/lightBox');
+let articles = []
 
 
 module.exports = (id) => {
@@ -22,34 +23,56 @@ module.exports = (id) => {
   const displayHeaderElements = (data) => {
     data.forEach((photographer) => {
       if (location.href.includes(photographer.id)) {
-        getPhotographerProfileDetails(photographer);
+        // header
+        const photographerModel = factoryPhotographer.createProfileCard(photographer);
+        const headerDOM = photographerModel.getProfileHeaderDOM()
+        domLinker.photographHeader.appendChild(headerDOM)
+        // contact modal
+        const modalTextHeading = `Contactez-moi ${photographerModel.name}`
+        domLinker.modalHeading.textContent = modalTextHeading
+        // like & Price container
+        const pricing = photographerModel.photographerPrice
+        domLinker.priceContainer.textContent = pricing
       }
     });
+      displayModal().openModal()
+      displayModal().closeModal()
   };
 
-  /**
-   * to display each photographer medias (by id) on his profile
-   * @param {object} data to get medias informations
-   */
-  const displayMedias = (data) => {
-    console.log(`id du photographe: ${id}`);
-    let ids = []
-    let sources = []
-    for (let i = 0; i< data.length; i++){
-      ids.push(data[i].id)
-      sources.push(`../src/assets/medias/${data[i].image}`)
+  const displayMedias = (data) =>{
+
+    data.forEach((media)=>{
+      const mediaModel = factoryMedia.createMediaCard(media)
+      const mediaCardDOM = mediaModel.getMediaCardDOM()
+      domLinker.mediasContainer.appendChild(mediaCardDOM);
+
+      // lightbox
+      const getLightboxContent = (media) => {
+        articles.push(mediaModel.getArticleDOM().article)
+        mediaCardDOM.addEventListener('click', () =>{ 
+          lightbox.openLightBox();
+          lightbox.displayLightBoxContent(media)
+        })
+      }
+      getLightboxContent(mediaModel)
+      lightbox.closeLightBox()
+    })
+    domLinker.nextLightBoxBtn.addEventListener('click', () => lightbox.nextMedia(articles) )
+    domLinker.prevLightBoxBtn.addEventListener('click', () => lightbox.prevMedia(articles) )
+
+
+    const likeBtn =document.querySelectorAll('.media__container--likes')
+    
+    function addLike(){
+      likeBtn.forEach((btn)=>{
+        btn .addEventListener('click' , (e) => {
+          console.log(e.target);
+        })
+      })
     }
-    console.log(ids);
-    console.log(sources);
-    data.forEach((media) => {
-      if (parseInt(id) === media.photographerId) {
-        getMediaCard(media, mediasContainer);
-      }
-    });
-    getLightbox(ids,sources);
-  };
-
-
+  addLike()
+    console.log(likeBtn);
+  }
 
   /**
    * To display the total of all media likes
@@ -58,24 +81,13 @@ module.exports = (id) => {
   const displaytotalOfLikes = (data) => {
     const arrayOfLikes = []
     data.forEach((media) => {
-        totalOfLikes(media, arrayOfLikes);
+        factoryMedia.totalOfLikes(media, arrayOfLikes);
     });
     const likesReduce = arrayOfLikes.reduce((acc,likes)=> acc + likes)
-    console.log(`total of likes = ${likesReduce}`);
     const totalLikesDom = document.getElementById('totalLikes')
     totalLikesDom.textContent = likesReduce
   };
 
-  /**  DOESN'T WORK AT THE MOMENT (bad Logic)
-   * 
-   * @param {object} data 
-   */
-  const displayUserLike = (data) => {
-    const arrayOfLikes = []
-    data.forEach((like)=>{
-      addLike(like, arrayOfLikes)
-    })
-  }
 
   /**
    * To get data photographers info in data.json
@@ -84,16 +96,14 @@ module.exports = (id) => {
    */
    const init = async () => {
     const photographers = await api.getPhotographers();
-    console.log("Photographes:" , photographers);
     const medias = await api.getMediasByPhotographerId(parseInt(id));
+    console.log(`id du photographe: ${id}`);
+    console.log("Photographes:" , photographers);
     console.log("medias du photographe:", medias)
 
     displayHeaderElements(photographers);
     displayMedias(medias);
     displaytotalOfLikes(medias);
-    displayUserLike(medias);
-    openModal();
-    closeModal();
   };
 
  init()

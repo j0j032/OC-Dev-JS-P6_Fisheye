@@ -1,55 +1,43 @@
 /* eslint-disable prettier/prettier */
+
 /**
- * Method to insert a 'generic' Element
- * @param {HTMLElement} tag to create html tag
- * @param {string} text to fill text area
- * @param {string} style for css class
- * @param {string} ariaLabel to set aria-label
- * @param {link} src to set the source of img (if img)
- * @param {string} alt to set the alt of img(if img)
- * @param {HTMLElement} parent to insert at the right place
+ * To create DOM new Element
+ * @param {HTMLElement} tag tagName (h1,div,span...)
+ * @param {array} attributes set attributes in an array of object: key for attribute type / value for the value of attribute 
+ * @param {HTMLElement} parent to attach new element to parrent
+ * @param {*} text to set value of text if needed (if text? enter tour text/ if div set to null or '')
+ * @returns new element
  */
-const createElements = (tag, text, style, ariaLabel, src, alt, parent , type, style2, id) => {
+const createElement = (tag, attributes = [], parent, text) => {
   const element = document.createElement(tag);
-  element.classList.add(style);
-  element.textContent = text;
-  element.setAttribute('aria-label', ariaLabel)
 
-  if (tag === 'img' || tag === 'source'){
-    element.setAttribute('src', src)
-    element.setAttribute('alt', alt)
-    element.setAttribute('id',id)
-  } 
-  if(tag === 'source'){
-    element.setAttribute('type', type)
-  }
-  if(tag === 'i'){
-    element.classList.add(style2)
+  // add attributes to an element
+  for (const attribute of attributes) {
+    const key = Object.keys(attribute);
+    element.setAttribute(key, attribute[key]);
   }
 
-  parent.appendChild(element);
+  // to add text to an element
+  if (text) {
+    element.textContent = text;
+  }
 
-}
+  // to add parent to an element
+  if (parent) {
+    parent.appendChild(element);
+  }
+
+  return element;
+};
+
 /**
- * To add attributes to a 'parent' element
- * @param {const} parentId to identify a new parent element
- * @param {string} style for css class
- * @param {string} ariaLabel to set aria-label (if necessary)
- * @param {link} link to set link (if the parent is a link)
+ * To remove lightBox media before append next one
+ * @param {HTMLElement} element (container)
  */
-const setParent = (parentId, style, alabel,link, mediaId) => {
-  // before set create element with parent id
-  const theParent = parentId
-    theParent.classList.add(style);
-    theParent.ariaLabel = alabel
-    if(link){
-      theParent.href = link;
-      theParent.id = mediaId;
-    }
-  // after set where parent goes with appendChild
-}
+const empty = (element) => {
+  element.lastChild ? element.removeChild(element.lastChild) : console.log('LightBox Empty');
+};
 
 module.exports = {
-  createElements,
-  setParent,
+  createElement, empty
 };
