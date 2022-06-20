@@ -1,76 +1,69 @@
 /* eslint-disable prettier/prettier */
+const { createElement } = require('../components/dom');
 
-// pattern to create an element in dom.js
-// Link to DOM elements in domLinker.js
-const { createElements, setParent } = require("../components/dom")
-const domLink = require("../components/domLinker")
+module.exports = {
+  createProfileCard(data) {
+    const { id, name, portrait, city, country, tagline, price } = data;
+    const profilePicture = `/src/assets/photographers/${portrait}`;
+    const photographerLocation = `${city}, ${country}`;
+    const photographerPrice = `${price}€/jour`;
 
-/**
- * Factory to fill a photographer 'Profile card' informations on homepage
- * @param {object} data to get photographers data
- */
-const getPhotographerCard = (data) => {
-  // turn data into var easy reusable
-  const {name, id, city, country, tagline, price, portrait} = data
-  const photographerLocation = `${city}, ${country}`
-  const photographerPricing = `${price}€/jour`
-  const profilePicture = `/src/assets/photographers/${portrait}`;
-  const profilePictureAlt = `Portrait de ${name}`;
-  const profileLink = `photographer.html?id=${id}`;
-  const profileLinkAlabel = `lien vers la page de ${name}`;
-  const mediaId = id
-  
-      /**
-       * to set up a link to the photographer page (img and name)
-       * @param {HTMLElement} parent to insert at the right place
-       */
-      const createCardLink = (parent) => {
-        const cardLink = document.createElement("a");
-        setParent(cardLink, "card__link", profileLinkAlabel,profileLink,mediaId )
-        parent.appendChild(cardLink);
-        
-        createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, cardLink )
-        createElements("h2", name, "card__name",name, null,null, cardLink)
-      }
+    const cardAttributes = [{ class: 'card' }];
+    const cardLinkAttributes = [
+      { href: `photographer.html?id=${id}` },
+      { 'aria-label': `lien vers la page du photographe ${name}` },
+      { class: 'card__link' },
+    ];
+    const cardImgAttributes = [
+      { src: profilePicture },
+      { alt: `Portrait de ${name}` },
+      { 'aria-label': `Portrait de ${name}` },
+      { 'aria-describedby': id },
+      { class: 'card__pic' },
+    ];
+    const cardNameAttributes = [{ class: 'card__name' }];
+    const cardLocationAttributes = [
+      { class: 'card__location' },
+      { 'aria-label': photographerLocation },
+    ];
+    const cardTaglineAttributes = [
+      { class: 'card__tagline' },
+      { 'aria-label': tagline },
+    ];
+    const cardPriceAttributes = [
+      { class: 'card__price' },
+      { 'aria-label': price },
+    ];
 
-       // To create a card and get all the elements together 
-        const createCard = () =>{
-        const card = document.createElement("div")
-        setParent(card, "card", null,null )
-        domLink.photographersSection.appendChild(card)
+    const getProfileCardDOM = () => {
+      const card = createElement('div', cardAttributes, null);
+      const cardLink = createElement('a', cardLinkAttributes, card);
+      createElement('img', cardImgAttributes, cardLink);
+      createElement('h2', cardNameAttributes, cardLink, name);
+      createElement('p', cardLocationAttributes, card, photographerLocation);
+      createElement('p', cardTaglineAttributes, card, tagline);
+      createElement('p', cardPriceAttributes, card, photographerPrice);
+      return card;
+    };
 
-        createCardLink(card)
-        createElements("p", photographerLocation, "card__location",photographerLocation , null,null, card)
-        createElements("p", tagline, "card__tagline",tagline, null,null, card)
-        createElements("p", photographerPricing, "card__price",price,null,null, card)
-      }
-    createCard()
-    } 
-    
-    /**
-     * To fill profile header on photographer page
-     * @param {object} data to get photographers data
-     */
-    const getPhotographerProfileDetails = (data) => {
-      // turn data into var easy reusable
-      const {name, /* id, */ city, country, tagline, price, portrait} = data
-      const photographerLocation = `${city}, ${country}`
-      const profilePicture = `/src/assets/photographers/${portrait}`;
-      const profilePictureAlt = `Portrait de ${name}`;
-      const photographerPricing = `${price}€/jour`
+    const photographHeaderAttributes = [{class: 'photograph-header'}];
+    const pHDetailsAttributes = [{ class: 'photograph-header__details' }];
+    const pHNameAttributes = [{ class: 'name' }];
+    const pHBtnAttributes = [{class :'photograph-header__btn btn' }]
+    const pHImgContainerAttributes = [{class: 'photograph-header__profilePic-Container'}]
 
-      // Factory to inject profile details
-      const createProfileHeader = () => {
-        createElements('img', null,"card__pic",profilePictureAlt, profilePicture, profilePictureAlt, domLink.photogHeadPic)
-        createElements("h1", name, "card__name",name, null,null, domLink.photogHeadDescription)
-        createElements("p", photographerLocation, "card__location",photographerLocation , null,null, domLink.photogHeadDescription)
-        createElements("p", tagline, "card__tagline",tagline, null,null, domLink.photogHeadDescription)
-        createElements("p", photographerPricing,null, price, null, null, domLink.priceContainer  )
+    const getProfileHeaderDOM = () => {
+      const photographHeader = createElement('div',photographHeaderAttributes, null )
+      const headerDetails = createElement('div', pHDetailsAttributes, photographHeader);
+      createElement('h1', pHNameAttributes, headerDetails, name);
+      createElement('p', cardLocationAttributes, headerDetails, photographerLocation);
+      createElement('p', cardTaglineAttributes, headerDetails, tagline);
+      createElement('button',pHBtnAttributes, photographHeader, 'Contactez-moi' )
+      const headerImgContainer = createElement('div', pHImgContainerAttributes, photographHeader)
+      createElement('img', cardImgAttributes, headerImgContainer);
+      return photographHeader;
+    };
 
-        // to display name in modal
-        createElements("h1", name, "modal__heading-police",name, null,null, domLink.modalHeader)
-      }
-      createProfileHeader()
-    }
-    
-module.exports = {getPhotographerCard,getPhotographerProfileDetails}
+    return { name, profilePicture, photographerPrice, getProfileCardDOM, getProfileHeaderDOM};
+  },
+};
