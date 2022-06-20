@@ -26,6 +26,7 @@ const nextMedia = (articles) => {
       ? articles[0]
       : articles[currentIndex + 1]
   );
+  setVideo()
 };
 
 /**
@@ -39,6 +40,7 @@ const prevMedia = (articles) => {
       ? articles[articles.length - 1]
       : articles[currentIndex - 1]
   );
+  setVideo()
 };
 
 const openLightBox = () => {
@@ -58,7 +60,15 @@ const closeLightBox = () => {
  */
 const displayLightBoxContent = async (media) => {
   lightBoxContent.appendChild(media.getArticleDOM().article);
+  setVideo()
 };
+
+const setVideo = () => {
+  const video = document.querySelector('div.lightBox__container > article > video')
+  if (video){
+    video.setAttribute('controls' , 'controls')
+  }
+}
 
 module.exports = {
   openLightBox,

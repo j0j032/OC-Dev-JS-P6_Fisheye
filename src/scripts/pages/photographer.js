@@ -10,7 +10,6 @@ const api = require('../components/api');
 const factoryPhotographer = require('../factories/photographer');
 const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
-// const { getLightbox } = require('../utils/lightBox');
 const domLinker  = require('../components/domLinker');
 const lightbox  = require('../utils/lightBox');
 let articles = []

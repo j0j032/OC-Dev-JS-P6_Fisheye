@@ -98,6 +98,7 @@
     height: 200px;
     &--infos {
       @include flex-spacer;
+      align-content: top;
     }
     &--likes {
       width: 20%;
