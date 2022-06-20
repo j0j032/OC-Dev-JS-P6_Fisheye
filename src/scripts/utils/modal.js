@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
-
 
 const domLinker = require('../components/domLinker');
 
@@ -24,20 +24,14 @@ module.exports = {
   displayModal
 }
 
-const logInputsValue = () => {
-  domLinker.modalInputs.forEach(input => {
-    input.addEventListener('input',(e)=>{
-      console.log(`${e.target.id} = ${e.target.value}`);
-    })
-  });
-  domLinker.contactMessage.addEventListener('input',(e)=>{
-    console.log(`${e.target.id} = ${e.target.value}`);
-  })
-  
-};
-logInputsValue()
-
 domLinker.contactModal.addEventListener('submit',(e)=>{
   e.preventDefault()
-  logInputsValue()
+  console.log(
+    'Données du formulaire: ',
+    `Prénom = ${first.value} / `,
+    `Nom = ${last.value} / `,
+    `Email = ${email.value} / `,
+    `Message = ${message.value}`,
+    );
+
 })

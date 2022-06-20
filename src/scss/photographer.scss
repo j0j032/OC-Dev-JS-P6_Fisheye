@@ -17,6 +17,7 @@
     > .name {
       font-size: 3.3em;
       font-weight: 500;
+      color: $orange;
     }
     > .card__location {
       font-size: 1.3rem;
@@ -100,7 +101,6 @@
     }
     &--likes {
       width: 20%;
-      z-index: 1000;
       display: flex;
       justify-content: end;
       align-content: center;
