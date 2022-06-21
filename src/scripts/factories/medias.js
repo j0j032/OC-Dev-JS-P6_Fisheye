@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-constant-condition */
 const { createElement } = require('../components/dom');
 
 module.exports = {
@@ -10,10 +12,10 @@ module.exports = {
     const { id, image, video, likes, title } = data;
     const mediaSrc = `../src/assets/medias/${image || video}`;
 
-    const linkAttributes = [
+    /* const linkAttributes = [
       { href: `#lightBox?id=${id}` },
       { 'aria-label': `ouvre en grand l'image ${title}` },
-    ];
+    ]; */
 
     const mediaAttributes = [
       // img by default
@@ -45,9 +47,11 @@ module.exports = {
 
     const infoDivAttributes = [{ class: 'media__container--infos' }];
     const likesDivAttributes = [{ class: 'media__container--likes' }];
+    const cardAttributes = [{ class: 'media__card' }];
 
-    // article = container with id of media that contain media and title
-    const getArticleDOM = () => {
+    const mediaTitle = createElement('p', titleAttributes, null, title);
+
+    const getArticleDOM = (lightBox = false) => {
       const article = createElement('article', [{ id }], null);
       image
         ? createElement('img', mediaAttributes, article)
@@ -56,21 +60,29 @@ module.exports = {
             [...videoAttributes, ...mediaAttributes],
             article
           );
-      const infoDiv = createElement('div', infoDivAttributes, article);
-      createElement('p', titleAttributes, infoDiv, title);
-      return { article, infoDiv };
+      if ((lightBox = true)) {
+        article.appendChild(mediaTitle);
+      }
+      return { article };
     };
 
     const getMediaCardDOM = () => {
-      const link = createElement('a', linkAttributes, null);
-      const { article, infoDiv } = getArticleDOM();
-      const likesDiv = createElement('div', likesDivAttributes, infoDiv);
+      const card = createElement('div', cardAttributes, null);
+      const { article } = getArticleDOM();
+      const infosDiv = createElement('div', infoDivAttributes, null);
+      createElement('p', titleAttributes, infosDiv, title);
+      const likesDiv = createElement('div', likesDivAttributes, infosDiv);
       createElement('p', likesAttributes, likesDiv, likes);
       createElement('i', heartIconAttributes, likesDiv);
-      link.appendChild(article);
-      return link;
+
+      card.appendChild(article);
+      card.appendChild(infosDiv);
+      return { card, article, infosDiv };
     };
-    return { title, mediaSrc, getArticleDOM, getMediaCardDOM };
+
+    return {
+      getArticleDOM, getMediaCardDOM, mediaTitle,
+    };
   },
 
   /**

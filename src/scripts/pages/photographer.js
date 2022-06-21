@@ -15,6 +15,7 @@ const lightbox  = require('../utils/lightBox');
 let articles = []
 
 
+
 module.exports = (id) => {
   /**
    * to display each photographer info on his profile
@@ -42,14 +43,17 @@ module.exports = (id) => {
   const displayMedias = (data) =>{
 
     data.forEach((media)=>{
+      
       const mediaModel = factoryMedia.createMediaCard(media)
-      const mediaCardDOM = mediaModel.getMediaCardDOM()
+      const mediaCardDOM = mediaModel.getMediaCardDOM().card
+      const mediaArticleDOM = mediaModel.getArticleDOM().article
+
       domLinker.mediasContainer.appendChild(mediaCardDOM);
 
       // lightbox
       const getLightboxContent = (media) => {
-        articles.push(mediaModel.getArticleDOM().article)
-        mediaCardDOM.addEventListener('click', () =>{ 
+        articles.push(mediaArticleDOM)
+        mediaCardDOM.firstElementChild.addEventListener('click', () =>{ 
           lightbox.openLightBox();
           lightbox.displayLightBoxContent(media)
         })
@@ -59,8 +63,8 @@ module.exports = (id) => {
     })
     domLinker.nextLightBoxBtn.addEventListener('click', () => lightbox.nextMedia(articles) )
     domLinker.prevLightBoxBtn.addEventListener('click', () => lightbox.prevMedia(articles) )
-
-
+    
+    
     const likeBtn =document.querySelectorAll('.media__container--likes')
     
     function addLike(){
@@ -70,10 +74,10 @@ module.exports = (id) => {
         })
       })
     }
-  addLike()
+    addLike()
     console.log(likeBtn);
   }
-
+  
   /**
    * To display the total of all media likes
    * @param {object} data to get medias informations

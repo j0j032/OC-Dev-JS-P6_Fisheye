@@ -58,7 +58,7 @@ const closeLightBox = () => {
  *
  * @param {object} media data from photographers.json
  */
-const displayLightBoxContent = async (media) => {
+const displayLightBoxContent = (media) => {
   lightBoxContent.appendChild(media.getArticleDOM().article);
   setVideo()
 };

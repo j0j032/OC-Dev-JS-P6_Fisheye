@@ -85,6 +85,12 @@
 }
 
 .media {
+  &__card {
+    z-index: 0;
+    & > article {
+      z-index: 10;
+    }
+  }
   &__itself {
     @include mediaGallery;
   }
