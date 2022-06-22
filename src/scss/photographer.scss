@@ -115,6 +115,9 @@
       cursor: pointer;
     }
   }
+  &__likes.liked {
+    color: $red;
+  }
 }
 
 .fa-heart {
