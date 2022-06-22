@@ -66,25 +66,16 @@ module.exports = (id) => {
   };
 
   // likes
-
-/*   const getCurrentTarget = (allIds) =>{
-    const target = e.target.id
-    const result = allIds.find((item)=> item.id === target);
-    console.log(result);
-  } */
-
-
   const displayUserLike = (data) => {
     let allIds = []
     let allLikes = []
-    let mediaModel
     data.forEach((media) => {
-      mediaModel = factoryMedia.createMediaCard(media);
+      const mediaModel = factoryMedia.createMediaCard(media);
       allIds.push(mediaModel.id)
       allLikes.push(mediaModel.likes)
     });
+    getTotalOfLikes(allLikes)
     const nbrLikeContainer = document.querySelectorAll('.media__likes');
-    console.log(nbrLikeContainer);
     const likeBtns = document.querySelectorAll('.likeIcon');
     
     likeBtns.forEach((likeBtn) => {
@@ -112,7 +103,6 @@ module.exports = (id) => {
         })
         getTotalOfLikes(allLikes)
       });
-      getTotalOfLikes(allLikes)
     });
   };
 
@@ -121,7 +111,6 @@ module.exports = (id) => {
     totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
   }
   
-
   /**
    * To get data photographers info in data.json
    * To get each photographer's media from data.json
