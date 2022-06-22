@@ -86,34 +86,41 @@ module.exports = (id) => {
     const nbrLikeContainer = document.querySelectorAll('.media__likes');
     console.log(nbrLikeContainer);
     const likeBtns = document.querySelectorAll('.likeIcon');
+    
     likeBtns.forEach((likeBtn) => {
+      let isLiked = false
       likeBtn.addEventListener('click', (e) => {
         const target = e.target.id
         const result = allIds.indexOf(parseInt(target));
-        allLikes[result] ++
+
+        if (isLiked === false){
+          allLikes[result] ++
+          isLiked = true
+        } else {
+          allLikes[result] --
+          isLiked = false
+        }
         nbrLikeContainer.forEach((container)=>{
           if(target === container.id){
             container.textContent = allLikes[result]
-            container.classList.add('liked')
+            if (isLiked === true){
+              container.classList.add('liked')
+            }else{
+              container.classList.remove('liked')
+            }
           }
         })
+        getTotalOfLikes(allLikes)
       });
+      getTotalOfLikes(allLikes)
     });
   };
-  
-  /**
-   * To display the total of all media likes
-   * @param {object} data to get medias informations
-   */
-  const displaytotalOfLikes = (data) => {
-    const arrayOfLikes = [];
-    data.forEach((media) => {
-      factoryMedia.totalOfLikes(media, arrayOfLikes);
-    });
-    const likesReduce = arrayOfLikes.reduce((acc, likes) => acc + likes);
+
+  const getTotalOfLikes = (arrayOfdata) => {
     const totalLikesDom = document.getElementById('totalLikes');
-    totalLikesDom.textContent = likesReduce;
-  };
+    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
+  }
+  
 
   /**
    * To get data photographers info in data.json
@@ -130,7 +137,6 @@ module.exports = (id) => {
     displayHeaderElements(photographers);
     displayMedias(medias);
     displayUserLike(medias);
-    displaytotalOfLikes(medias);
   };
 
   init();

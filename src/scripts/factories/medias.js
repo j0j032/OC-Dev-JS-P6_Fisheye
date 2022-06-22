@@ -73,25 +73,8 @@ module.exports = {
       return { card, article, infosDiv };
     };
 
-    const addLike = () => {
-      console.log(likes);
-    };
-
-
     return {
-      getArticleDOM, getMediaCardDOM, addLike, mediaTitle, likes, id
+      getArticleDOM, getMediaCardDOM, mediaTitle, likes, id
     };    
-  },
-
-
-
-  /**
-   * to get total of likes per photographer
-   * @param {object} data to get media informations
-   * @param {array} total to stock and additionning all likes
-   */
-  totalOfLikes(data, array) {
-    const { likes } = data;
-    array.push(likes);
   },
 };
