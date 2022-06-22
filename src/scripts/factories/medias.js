@@ -12,13 +12,7 @@ module.exports = {
     const { id, image, video, likes, title } = data;
     const mediaSrc = `../src/assets/medias/${image || video}`;
 
-    /* const linkAttributes = [
-      { href: `#lightBox?id=${id}` },
-      { 'aria-label': `ouvre en grand l'image ${title}` },
-    ]; */
-
     const mediaAttributes = [
-      // img by default
       { src: mediaSrc },
       { class: 'media__itself' },
       { alt: `titre du media : ${title}` },
@@ -36,12 +30,12 @@ module.exports = {
     ];
 
     const likesAttributes = [
-      { class: 'media__likes' },
+      { class: 'media__likes' },{id},
       { 'aria-label': `Nombres de like du média : ${title} = ${likes}` },
     ];
 
     const heartIconAttributes = [
-      { class: 'fa-solid fa-heart' },
+      { class: 'likeIcon fa-solid fa-heart' },{id},
       { 'aria-label': `icone clickable pour aimer limage : ${title}` },
     ];
 
@@ -72,16 +66,15 @@ module.exports = {
       const infosDiv = createElement('div', infoDivAttributes, null);
       createElement('p', titleAttributes, infosDiv, title);
       const likesDiv = createElement('div', likesDivAttributes, infosDiv);
-      createElement('p', likesAttributes, likesDiv, likes);
+      createElement('p', likesAttributes, likesDiv, likes );
       createElement('i', heartIconAttributes, likesDiv);
-
       card.appendChild(article);
       card.appendChild(infosDiv);
       return { card, article, infosDiv };
     };
 
     return {
-      getArticleDOM, getMediaCardDOM, mediaTitle,
+      getArticleDOM, getMediaCardDOM, mediaTitle, likes, id
     };
   },
 

@@ -43,8 +43,9 @@ const prevMedia = (articles) => {
   setVideo()
 };
 
-const openLightBox = () => {
+const openLightBox = (media) => {
   lightBox.classList.add('show');
+  displayLightBoxContent(media)
 };
 
 const closeLightBox = () => {
@@ -73,7 +74,6 @@ const setVideo = () => {
 module.exports = {
   openLightBox,
   closeLightBox,
-  displayLightBoxContent,
   nextMedia,
   prevMedia,
 };

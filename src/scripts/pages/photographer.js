@@ -13,8 +13,7 @@ const factoryMedia = require('../factories/medias');
 const domLinker  = require('../components/domLinker');
 const lightbox  = require('../utils/lightBox');
 let articles = []
-
-
+let medialikes = []
 
 module.exports = (id) => {
   /**
@@ -41,41 +40,54 @@ module.exports = (id) => {
   };
 
   const displayMedias = (data) =>{
-
+    
+    
     data.forEach((media)=>{
-      
       const mediaModel = factoryMedia.createMediaCard(media)
       const mediaCardDOM = mediaModel.getMediaCardDOM().card
       const mediaArticleDOM = mediaModel.getArticleDOM().article
 
+      // gallery display 
       domLinker.mediasContainer.appendChild(mediaCardDOM);
 
-      // lightbox
-      const getLightboxContent = (media) => {
+      // lightbox display 
         articles.push(mediaArticleDOM)
         mediaCardDOM.firstElementChild.addEventListener('click', () =>{ 
-          lightbox.openLightBox();
-          lightbox.displayLightBoxContent(media)
+          lightbox.openLightBox(mediaModel);
         })
-      }
-      getLightboxContent(mediaModel)
-      lightbox.closeLightBox()
     })
+    
+    // lightbox nav
     domLinker.nextLightBoxBtn.addEventListener('click', () => lightbox.nextMedia(articles) )
     domLinker.prevLightBoxBtn.addEventListener('click', () => lightbox.prevMedia(articles) )
+    lightbox.closeLightBox()
     
+
+
+    // likes
+    const nbrLikeContainer = document.querySelectorAll('.media__likes')
+    console.log(nbrLikeContainer);
+    const likeBtn =document.querySelectorAll('.likeIcon')
     
-    const likeBtn =document.querySelectorAll('.media__container--likes')
     
     function addLike(){
       likeBtn.forEach((btn)=>{
-        btn .addEventListener('click' , (e) => {
-          console.log(e.target);
-        })
+        btn.addEventListener('click' , (e) => {
+          console.log(e.target.id);
+          nbrLikeContainer.forEach((container)=>{
+            if(e.target.id === container.id){
+              console.log(container);
+              const articleLike = parseInt(container.innerText)
+              container.textContent = articleLike+1;
+              let newValueOfLike = parseInt(container.outerText)
+              console.log("Nouvelle valeure " + newValueOfLike);
+        }
       })
-    }
-    addLike()
-    console.log(likeBtn);
+    })
+  })
+}
+addLike()
+    
   }
   
   /**
