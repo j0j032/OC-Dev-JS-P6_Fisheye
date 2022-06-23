@@ -9,7 +9,7 @@ module.exports = {
    */
 
   createMediaCard(data) {
-    const { id, image, video, likes, title } = data;
+    const { id, image, video, likes, title, date } = data;
     const mediaSrc = `../src/assets/medias/${image || video}`;
 
     const mediaAttributes = [
@@ -74,7 +74,7 @@ module.exports = {
     };
 
     return {
-      getArticleDOM, getMediaCardDOM, mediaTitle, likes, id
+      getArticleDOM, getMediaCardDOM, mediaTitle, likes, id, title, date
     };    
   },
 };
