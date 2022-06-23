@@ -41,16 +41,19 @@ module.exports = (id) => {
 
   const sortData = (data) => {
     const sortBtn = document.getElementById('sortBy');
-
+    // displayMedias(data)
+    displayUserLike(data)
     sortBtn.addEventListener('change', (e) => {
-      switch (e.target.value) {
 
+      switch (e.target.value) {
         case 'Popularité':
           data.sort(function (a, b) {
             return a.likes - b.likes;
           });
           data.reverse();
           console.log('les datas par nombre de likes décroissant: ', data);
+          displayMedias(data)
+          displayUserLike(data)
           break;
 
         case 'Date':
@@ -63,6 +66,8 @@ module.exports = (id) => {
             return 0;
           });
           console.log('Datas par date croissant: ', data);
+          displayMedias(data)
+          displayUserLike(data)
           break;
           
         case 'Titre':
@@ -70,30 +75,34 @@ module.exports = (id) => {
             return a.title > b.title ? 1 : -1;
           });
           console.log('Datas par titre alphabétique: ', data);
+          displayMedias(data)
+          displayUserLike(data)
           break;
 
         default:
           data.sort(function (a, b) {
             return a.likes - b.likes;
           });
+          displayMedias(data)
+          displayUserLike(data)
           break;
       }
     });
   };
 
   const displayMedias = (data) => {
+
     data.forEach((media) => {
       const mediaModel = factoryMedia.createMediaCard(media);
       const mediaCardDOM = mediaModel.getMediaCardDOM().card;
       const mediaArticleDOM = mediaModel.getArticleDOM().article;
-
       // gallery display
       domLinker.mediasContainer.appendChild(mediaCardDOM);
-
+      
       // lightbox display
       articles.push(mediaArticleDOM);
       mediaCardDOM.firstElementChild.addEventListener('click', () => {
-        lightbox.openLightBox(mediaModel);
+        lightbox.openLightBox(mediaModel, articles);
       });
     });
 
@@ -106,6 +115,8 @@ module.exports = (id) => {
     );
     lightbox.closeLightBox();
   };
+
+
 
   // likes
   const displayUserLike = (data) => {
@@ -164,11 +175,8 @@ module.exports = (id) => {
     console.log(`id du photographe: ${id}`);
     console.log('Photographes:', photographers);
     console.log('medias du photographe:', medias);
-
     displayHeaderElements(photographers);
-    displayMedias(medias);
     sortData(medias);
-    displayUserLike(medias);
   };
 
   init();

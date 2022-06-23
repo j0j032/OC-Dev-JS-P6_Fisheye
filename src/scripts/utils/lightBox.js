@@ -43,9 +43,10 @@ const prevMedia = (articles) => {
   setVideo()
 };
 
-const openLightBox = (media) => {
+const openLightBox = (media ,arrray) => {
   lightBox.classList.add('show');
   displayLightBoxContent(media)
+  getCurrentArticleIndex(arrray)
 };
 
 const closeLightBox = () => {
