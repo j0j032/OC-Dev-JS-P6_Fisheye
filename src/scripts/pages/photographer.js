@@ -41,7 +41,7 @@ module.exports = (id) => {
 
   const sortData = (data) => {
     const sortBtn = document.getElementById('sortBy');
-    // displayMedias(data)
+    displayMedias(data)
     displayUserLike(data)
     sortBtn.addEventListener('change', (e) => {
 
@@ -134,6 +134,7 @@ module.exports = (id) => {
     likeBtns.forEach((likeBtn) => {
       let isLiked = false;
       likeBtn.addEventListener('click', (e) => {
+        e.stopPropagation()
         const target = e.target.id;
         const result = allIds.indexOf(parseInt(target));
 
