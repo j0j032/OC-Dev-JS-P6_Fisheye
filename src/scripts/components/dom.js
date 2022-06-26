@@ -38,6 +38,17 @@ const empty = (element) => {
   element.lastChild ? element.removeChild(element.lastChild) : console.log('LightBox Empty');
 };
 
+/**
+ * Remove all first child from an element quoted in parameter
+ *
+ * @param {HTMLElement} el - target element html with all first child to remove
+ */
+ const emptyMedias = el => {
+  while (el.firstChild) {
+    el.removeChild(el.firstChild)
+  }
+}
+
 module.exports = {
-  createElement, empty
+  createElement, empty, emptyMedias
 };

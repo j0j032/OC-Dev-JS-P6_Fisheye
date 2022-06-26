@@ -12,6 +12,8 @@ const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 const domLinker = require('../components/domLinker');
 const lightbox = require('../utils/lightBox');
+const { emptyMedias } = require('../components/dom');
+const { mediasContainer } = require('../components/domLinker');
 let articles = [];
 
 module.exports = (id) => {
@@ -47,6 +49,8 @@ module.exports = (id) => {
 
       switch (e.target.value) {
         case 'Popularité':
+          emptyMedias(mediasContainer)
+          articles = []
           data.sort(function (a, b) {
             return a.likes - b.likes;
           });
@@ -57,6 +61,8 @@ module.exports = (id) => {
           break;
 
         case 'Date':
+          emptyMedias(mediasContainer)
+          articles = []
           data.sort(function (x, y) {
             let firstDate = new Date(x.date);
             let SecondDate = new Date(y.date);
@@ -71,6 +77,8 @@ module.exports = (id) => {
           break;
           
         case 'Titre':
+          emptyMedias(mediasContainer)
+          articles = []
           data.sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
           });
