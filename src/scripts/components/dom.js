@@ -30,13 +30,6 @@ const createElement = (tag, attributes = [], parent, text) => {
   return element;
 };
 
-/**
- * To remove lightBox media before append next one
- * @param {HTMLElement} element (container)
- */
-const empty = (element) => {
-  element.lastChild ? element.removeChild(element.lastChild) : console.log('LightBox Empty');
-};
 
 /**
  * Remove all first child from an element quoted in parameter
@@ -48,6 +41,9 @@ const empty = (element) => {
     el.removeChild(el.firstChild)
   }
 }
+
+
+// sort Methods
 
 const byASCTitle = (a, b) => {
   return a.title > b.title ? 1 : -1;
@@ -67,5 +63,5 @@ const byDESCDate = (x, y) => {
 }
 
 module.exports = {
-  createElement, empty, emptyMedias, byASCTitle, byDESCDate, byDESCLikes
+  createElement, emptyMedias, byASCTitle, byDESCDate, byDESCLikes
 };

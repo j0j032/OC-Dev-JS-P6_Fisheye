@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 
-const { empty } = require('../components/dom');
+const { emptyMedias } = require('../components/dom');
 const {lightBox,closeLightBoxBtn,lightBoxContent,} = require('../components/domLinker');
 
 /**
@@ -20,7 +20,7 @@ const getCurrentArticleIndex = (articles) => {
  */
 const nextMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  empty(lightBoxContent);
+  emptyMedias(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === articles.length - 1
       ? articles[0]
@@ -34,7 +34,7 @@ const nextMedia = (articles) => {
  */
 const prevMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  empty(lightBoxContent);
+  emptyMedias(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === 0
       ? articles[articles.length - 1]
@@ -52,7 +52,7 @@ const openLightBox = (media ,arrray) => {
 const closeLightBox = () => {
   closeLightBoxBtn.addEventListener('click', () => {
     lightBox.classList.remove('show');
-    empty(lightBoxContent);
+    emptyMedias(lightBoxContent);
   });
 };
 

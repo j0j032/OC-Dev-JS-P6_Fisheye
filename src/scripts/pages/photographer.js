@@ -12,7 +12,7 @@ const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 const domLinker = require('../components/domLinker');
 const lightbox = require('../utils/lightBox');
-const { emptyMedias, byASCTitle, byDESCDate, byDESCLikes } = require('../components/dom');
+const dom = require('../components/dom');
 const { mediasContainer } = require('../components/domLinker');
 let articles = [];
 
@@ -46,7 +46,7 @@ module.exports = (id) => {
     getMediasDOM(data)
 
     const resetMediasDOM = () =>{
-      emptyMedias(mediasContainer)
+      dom.emptyMedias(mediasContainer)
       articles = []
     }
     
@@ -59,15 +59,15 @@ module.exports = (id) => {
     domLinker.sortBtn.addEventListener('change', (e) => {
       switch (e.target.value) {
         case 'Popularité':
-          sortMedias(byDESCLikes)
+          sortMedias(dom.byDESCLikes)
           break;
 
         case 'Date':
-          sortMedias(byDESCDate)
+          sortMedias(dom.byDESCDate)
           break;
           
         case 'Titre':
-          sortMedias(byASCTitle)
+          sortMedias(dom.byASCTitle)
           break;
       }
     });
@@ -99,7 +99,6 @@ module.exports = (id) => {
     lightbox.closeLightBox();
     displayUserLike(data)
   };
-
 
 
   // likes
@@ -158,8 +157,8 @@ module.exports = (id) => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMediasByPhotographerId(parseInt(id));
     console.log(`id du photographe: ${id}`);
-    console.log('Photographes:', photographers);
     console.log('medias du photographe:', medias);
+
     displayHeaderElements(photographers);
     displayMedias(medias);
   };
