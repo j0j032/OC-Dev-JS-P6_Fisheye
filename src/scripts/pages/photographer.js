@@ -12,9 +12,10 @@ const { displayModal } = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 const domLinker = require('../components/domLinker');
 const lightbox = require('../utils/lightBox');
-const { emptyMedias } = require('../components/dom');
+const { emptyMedias, byASCTitle, byDESCDate, byDESCLikes } = require('../components/dom');
 const { mediasContainer } = require('../components/domLinker');
 let articles = [];
+
 
 module.exports = (id) => {
   /**
@@ -41,64 +42,38 @@ module.exports = (id) => {
     displayModal().closeModal();
   };
 
-  const sortData = (data) => {
-    const sortBtn = document.getElementById('sortBy');
-    displayMedias(data)
-    displayUserLike(data)
-    sortBtn.addEventListener('change', (e) => {
+  const displayMedias = (data) => {
+    getMediasDOM(data)
 
+    const resetMediasDOM = () =>{
+      emptyMedias(mediasContainer)
+      articles = []
+    }
+    
+    const sortMedias = (sortFunction) => {
+      resetMediasDOM()
+      data.sort(sortFunction)
+      getMediasDOM(data)
+    }
+
+    domLinker.sortBtn.addEventListener('change', (e) => {
       switch (e.target.value) {
         case 'Popularité':
-          emptyMedias(mediasContainer)
-          articles = []
-          data.sort(function (a, b) {
-            return a.likes - b.likes;
-          });
-          data.reverse();
-          console.log('les datas par nombre de likes décroissant: ', data);
-          displayMedias(data)
-          displayUserLike(data)
+          sortMedias(byDESCLikes)
           break;
 
         case 'Date':
-          emptyMedias(mediasContainer)
-          articles = []
-          data.sort(function (x, y) {
-            let firstDate = new Date(x.date);
-            let SecondDate = new Date(y.date);
-
-            if (firstDate < SecondDate) return -1;
-            if (firstDate > SecondDate) return 1;
-            return 0;
-          });
-          console.log('Datas par date croissant: ', data);
-          displayMedias(data)
-          displayUserLike(data)
+          sortMedias(byDESCDate)
           break;
           
         case 'Titre':
-          emptyMedias(mediasContainer)
-          articles = []
-          data.sort(function (a, b) {
-            return a.title > b.title ? 1 : -1;
-          });
-          console.log('Datas par titre alphabétique: ', data);
-          displayMedias(data)
-          displayUserLike(data)
-          break;
-
-        default:
-          data.sort(function (a, b) {
-            return a.likes - b.likes;
-          });
-          displayMedias(data)
-          displayUserLike(data)
+          sortMedias(byASCTitle)
           break;
       }
     });
   };
 
-  const displayMedias = (data) => {
+  const getMediasDOM = (data) => {
 
     data.forEach((media) => {
       const mediaModel = factoryMedia.createMediaCard(media);
@@ -122,6 +97,7 @@ module.exports = (id) => {
       lightbox.prevMedia(articles)
     );
     lightbox.closeLightBox();
+    displayUserLike(data)
   };
 
 
@@ -185,7 +161,7 @@ module.exports = (id) => {
     console.log('Photographes:', photographers);
     console.log('medias du photographe:', medias);
     displayHeaderElements(photographers);
-    sortData(medias);
+    displayMedias(medias);
   };
 
   init();

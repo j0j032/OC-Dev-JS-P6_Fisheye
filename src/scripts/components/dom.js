@@ -49,6 +49,23 @@ const empty = (element) => {
   }
 }
 
+const byASCTitle = (a, b) => {
+  return a.title > b.title ? 1 : -1;
+}
+
+const byDESCLikes = (a,b)=>{
+  return b.likes - a.likes;
+}
+
+const byDESCDate = (x, y) => { 
+  const firstDate = new Date(x.date);
+  const SecondDate = new Date(y.date);
+
+  if (firstDate < SecondDate) return -1;
+  if (firstDate > SecondDate) return 1;
+  return 0;
+}
+
 module.exports = {
-  createElement, empty, emptyMedias
+  createElement, empty, emptyMedias, byASCTitle, byDESCDate, byDESCLikes
 };
