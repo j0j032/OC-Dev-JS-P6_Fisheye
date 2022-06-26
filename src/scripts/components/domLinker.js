@@ -5,7 +5,8 @@ module.exports = {
   photogHeadDescription :document.querySelector('.photograph-header__description'),
   photogHeadPic :document.querySelector('.photograph-header__profilePic-Container'),
   priceContainer :document.querySelector('.price-container'),
-  mediasContainer : document.querySelector('.medias__container'),  
+  mediasContainer : document.querySelector('.medias__container'), 
+  sortBtn : document.getElementById('sortBy'), 
 
   // modal
   contactModal: document.getElementById('contact_modal'),

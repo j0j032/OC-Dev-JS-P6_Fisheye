@@ -38,6 +38,34 @@ const empty = (element) => {
   element.lastChild ? element.removeChild(element.lastChild) : console.log('LightBox Empty');
 };
 
+/**
+ * Remove all first child from an element quoted in parameter
+ *
+ * @param {HTMLElement} el - target element html with all first child to remove
+ */
+ const emptyMedias = el => {
+  while (el.firstChild) {
+    el.removeChild(el.firstChild)
+  }
+}
+
+const byASCTitle = (a, b) => {
+  return a.title > b.title ? 1 : -1;
+}
+
+const byDESCLikes = (a,b)=>{
+  return b.likes - a.likes;
+}
+
+const byDESCDate = (x, y) => { 
+  const firstDate = new Date(x.date);
+  const SecondDate = new Date(y.date);
+
+  if (firstDate < SecondDate) return -1;
+  if (firstDate > SecondDate) return 1;
+  return 0;
+}
+
 module.exports = {
-  createElement, empty
+  createElement, empty, emptyMedias, byASCTitle, byDESCDate, byDESCLikes
 };

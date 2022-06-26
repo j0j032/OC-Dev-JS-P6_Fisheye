@@ -43,38 +43,34 @@ module.exports = {
     const likesDivAttributes = [{ class: 'media__container--likes' }];
     const cardAttributes = [{ class: 'media__card' }];
 
-    const mediaTitle = createElement('p', titleAttributes, null, title);
-
-    const getArticleDOM = (lightBox = false) => {
+    
+    const getArticleDOM = () => {
       const article = createElement('article', [{ id }], null);
       image
-        ? createElement('img', mediaAttributes, article)
-        : createElement(
-            'video',
-            [...videoAttributes, ...mediaAttributes],
-            article
-          );
-      if ((lightBox = true)) {
-        article.appendChild(mediaTitle);
-      }
-      return { article };
+      ? createElement('img', mediaAttributes, article)
+      : createElement(
+        'video',
+        [...videoAttributes, ...mediaAttributes],
+        article
+        );
+        const infosDiv = createElement('div', infoDivAttributes, article);
+        createElement('p', titleAttributes, infosDiv, title);
+
+      return { article, infosDiv };
     };
 
     const getMediaCardDOM = () => {
       const card = createElement('div', cardAttributes, null);
-      const { article } = getArticleDOM();
-      const infosDiv = createElement('div', infoDivAttributes, null);
-      createElement('p', titleAttributes, infosDiv, title);
+      const { article , infosDiv } = getArticleDOM();
       const likesDiv = createElement('div', likesDivAttributes, infosDiv);
       createElement('p', likesAttributes, likesDiv, likes );
       createElement('i', heartIconAttributes, likesDiv);
       card.appendChild(article);
-      card.appendChild(infosDiv);
-      return { card, article, infosDiv };
+      return { card, article };
     };
 
     return {
-      getArticleDOM, getMediaCardDOM, mediaTitle, likes, id, title, date
+      getArticleDOM, getMediaCardDOM, likes, id, title, date
     };    
   },
 };
