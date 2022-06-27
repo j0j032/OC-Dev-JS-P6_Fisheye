@@ -161,6 +161,8 @@ module.exports = (id) => {
 
     displayHeaderElements(photographers);
     displayMedias(medias);
+
+   // document.addEventListener('keydown', e => lightbox.keyDown(e, articles))
   };
 
   init();

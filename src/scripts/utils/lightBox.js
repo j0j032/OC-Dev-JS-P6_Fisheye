@@ -16,7 +16,7 @@ const getCurrentArticleIndex = (articles) => {
 };
 
 /**
- * @param {arrayy} articles
+ * @param {array} articles
  */
 const nextMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);

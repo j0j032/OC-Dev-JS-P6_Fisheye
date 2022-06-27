@@ -43,6 +43,11 @@ module.exports = {
     const likesDivAttributes = [{ class: 'media__container--likes' }];
     const cardAttributes = [{ class: 'media__card' }];
 
+    const linkAttributes = [
+      { href: `#lightbox?id=${id}` },
+      { 'aria-label': `ouvre la vue lightbox de l'image ${title}` }
+    ]
+
     
     const getArticleDOM = () => {
       const article = createElement('article', [{ id }], null);
@@ -65,7 +70,9 @@ module.exports = {
       const likesDiv = createElement('div', likesDivAttributes, infosDiv);
       createElement('p', likesAttributes, likesDiv, likes );
       createElement('i', heartIconAttributes, likesDiv);
-      card.appendChild(article);
+      const link = createElement('a', linkAttributes, null)
+      link.appendChild(article);
+      card.appendChild(link);
       return { card, article };
     };
 
