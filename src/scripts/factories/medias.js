@@ -48,6 +48,8 @@ module.exports = {
       { 'aria-label': `ouvre la vue lightbox de l'image ${title}` }
     ]
 
+    const likeClickAttributes = [{class: 'likeIcon--btn'}]
+
     
     const getArticleDOM = () => {
       const article = createElement('article', [{ id }], null);
@@ -69,7 +71,8 @@ module.exports = {
       const { article , infosDiv } = getArticleDOM();
       const likesDiv = createElement('div', likesDivAttributes, infosDiv);
       createElement('p', likesAttributes, likesDiv, likes );
-      createElement('i', heartIconAttributes, likesDiv);
+      const likeClick = createElement('button', likeClickAttributes, likesDiv )
+      createElement('i', heartIconAttributes, likeClick);
       const link = createElement('a', linkAttributes, null)
       link.appendChild(article);
       card.appendChild(link);

@@ -112,10 +112,11 @@ module.exports = (id) => {
     });
     getTotalOfLikes(allLikes);
     const nbrLikeContainer = document.querySelectorAll('.media__likes');
-    const likeBtns = document.querySelectorAll('.likeIcon');
+    const likeBtns = document.querySelectorAll('.likeIcon--btn');
 
     likeBtns.forEach((likeBtn) => {
       let isLiked = false;
+      
       likeBtn.addEventListener('click', (e) => {
         e.stopPropagation()
         const target = e.target.id;
@@ -162,7 +163,6 @@ module.exports = (id) => {
     displayHeaderElements(photographers);
     displayMedias(medias);
 
-   // document.addEventListener('keydown', e => lightbox.keyDown(e, articles))
   };
 
   init();

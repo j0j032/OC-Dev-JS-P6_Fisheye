@@ -37,18 +37,21 @@
       </div>
     </section>
   </main>
-  <div id="contact_modal">
-    <div class="modal">
+  <div role="dialog" id="contact_modal">
+    <div role="document" class="modal">
+      <button role="button" id="close-modal" class="modal__closeBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
       <header class="modal__heading">
         <div class="modal__heading-flex">
           <h1 class="modal__heading-police"></h1>
-          <img id="close-modal" class="modal__closeBtn" src="src/assets/icons/close.svg" />
         </div>
       </header>
-      <form class="contact__form">
-        <div>
-          <label class="contact__label" for="first">Prénom</label><br>
-          <input id="first" name="first" class="contact__input" type="text" />
+      <form id="contact__form" name="contact-form" class="contact__form">
+        <div tabindex="0">
+          <label id="label-first" class="contact__label" for="first">Prénom</label><br>
+          <input id="first" name="firstname" class="contact__input" type="text" aria-labelledby="label-firstname"
+            role="text" />
         </div>
         <div>
           <label class="contact__label" for="last">Nom</label><br>
@@ -67,13 +70,16 @@
     </div>
   </div>
 
-  <div id="lightBox" class="lightBox">
-    <img id="close-modal" class="lightBox__close" src="src/assets/icons/close-red.svg" />
-    <button class="lightBox__next">
-      <i class="fa-solid fa-chevron-right"></i>
+  <div role="dialog" id="lightBox" class="lightBox">
+    <button role="button" id="close-modal" class="lightBox__close">
+      <i class="fa-solid fa-xmark"></i>
     </button>
+    <!--     <img role="button" id="close-modal" class="lightBox__close" src="src/assets/icons/close-red.svg" /> -->
     <button class="lightBox__prev">
       <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="lightBox__next">
+      <i class="fa-solid fa-chevron-right"></i>
     </button>
     <div class="lightBox__container">
     </div>

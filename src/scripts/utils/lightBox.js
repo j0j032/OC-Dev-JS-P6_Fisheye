@@ -3,6 +3,7 @@
 
 const { emptyMedias } = require('../components/dom');
 const {lightBox,closeLightBoxBtn,lightBoxContent,} = require('../components/domLinker');
+const domLinker = require('../components/domLinker');
 
 /**
  * @param {array} articles
@@ -47,6 +48,9 @@ const openLightBox = (media ,arrray) => {
   lightBox.classList.add('show');
   displayLightBoxContent(media)
   getCurrentArticleIndex(arrray)
+  domLinker.photographerPage.setAttribute('aria-hidden', 'true')
+  domLinker.lightBox.setAttribute('aria-hidden', 'false')
+  domLinker.closeLightBoxBtn.focus()
 };
 
 const closeLightBox = () => {
