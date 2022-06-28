@@ -10,6 +10,7 @@ module.exports = {
   photographerPage : document.getElementById('main'),
 
   // modal
+  
   contactModal: document.getElementById('contact_modal'),
   closeModalBtn:document.getElementById('close-modal'),
   modalHeading: document.querySelector('.modal__heading-police'),

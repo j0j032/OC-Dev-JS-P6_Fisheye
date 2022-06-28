@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-expressions */
 
 /**
  * To create DOM new Element
@@ -62,6 +63,7 @@ const byDESCDate = (x, y) => {
   return 0;
 }
 
+
 module.exports = {
-  createElement, emptyMedias, byASCTitle, byDESCDate, byDESCLikes
+  createElement, emptyMedias, byASCTitle, byDESCDate, byDESCLikes,
 };

@@ -8,7 +8,7 @@
 
 const api = require('../components/api');
 const factoryPhotographer = require('../factories/photographer');
-const { displayModal } = require('../utils/modal');
+const modal = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 const domLinker = require('../components/domLinker');
 const lightbox = require('../utils/lightBox');
@@ -38,8 +38,6 @@ module.exports = (id) => {
         domLinker.priceContainer.textContent = pricing;
       }
     });
-    displayModal().openModal();
-    displayModal().closeModal();
   };
 
   const displayMedias = (data) => {
@@ -159,10 +157,13 @@ module.exports = (id) => {
     const medias = await api.getMediasByPhotographerId(parseInt(id));
     console.log(`id du photographe: ${id}`);
     console.log('medias du photographe:', medias);
-
+    
     displayHeaderElements(photographers);
     displayMedias(medias);
-
+    
+    document.querySelector('.photograph-header__btn').addEventListener('click', () => modal.openModal())
+    domLinker.closeModalBtn.addEventListener('click', ()=> modal.closeModal())
+    domLinker.closeLightBoxBtn.addEventListener('click', () => lightbox.closeLightBox())
   };
 
   init();

@@ -3,29 +3,34 @@
 /* eslint-disable no-console */
 
 const domLinker = require('../components/domLinker');
+const EscKey = 'Escape' || key === 'Esc' || key === 27;
 
-
-const displayModal = () => {
+  const setKeyESC = (user) => {
+    if (user === EscKey){
+      if(domLinker.contactModal.style.display === 'block'){
+        closeModal()
+      } 
+    }
+  }
 
   const openModal = () =>{
-    const contactBtn = document.querySelector('.photograph-header__btn');
-    contactBtn.addEventListener('click', () => {
       domLinker.contactModal.style.display = ('block');
       domLinker.photographerPage.setAttribute('aria-hidden', 'true')
       domLinker.contactModal.setAttribute('aria-hidden', 'false')
       domLinker.closeModalBtn.focus()
+      document.addEventListener('keydown', e =>{
+        const userPress = e.key
+        setKeyESC(userPress)
     });
   }
+
   const closeModal = () => {
-    domLinker.closeModalBtn.addEventListener('click', ()=>{
       domLinker.contactModal.style.display = ('none');
       domLinker.photographerPage.setAttribute('aria-hidden', 'false')
       domLinker.contactModal.setAttribute('aria-hidden', 'true')
       domLinker.photographerPage.focus()
-    })
+      document.removeEventListener('keydown',setKeyESC)
   }
-  return {openModal, closeModal}
-}
 
 
 domLinker.contactModal.addEventListener('submit',(e)=>{
@@ -41,5 +46,5 @@ domLinker.contactModal.addEventListener('submit',(e)=>{
 })
 
 module.exports = {
-  displayModal
+  openModal, closeModal
 }
