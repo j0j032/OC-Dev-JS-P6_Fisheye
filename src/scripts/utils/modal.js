@@ -18,6 +18,7 @@ const EscKey = 'Escape' || key === 'Esc' || key === 27;
       domLinker.photographerPage.setAttribute('aria-hidden', 'true')
       domLinker.contactModal.setAttribute('aria-hidden', 'false')
       domLinker.closeModalBtn.focus()
+      
       document.addEventListener('keydown', e =>{
         const userPress = e.key
         setKeyESC(userPress)

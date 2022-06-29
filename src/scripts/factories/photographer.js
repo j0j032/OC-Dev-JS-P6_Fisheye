@@ -12,27 +12,27 @@ module.exports = {
     const cardLinkAttributes = [
       { href: `photographer.html?id=${id}` },
       { 'aria-label': `lien vers la page du photographe ${name}` },
+      { 'alt': `lien vers la page du photographe ${name}` },
       { class: 'card__link' },
     ];
     const cardImgAttributes = [
       { src: profilePicture },
       { alt: `Portrait de ${name}` },
       { 'aria-label': `Portrait de ${name}` },
-      { 'aria-describedby': id },
       { class: 'card__pic' },
     ];
-    const cardNameAttributes = [{ class: 'card__name' }];
+    const cardNameAttributes = [{ class: 'card__name' },{'aria-label':name}];
     const cardLocationAttributes = [
       { class: 'card__location' },
-      { 'aria-label': photographerLocation },
+      { 'alt': photographerLocation },
     ];
     const cardTaglineAttributes = [
       { class: 'card__tagline' },
-      { 'aria-label': tagline },
+      { 'alt': tagline },
     ];
     const cardPriceAttributes = [
       { class: 'card__price' },
-      { 'aria-label': price },
+      { 'alt': price },
     ];
 
     const getProfileCardDOM = () => {

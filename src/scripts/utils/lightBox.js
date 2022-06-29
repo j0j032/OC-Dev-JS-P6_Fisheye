@@ -3,8 +3,8 @@
 /* eslint-disable no-console */
 
 const { emptyMedias } = require('../components/dom');
-const {lightBox,lightBoxContent,} = require('../components/domLinker');
-const domLinker = require('../components/domLinker');
+const {lightBox,lightBoxContent, photographerPage, closeLightBoxBtn,nextLightBoxBtn,prevLightBoxBtn} = require('../components/domLinker');
+
 const EscKey = 'Escape' || key === 'Esc' || key === 27;
 const arrowR = 'ArrowRight' || key === 39;
 const arrowL = 'ArrowLeft' || key === 37;
@@ -48,38 +48,44 @@ const prevMedia = (articles) => {
   setVideo()
 };
 
-const setKeys = (userKeyPressed, array) => {
+const setKeys = (userKeyPressed, articles) => {
   if(lightBox.classList.contains('show')){
     switch (userKeyPressed) {
      case EscKey: closeLightBox()
        break;
-     case arrowL: prevMedia(array)
+     case arrowL: prevMedia(articles)
        break;
-     case arrowR: nextMedia(array)
+     case arrowR: nextMedia(articles)
        break;
     }
   }
 }
 
-const openLightBox = (media ,array) => {
+const openLightBox = (media ,articles) => {
   lightBox.classList.add('show');
   displayLightBoxContent(media)
-  getCurrentArticleIndex(array)
-  domLinker.photographerPage.setAttribute('aria-hidden', 'true')
-  domLinker.lightBox.setAttribute('aria-hidden', 'false')
-  domLinker.closeLightBoxBtn.focus()
+  getCurrentArticleIndex(articles)
+
+  nextLightBoxBtn.addEventListener('click', () => nextMedia(articles));
+  prevLightBoxBtn.addEventListener('click', () => prevMedia(articles));
+
+  photographerPage.setAttribute('aria-hidden', 'true')
+  lightBox.setAttribute('aria-hidden', 'false')
+  closeLightBoxBtn.focus()
   document.addEventListener('keydown', e =>{
     const userPress = e.key
-    setKeys(userPress, array)
+    setKeys(userPress, articles)
 });
 };
 
 const closeLightBox = () => {
     lightBox.classList.remove('show');
     emptyMedias(lightBoxContent);
-    domLinker.photographerPage.setAttribute('aria-hidden', 'true')
-    domLinker.lightBox.setAttribute('aria-hidden', 'false')
-    domLinker.photographerPage.focus()
+    photographerPage.setAttribute('aria-hidden', 'true')
+    lightBox.setAttribute('aria-hidden', 'false')
+    photographerPage.focus()
+    document.removeEventListener('click',nextMedia)
+    document.removeEventListener('click',prevMedia)
     document.removeEventListener('keydown',setKeys)
 };
 
@@ -104,4 +110,5 @@ module.exports = {
   closeLightBox,
   nextMedia,
   prevMedia,
+  getCurrentArticleIndex,
 };

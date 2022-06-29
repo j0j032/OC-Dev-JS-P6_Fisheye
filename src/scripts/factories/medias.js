@@ -26,17 +26,16 @@ module.exports = {
 
     const titleAttributes = [
       { class: 'media__title' },
-      { 'aria-label': `Titre du média : ${title}` },
+      { 'alt': `Titre du média : ${title}` },
     ];
 
     const likesAttributes = [
       { class: 'media__likes' },{id},
-      { 'aria-label': `Nombres de like du média : ${title} = ${likes}` },
+      { 'alt': `Nombres de like du média : ${title} = ${likes}` },
     ];
 
     const heartIconAttributes = [
       { class: 'likeIcon fa-solid fa-heart' },{id},
-      { 'aria-label': `icone clickable pour aimer limage : ${title}` },
     ];
 
     const infoDivAttributes = [{ class: 'media__container--infos' }];
@@ -45,10 +44,14 @@ module.exports = {
 
     const linkAttributes = [
       { href: `#lightbox?id=${id}` },
-      { 'aria-label': `ouvre la vue lightbox de l'image ${title}` }
+      { 'aria-label': `ouvre la vue lightbox de l'image ${title}` },
+      { 'alt': `ouvre la vue lightbox de l'image ${title}` }
     ]
 
-    const likeClickAttributes = [{class: 'likeIcon--btn'}]
+    const likeClickAttributes = [
+      {class: 'likeIcon--btn'},
+      {'aria-label': 'aimer le media'}
+    ]
 
     
     const getArticleDOM = () => {

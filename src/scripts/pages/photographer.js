@@ -46,6 +46,7 @@ module.exports = (id) => {
     const resetMediasDOM = () =>{
       dom.emptyMedias(mediasContainer)
       articles = []
+      console.log(articles);
     }
     
     const sortMedias = (sortFunction) => {
@@ -87,17 +88,13 @@ module.exports = (id) => {
       });
     });
 
-    // lightbox nav
-    domLinker.nextLightBoxBtn.addEventListener('click', () =>
-      lightbox.nextMedia(articles)
-    );
-    domLinker.prevLightBoxBtn.addEventListener('click', () =>
-      lightbox.prevMedia(articles)
-    );
-    lightbox.closeLightBox();
     displayUserLike(data)
   };
 
+  const getTotalOfLikes = (arrayOfdata) => {
+    const totalLikesDom = document.getElementById('totalLikes');
+    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
+  };
 
   // likes
   const displayUserLike = (data) => {
@@ -114,7 +111,6 @@ module.exports = (id) => {
 
     likeBtns.forEach((likeBtn) => {
       let isLiked = false;
-      
       likeBtn.addEventListener('click', (e) => {
         e.stopPropagation()
         const target = e.target.id;
@@ -142,16 +138,7 @@ module.exports = (id) => {
     });
   };
 
-  const getTotalOfLikes = (arrayOfdata) => {
-    const totalLikesDom = document.getElementById('totalLikes');
-    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
-  };
-
-  /**
-   * To get data photographers info in data.json
-   * To get each photographer's media from data.json
-   * To play the logics filled with datas
-   */
+   
   const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMediasByPhotographerId(parseInt(id));

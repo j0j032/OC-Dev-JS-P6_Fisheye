@@ -11,14 +11,15 @@
 <body>
   <header class="header">
     <a href="http://localhost:8087/" alt="fisheye Home page" aria-label="lien vers la page d'acceuil">
-      <img src="src/assets/images/logo.png" class="header__logo" aria-label="logo du site fisheye" />
+      <img role="button" src="src/assets/images/logo.png" class="header__logo" alt="retour au menu principal"
+        aria-label="logo du site fisheye" />
     </a>
   </header>
   <main id="main">
     <div class="photographer">
     </div>
     <label class="sort" for="sortBy">Trier par
-      <select name="sortBy " id="sortBy">
+      <select aria-label='trier les medias' name="sortBy " id="sortBy">
         <option id="date" value="Date">Date</option>
         <option id="popular" value="Popularité">Popularité</option>
         <option id="title" value="Titre">Titre</option>
@@ -39,46 +40,46 @@
   </main>
   <div role="dialog" id="contact_modal">
     <div role="document" class="modal">
-      <button role="button" id="close-modal" class="modal__closeBtn">
+      <button role="button" id="close-modal" class="modal__closeBtn" aria-label="fermer la fenêtre">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <header class="modal__heading">
         <div class="modal__heading-flex">
-          <h1 class="modal__heading-police"></h1>
+          <h1 class="modal__heading-police">''</h1>
         </div>
       </header>
       <form id="contact__form" name="contact-form" class="contact__form">
         <div>
-          <label id="label-first" class="contact__label" for="first">Prénom</label><br>
+          <label id="label-firstname" class="contact__label" for="firstname">Prénom</label><br>
           <input id="first" name="firstname" class="contact__input" type="text" aria-labelledby="label-firstname"
             role="text" />
         </div>
         <div>
-          <label class="contact__label" for="last">Nom</label><br>
-          <input id="last" name="last" class="contact__input" type="text" />
+          <label id="label-lastname" class="contact__label" for="lastname">Nom</label><br>
+          <input id="last" name="lastname" class="contact__input" type="text" aria-labelledby="label-lastname" />
         </div>
         <div>
-          <label class="contact__label" for="email">Email</label><br>
-          <input id="email" name="email" class="contact__input" type="email" />
+          <label id="label-email" class="contact__label" for="email">Email</label><br>
+          <input id="email" name="email" class="contact__input" type="email" aria-labelledby="label-email" />
         </div>
         <div>
-          <label class="contact__label" for="message">Votre message</label><br>
-          <textarea id="message" name="message" maxlength="500" class="contact__input--message" type="text"></textarea>
+          <label id="label-message" class="contact__label" for="message">Votre message</label><br>
+          <textarea id="message" name="message" maxlength="500" class="contact__input--message" type="text"
+            aria-labelledby="label-message"></textarea>
         </div> <br>
-        <button class="btn contact__btn">Envoyer</button>
+        <button class="btn contact__btn" aria-label="envoyer le formulaire">Envoyer</button>
       </form>
     </div>
   </div>
 
   <div role="dialog" id="lightBox" class="lightBox">
-    <button role="button" id="close-modal" class="lightBox__close">
+    <button role="button" id="close-lightBox" class="lightBox__close" aria-label="fermer la fenêtre">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <!--     <img role="button" id="close-modal" class="lightBox__close" src="src/assets/icons/close-red.svg" /> -->
-    <button class="lightBox__prev">
+    <button class="lightBox__prev" aria-label="media précédent">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
-    <button class="lightBox__next">
+    <button class="lightBox__next" aria-label="media suivant">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
     <div class="lightBox__container">
