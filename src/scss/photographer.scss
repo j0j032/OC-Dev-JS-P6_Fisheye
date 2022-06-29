@@ -120,6 +120,18 @@
     color: $red;
   }
 }
+.likeIcon--btn {
+  border: none;
+  background-color: transparent;
+  color: $red;
+  margin-left: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  > .fa-heart {
+    font-size: 1.1rem;
+  }
+}
 
 .fa-heart {
   color: $red;

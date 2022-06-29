@@ -7,8 +7,10 @@ module.exports = {
   priceContainer :document.querySelector('.price-container'),
   mediasContainer : document.querySelector('.medias__container'), 
   sortBtn : document.getElementById('sortBy'), 
+  photographerPage : document.getElementById('main'),
 
   // modal
+  
   contactModal: document.getElementById('contact_modal'),
   closeModalBtn:document.getElementById('close-modal'),
   modalHeading: document.querySelector('.modal__heading-police'),

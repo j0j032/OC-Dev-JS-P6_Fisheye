@@ -1,8 +1,13 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
 
-const { empty } = require('../components/dom');
-const {lightBox,closeLightBoxBtn,lightBoxContent,} = require('../components/domLinker');
+const { emptyMedias } = require('../components/dom');
+const {lightBox,lightBoxContent, photographerPage, closeLightBoxBtn,nextLightBoxBtn,prevLightBoxBtn} = require('../components/domLinker');
+
+const EscKey = 'Escape' || key === 'Esc' || key === 27;
+const arrowR = 'ArrowRight' || key === 39;
+const arrowL = 'ArrowLeft' || key === 37;
 
 /**
  * @param {array} articles
@@ -16,11 +21,11 @@ const getCurrentArticleIndex = (articles) => {
 };
 
 /**
- * @param {arrayy} articles
+ * @param {array} articles
  */
 const nextMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  empty(lightBoxContent);
+  emptyMedias(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === articles.length - 1
       ? articles[0]
@@ -34,7 +39,7 @@ const nextMedia = (articles) => {
  */
 const prevMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  empty(lightBoxContent);
+  emptyMedias(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === 0
       ? articles[articles.length - 1]
@@ -43,17 +48,45 @@ const prevMedia = (articles) => {
   setVideo()
 };
 
-const openLightBox = (media ,arrray) => {
+const setKeys = (userKeyPressed, articles) => {
+  if(lightBox.classList.contains('show')){
+    switch (userKeyPressed) {
+     case EscKey: closeLightBox()
+       break;
+     case arrowL: prevMedia(articles)
+       break;
+     case arrowR: nextMedia(articles)
+       break;
+    }
+  }
+}
+
+const openLightBox = (media ,articles) => {
   lightBox.classList.add('show');
   displayLightBoxContent(media)
-  getCurrentArticleIndex(arrray)
+  getCurrentArticleIndex(articles)
+
+  nextLightBoxBtn.addEventListener('click', () => nextMedia(articles));
+  prevLightBoxBtn.addEventListener('click', () => prevMedia(articles));
+
+  photographerPage.setAttribute('aria-hidden', 'true')
+  lightBox.setAttribute('aria-hidden', 'false')
+  closeLightBoxBtn.focus()
+  document.addEventListener('keydown', e =>{
+    const userPress = e.key
+    setKeys(userPress, articles)
+});
 };
 
 const closeLightBox = () => {
-  closeLightBoxBtn.addEventListener('click', () => {
     lightBox.classList.remove('show');
-    empty(lightBoxContent);
-  });
+    emptyMedias(lightBoxContent);
+    photographerPage.setAttribute('aria-hidden', 'true')
+    lightBox.setAttribute('aria-hidden', 'false')
+    photographerPage.focus()
+    document.removeEventListener('click',nextMedia)
+    document.removeEventListener('click',prevMedia)
+    document.removeEventListener('keydown',setKeys)
 };
 
 /**
@@ -77,4 +110,5 @@ module.exports = {
   closeLightBox,
   nextMedia,
   prevMedia,
+  getCurrentArticleIndex,
 };

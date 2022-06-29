@@ -8,11 +8,11 @@
 
 const api = require('../components/api');
 const factoryPhotographer = require('../factories/photographer');
-const { displayModal } = require('../utils/modal');
+const modal = require('../utils/modal');
 const factoryMedia = require('../factories/medias');
 const domLinker = require('../components/domLinker');
 const lightbox = require('../utils/lightBox');
-const { emptyMedias, byASCTitle, byDESCDate, byDESCLikes } = require('../components/dom');
+const dom = require('../components/dom');
 const { mediasContainer } = require('../components/domLinker');
 let articles = [];
 
@@ -38,16 +38,15 @@ module.exports = (id) => {
         domLinker.priceContainer.textContent = pricing;
       }
     });
-    displayModal().openModal();
-    displayModal().closeModal();
   };
 
   const displayMedias = (data) => {
     getMediasDOM(data)
 
     const resetMediasDOM = () =>{
-      emptyMedias(mediasContainer)
+      dom.emptyMedias(mediasContainer)
       articles = []
+      console.log(articles);
     }
     
     const sortMedias = (sortFunction) => {
@@ -59,15 +58,15 @@ module.exports = (id) => {
     domLinker.sortBtn.addEventListener('change', (e) => {
       switch (e.target.value) {
         case 'Popularité':
-          sortMedias(byDESCLikes)
+          sortMedias(dom.byDESCLikes)
           break;
 
         case 'Date':
-          sortMedias(byDESCDate)
+          sortMedias(dom.byDESCDate)
           break;
           
         case 'Titre':
-          sortMedias(byASCTitle)
+          sortMedias(dom.byASCTitle)
           break;
       }
     });
@@ -89,18 +88,13 @@ module.exports = (id) => {
       });
     });
 
-    // lightbox nav
-    domLinker.nextLightBoxBtn.addEventListener('click', () =>
-      lightbox.nextMedia(articles)
-    );
-    domLinker.prevLightBoxBtn.addEventListener('click', () =>
-      lightbox.prevMedia(articles)
-    );
-    lightbox.closeLightBox();
     displayUserLike(data)
   };
 
-
+  const getTotalOfLikes = (arrayOfdata) => {
+    const totalLikesDom = document.getElementById('totalLikes');
+    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
+  };
 
   // likes
   const displayUserLike = (data) => {
@@ -113,7 +107,7 @@ module.exports = (id) => {
     });
     getTotalOfLikes(allLikes);
     const nbrLikeContainer = document.querySelectorAll('.media__likes');
-    const likeBtns = document.querySelectorAll('.likeIcon');
+    const likeBtns = document.querySelectorAll('.likeIcon--btn');
 
     likeBtns.forEach((likeBtn) => {
       let isLiked = false;
@@ -144,24 +138,19 @@ module.exports = (id) => {
     });
   };
 
-  const getTotalOfLikes = (arrayOfdata) => {
-    const totalLikesDom = document.getElementById('totalLikes');
-    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
-  };
-
-  /**
-   * To get data photographers info in data.json
-   * To get each photographer's media from data.json
-   * To play the logics filled with datas
-   */
+   
   const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMediasByPhotographerId(parseInt(id));
     console.log(`id du photographe: ${id}`);
-    console.log('Photographes:', photographers);
     console.log('medias du photographe:', medias);
+    
     displayHeaderElements(photographers);
     displayMedias(medias);
+    
+    document.querySelector('.photograph-header__btn').addEventListener('click', () => modal.openModal())
+    domLinker.closeModalBtn.addEventListener('click', ()=> modal.closeModal())
+    domLinker.closeLightBoxBtn.addEventListener('click', () => lightbox.closeLightBox())
   };
 
   init();

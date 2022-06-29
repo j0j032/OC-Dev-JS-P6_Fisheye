@@ -26,22 +26,32 @@ module.exports = {
 
     const titleAttributes = [
       { class: 'media__title' },
-      { 'aria-label': `Titre du média : ${title}` },
+      { 'alt': `Titre du média : ${title}` },
     ];
 
     const likesAttributes = [
       { class: 'media__likes' },{id},
-      { 'aria-label': `Nombres de like du média : ${title} = ${likes}` },
+      { 'alt': `Nombres de like du média : ${title} = ${likes}` },
     ];
 
     const heartIconAttributes = [
       { class: 'likeIcon fa-solid fa-heart' },{id},
-      { 'aria-label': `icone clickable pour aimer limage : ${title}` },
     ];
 
     const infoDivAttributes = [{ class: 'media__container--infos' }];
     const likesDivAttributes = [{ class: 'media__container--likes' }];
     const cardAttributes = [{ class: 'media__card' }];
+
+    const linkAttributes = [
+      { href: `#lightbox?id=${id}` },
+      { 'aria-label': `ouvre la vue lightbox de l'image ${title}` },
+      { 'alt': `ouvre la vue lightbox de l'image ${title}` }
+    ]
+
+    const likeClickAttributes = [
+      {class: 'likeIcon--btn'},
+      {'aria-label': 'aimer le media'}
+    ]
 
     
     const getArticleDOM = () => {
@@ -64,8 +74,11 @@ module.exports = {
       const { article , infosDiv } = getArticleDOM();
       const likesDiv = createElement('div', likesDivAttributes, infosDiv);
       createElement('p', likesAttributes, likesDiv, likes );
-      createElement('i', heartIconAttributes, likesDiv);
-      card.appendChild(article);
+      const likeClick = createElement('button', likeClickAttributes, likesDiv )
+      createElement('i', heartIconAttributes, likeClick);
+      const link = createElement('a', linkAttributes, null)
+      link.appendChild(article);
+      card.appendChild(link);
       return { card, article };
     };
 
