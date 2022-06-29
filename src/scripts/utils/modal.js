@@ -18,7 +18,7 @@ const EscKey = 'Escape' || key === 'Esc' || key === 27;
       domLinker.photographerPage.setAttribute('aria-hidden', 'true')
       domLinker.contactModal.setAttribute('aria-hidden', 'false')
       domLinker.closeModalBtn.focus()
-      
+      domLinker.closeModalBtn.addEventListener('click', ()=> closeModal())
       document.addEventListener('keydown', e =>{
         const userPress = e.key
         setKeyESC(userPress)
@@ -30,10 +30,11 @@ const EscKey = 'Escape' || key === 'Esc' || key === 27;
       domLinker.photographerPage.setAttribute('aria-hidden', 'false')
       domLinker.contactModal.setAttribute('aria-hidden', 'true')
       domLinker.photographerPage.focus()
+      document.removeEventListener('click',closeModal)
       document.removeEventListener('keydown',setKeyESC)
   }
 
-
+// log user inputs on submit
 domLinker.contactModal.addEventListener('submit',(e)=>{
   e.preventDefault()
   console.log(

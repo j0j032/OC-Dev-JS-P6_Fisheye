@@ -2,6 +2,11 @@
 const { createElement } = require('../components/dom');
 
 module.exports = {
+
+  /**
+   * @param {object} data => photographers
+   * @returns methods to create photographer card on home page and header on photographer page
+   */
   createProfileCard(data) {
     const { id, name, portrait, city, country, tagline, price } = data;
     const profilePicture = `/src/assets/photographers/${portrait}`;
@@ -35,6 +40,10 @@ module.exports = {
       { 'alt': price },
     ];
 
+    /**
+     * Create home page DOM
+     * @returns photographer card
+     */
     const getProfileCardDOM = () => {
       const card = createElement('div', cardAttributes, null);
       const cardLink = createElement('a', cardLinkAttributes, card);
@@ -46,14 +55,19 @@ module.exports = {
       return card;
     };
 
-    const photographHeaderAttributes = [{class: 'photograph-header'}];
+    // pH = photographer header
+    const pHAttributes = [{class: 'photograph-header'}];
     const pHDetailsAttributes = [{ class: 'photograph-header__details' }];
     const pHNameAttributes = [{ class: 'name' }];
     const pHBtnAttributes = [{class :'photograph-header__btn btn' }]
     const pHImgContainerAttributes = [{class: 'photograph-header__profilePic-Container'}]
 
+    /**
+     * Create header photographer DOM
+     * @returns photographer header
+     */
     const getProfileHeaderDOM = () => {
-      const photographHeader = createElement('div',photographHeaderAttributes, null )
+      const photographHeader = createElement('div',pHAttributes, null )
       const headerDetails = createElement('div', pHDetailsAttributes, photographHeader);
       createElement('h1', pHNameAttributes, headerDetails, name);
       createElement('p', cardLocationAttributes, headerDetails, photographerLocation);
