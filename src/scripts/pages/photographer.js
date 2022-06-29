@@ -40,15 +40,20 @@ module.exports = (id) => {
     });
   };
 
+  /**
+   * to display and sort medias
+   * @param {object} data => medias
+   */
   const displayMedias = (data) => {
     getMediasDOM(data)
 
+    // reset dom and array of articles for lightbox
     const resetMediasDOM = () =>{
-      dom.emptyMedias(mediasContainer)
+      dom.emptyDOM(mediasContainer)
       articles = []
-      console.log(articles);
     }
     
+    // logic for sort => errase, sort and create in new order
     const sortMedias = (sortFunction) => {
       resetMediasDOM()
       data.sort(sortFunction)
@@ -72,6 +77,10 @@ module.exports = (id) => {
     });
   };
 
+  /**
+   * to get medias and articles for lightbox and set the like logic.
+   * @param {object} data => medias
+   */
   const getMediasDOM = (data) => {
 
     data.forEach((media) => {
@@ -91,24 +100,32 @@ module.exports = (id) => {
     displayUserLike(data)
   };
 
-  const getTotalOfLikes = (arrayOfdata) => {
+  // Likes Logic
+
+  const getTotalOfLikes = (arrayOfLikes) => {
     const totalLikesDom = document.getElementById('totalLikes');
-    totalLikesDom.textContent = arrayOfdata.reduce((acc, likes) => acc + likes);
+    totalLikesDom.textContent = arrayOfLikes.reduce((acc, likes) => acc + likes);
   };
 
-  // likes
+  /**
+   * @param {object} data => medias (likes)
+   */
   const displayUserLike = (data) => {
     let allIds = [];
     let allLikes = [];
+
+    // set likes by id in arrays
     data.forEach((media) => {
       const mediaModel = factoryMedia.createMediaCard(media);
       allIds.push(mediaModel.id);
       allLikes.push(mediaModel.likes);
     });
     getTotalOfLikes(allLikes);
+
     const nbrLikeContainer = document.querySelectorAll('.media__likes');
     const likeBtns = document.querySelectorAll('.likeIcon--btn');
 
+    // Logic to add or remove like on each media
     likeBtns.forEach((likeBtn) => {
       let isLiked = false;
       likeBtn.addEventListener('click', (e) => {
@@ -138,7 +155,8 @@ module.exports = (id) => {
     });
   };
 
-   
+  // get datas and run methods
+  // event to open contact modal
   const init = async () => {
     const photographers = await api.getPhotographers();
     const medias = await api.getMediasByPhotographerId(parseInt(id));
@@ -149,8 +167,6 @@ module.exports = (id) => {
     displayMedias(medias);
     
     document.querySelector('.photograph-header__btn').addEventListener('click', () => modal.openModal())
-    domLinker.closeModalBtn.addEventListener('click', ()=> modal.closeModal())
-    domLinker.closeLightBoxBtn.addEventListener('click', () => lightbox.closeLightBox())
   };
 
   init();

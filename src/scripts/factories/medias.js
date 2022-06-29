@@ -3,11 +3,11 @@
 const { createElement } = require('../components/dom');
 
 module.exports = {
+  
   /**
-   * create and display medias
-   * @param {object} data
+   * @param {object} data => medias 
+   * @returns methods to create DOM
    */
-
   createMediaCard(data) {
     const { id, image, video, likes, title, date } = data;
     const mediaSrc = `../src/assets/medias/${image || video}`;
@@ -53,7 +53,10 @@ module.exports = {
       {'aria-label': 'aimer le media'}
     ]
 
-    
+    /**
+     * To get content in lightbox
+     * @returns lightBox content
+     */
     const getArticleDOM = () => {
       const article = createElement('article', [{ id }], null);
       image
@@ -69,6 +72,10 @@ module.exports = {
       return { article, infosDiv };
     };
 
+    /**
+     * to get each media
+     * @returns media cards
+     */
     const getMediaCardDOM = () => {
       const card = createElement('div', cardAttributes, null);
       const { article , infosDiv } = getArticleDOM();

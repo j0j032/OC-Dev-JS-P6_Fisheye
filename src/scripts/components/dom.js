@@ -34,18 +34,16 @@ const createElement = (tag, attributes = [], parent, text) => {
 
 /**
  * Remove all first child from an element quoted in parameter
- *
+ * (for lightBox and sort medias)
  * @param {HTMLElement} el - target element html with all first child to remove
  */
- const emptyMedias = el => {
+ const emptyDOM = el => {
   while (el.firstChild) {
     el.removeChild(el.firstChild)
   }
 }
 
-
 // sort Methods
-
 const byASCTitle = (a, b) => {
   return a.title > b.title ? 1 : -1;
 }
@@ -65,5 +63,5 @@ const byDESCDate = (x, y) => {
 
 
 module.exports = {
-  createElement, emptyMedias, byASCTitle, byDESCDate, byDESCLikes,
+  createElement, emptyDOM, byASCTitle, byDESCDate, byDESCLikes,
 };

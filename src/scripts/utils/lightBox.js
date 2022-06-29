@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 
-const { emptyMedias } = require('../components/dom');
+const { emptyDOM } = require('../components/dom');
 const {lightBox,lightBoxContent, photographerPage, closeLightBoxBtn,nextLightBoxBtn,prevLightBoxBtn} = require('../components/domLinker');
 
 const EscKey = 'Escape' || key === 'Esc' || key === 27;
@@ -25,7 +25,7 @@ const getCurrentArticleIndex = (articles) => {
  */
 const nextMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  emptyMedias(lightBoxContent);
+  emptyDOM(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === articles.length - 1
       ? articles[0]
@@ -39,7 +39,7 @@ const nextMedia = (articles) => {
  */
 const prevMedia = (articles) => {
   const currentIndex = getCurrentArticleIndex(articles);
-  emptyMedias(lightBoxContent);
+  emptyDOM(lightBoxContent);
   lightBoxContent.appendChild(
     currentIndex === 0
       ? articles[articles.length - 1]
@@ -48,6 +48,11 @@ const prevMedia = (articles) => {
   setVideo()
 };
 
+/**
+ * case to set action in function of user keyboard
+ * @param {event} userKeyPressed get user keyboard key
+ * @param {array} articles 
+ */
 const setKeys = (userKeyPressed, articles) => {
   if(lightBox.classList.contains('show')){
     switch (userKeyPressed) {
@@ -72,6 +77,9 @@ const openLightBox = (media ,articles) => {
   photographerPage.setAttribute('aria-hidden', 'true')
   lightBox.setAttribute('aria-hidden', 'false')
   closeLightBoxBtn.focus()
+
+  closeLightBoxBtn.addEventListener('click', () => closeLightBox())
+
   document.addEventListener('keydown', e =>{
     const userPress = e.key
     setKeys(userPress, articles)
@@ -80,24 +88,27 @@ const openLightBox = (media ,articles) => {
 
 const closeLightBox = () => {
     lightBox.classList.remove('show');
-    emptyMedias(lightBoxContent);
+    emptyDOM(lightBoxContent);
     photographerPage.setAttribute('aria-hidden', 'true')
     lightBox.setAttribute('aria-hidden', 'false')
     photographerPage.focus()
+
+    document.removeEventListener('click',closeLightBox)
     document.removeEventListener('click',nextMedia)
     document.removeEventListener('click',prevMedia)
     document.removeEventListener('keydown',setKeys)
 };
 
 /**
- *
- * @param {object} media data from photographers.json
+ * display media DOM
+ * @param {object} media 
  */
 const displayLightBoxContent = (media) => {
   lightBoxContent.appendChild(media.getArticleDOM().article);
   setVideo()
 };
 
+// if media = video set controllers
 const setVideo = () => {
   const video = document.querySelector('div.lightBox__container > article > video')
   if (video){
