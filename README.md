@@ -1,6 +1,10 @@
-# Base de code du projet P6 - Parcours Front-end
+Projet 6 Parcours front end openclassrooms
 
-## Démarrer le projet
+Webpack
 
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+Installation:
 
+- install node
+- from root directory run npm install
+- Run development server npm run start
+- Build for production npm run build
