@@ -43,15 +43,32 @@ const createElement = (tag, attributes = [], parent, text) => {
   }
 }
 
-// sort Methods
+/**
+ * Sort medias by title alphabethic order
+ * @param {title} a 
+ * @param {title} b 
+ * @returns order
+ */
 const byASCTitle = (a, b) => {
   return a.title > b.title ? 1 : -1;
 }
 
+/**
+ * Sort medias by descendant(more to less) total of likes order 
+ * @param {likes} a 
+ * @param {likes} b 
+ * @returns order
+ */
 const byDESCLikes = (a,b)=>{
   return b.likes - a.likes;
 }
 
+/**
+ * Sort medias by date of release (from oldest to newest)
+ * @param {date} x 
+ * @param {date} y 
+ * @returns order
+ */
 const byDESCDate = (x, y) => { 
   const firstDate = new Date(x.date);
   const SecondDate = new Date(y.date);

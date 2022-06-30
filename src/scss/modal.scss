@@ -2,10 +2,12 @@
 
 #contact_modal {
   display: none;
-  width: 60%;
-  max-height: 80vh;
+  background-color: rgba(255, 255, 255, 0.783);
+  z-index: 4;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  top: 40px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -15,9 +17,9 @@
   flex-direction: column;
   border-radius: 5px;
   background-color: $orangeBis;
-  width: 70%;
+  max-width: 40%;
   padding: 20px 35px;
-  margin: auto;
+  margin: 60px auto;
   @include shadow;
   position: relative;
 
