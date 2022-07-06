@@ -14,7 +14,7 @@ module.exports = {
       { src: mediaSrc },
       { class: 'media__itself' },
       { alt: `titre du media : ${title}` },
-      { 'aria-label': `ouvre en grand le media : ${title}` }
+      { 'aria-label': `${title}` }
     ]
 
     const videoAttributes = [
@@ -42,7 +42,7 @@ module.exports = {
 
     const linkAttributes = [
       { href: `#lightbox?id=${id}` },
-      { 'aria-label': `ouvre la vue lightbox de l'image ${title}` },
+      { 'aria-label': `ouvre, la vue lightbox de l'image, dont le titre est, ${title}` },
       { alt: `ouvre la vue lightbox de l'image ${title}` }
     ]
 
@@ -51,12 +51,17 @@ module.exports = {
       { 'aria-label': 'aimer le media' }
     ]
 
+    const articleAttributes = [
+      { id },
+      { 'aria-label': `le media en cours de visualisation, est, ${title}` }
+    ]
+
     /**
      * To get content in lightbox
      * @returns lightBox content
      */
     const getArticleDOM = () => {
-      const article = createElement('article', [{ id }], null)
+      const article = createElement('article', articleAttributes, null)
       image
         ? createElement('img', mediaAttributes, article)
         : createElement(

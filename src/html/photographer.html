@@ -10,16 +10,16 @@
 
 <body>
   <header class="header">
-    <a href="http://localhost:8087/" alt="fisheye Home page" aria-label="lien vers la page d'acceuil">
-      <img role="button" src="src/assets/images/logo.png" class="header__logo" alt="retour au menu principal"
+    <a href="http://localhost:8087/" alt="vers page d'acceuil" aria-label="lien vers la page d'acceuil">
+      <img role="button" src="src/assets/images/logo.png" class="header__logo" alt="logo du site"
         aria-label="logo du site fisheye" />
     </a>
   </header>
   <main id="main">
     <div class="photographer">
     </div>
-    <label class="sort" for="sortBy">Trier par
-      <select aria-label='trier les medias' name="sortBy " id="sortBy">
+    <label class="sort" for="sortBy"> Trier par
+      <select aria-label='date, popularité ou, ordre alphabétique' name="sortBy " id="sortBy">
         <option id="date" value="Date">Date</option>
         <option id="popular" value="Popularité">Popularité</option>
         <option id="title" value="Titre">Titre</option>
@@ -76,14 +76,14 @@
     <button role="button" id="close-lightBox" class="lightBox__close" aria-label="fermer la fenêtre">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <button class="lightBox__prev" aria-label="media précédent">
+    <button class="lightBox__prev" aria-label="aller vers le media précédent">
       <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="lightBox__next" aria-label="media suivant">
-      <i class="fa-solid fa-chevron-right"></i>
     </button>
     <div class="lightBox__container">
     </div>
+    <button class="lightBox__next" aria-label=" aller vers le media suivant">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
   </div>
 </body>
 
