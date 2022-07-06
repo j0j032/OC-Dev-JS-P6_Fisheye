@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 const { emptyDOM } = require('../components/dom')
-const { lightBox, lightBoxContent, photographerPage, closeLightBoxBtn, nextLightBoxBtn, prevLightBoxBtn } = require('../components/domLinker')
+const { lightBox, lightBoxContent, photographerPage, mediasContainer, closeLightBoxBtn, nextLightBoxBtn, prevLightBoxBtn } = require('../components/domLinker')
 
 const EscKey = 'Escape' || key === 'Esc' || key === 27
 const arrowR = 'ArrowRight' || key === 39
@@ -88,9 +88,9 @@ const openLightBox = (media, articles) => {
 const closeLightBox = () => {
   lightBox.classList.remove('show')
   emptyDOM(lightBoxContent)
-  photographerPage.setAttribute('aria-hidden', 'true')
-  lightBox.setAttribute('aria-hidden', 'false')
-  photographerPage.focus()
+  photographerPage.setAttribute('aria-hidden', 'false')
+  lightBox.setAttribute('aria-hidden', 'true')
+  mediasContainer.firstElementChild.focus()
 
   document.removeEventListener('click', closeLightBox)
   document.removeEventListener('click', nextMedia)
